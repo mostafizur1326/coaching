@@ -4,6 +4,8 @@ const router = express.Router();
 
 
 router.get('/about', (req, res) => {
+ // res.cookie('name', 'Mostafiz');
+  console.log(req.cookies);
   res.render('about');
 });
 
