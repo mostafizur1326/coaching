@@ -5,9 +5,10 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 
+const PORT = process.env.PORT || 5000;
+
 const connectDB = require('./src/db/db.js');
 const { LIMIT } = require('./src/constants.js');
-const PORT = process.env.PORT || 5000;
 
 const homeRouter = require('./src/routes/home.js');
 const aboutRouter = require('./src/routes/about.js');
