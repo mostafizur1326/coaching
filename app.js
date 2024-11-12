@@ -7,17 +7,14 @@ const cookieParser = require('cookie-parser');
 
 const PORT = process.env.PORT || 5000;
 
-const connectDB = require('./src/db/db.js');
-const { LIMIT } = require('./src/constants.js');
+const connectDB = require('./config/mongoose-connection.js');
 
-const homeRouter = require('./src/routes/home.js');
-const aboutRouter = require('./src/routes/about.js');
-
+const homeRouter = require('./routes/home.js');
 
 app.set('view engine', 'ejs');
-app.use(express.json({ LIMIT }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true,  LIMIT }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(logger('dev'));
 
@@ -26,7 +23,6 @@ connectDB()
   .then(() => {
     
     app.use('/', homeRouter);
-    app.use('/about', aboutRouter);
     
     
     app.listen(PORT, () => {
