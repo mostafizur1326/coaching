@@ -25,8 +25,8 @@ app.use(logger('dev'));
 connectDB()
   .then(() => {
     
-    app.use(homeRouter);
-    app.use(aboutRouter);
+    app.use('/', homeRouter);
+    app.use('/about', aboutRouter);
     
     
     app.listen(PORT, () => {
