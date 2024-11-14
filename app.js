@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5000;
 
 const connectDB = require('./config/mongoose-connection.js');
 
-const homeRouter = require('./routes/home.js');
+const homeRouter = require('./routes/home-route.js');
 
 app.set('view engine', 'ejs');
 app.use(express.json());
