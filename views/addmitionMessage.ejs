@@ -13,14 +13,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-  <title>BPMHS | Addition</title>
+  <title>BPMHS | Message</title>
 </head>
 
 <body class="w-full h-full bg-[#DEFFEE] tracking-tighter">
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
-      <nav class="tracking-tighter mb-20">
+      <nav class="tracking-tighter">
         <header class="header_lg w-full p-8 px-[100px] lg:hidden overflow-x-hidden h-[220px] absolute top-0 left-0 flex justify-between items-start z-50">
           <div class="logo1">
             <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
@@ -152,9 +152,42 @@
         </header>
       </nav>
       
-      
+      <section class="font-cy flex flex-col justify-center items-center min-h-screen text-center p-8">
+        <div class="absolute top-28 left-4 sm:hidden">
+            <button class="text-gray-600 hover:text-gray-800">
+                <a href="#" class="ml-2 font-medium text-sm">Back</a>
+            </button>
+        </div>
+
+        <div class="flex flex-col items-center text-center space-y-6 mt-12">
+            <div class="w-28 h-28 rounded-full bg-green-200 flex items-center justify-center">
+                <i class="text-5xl text-green-700 fas fa-check"></i>
+            </div>
+            <h1 class="text-xl font-bold text-gray-800">Admission Request Successful</h1>
+            <p class="text-green-600 text-sm text-base max-w-md">
+                Your admission has been successfully completed. Currently, your application is pending. You will be notified in due course.
+            </p>
+            <p class="text-red-600 text-sm text-base max-w-md">
+              <span class="font-bold">Note: </span>  Incorrect information will lead to rejection, while correct details will get the form approved.
+            </p>
+          </div>
+  
+          <div class="w-1/2 mt-8">
+              <div class="flex items-center justify-between mb-6">
+                  <span class="text-green-600 font-semibold text-md">Approved</span>
+                  <div class="flex-1 border-r border border-zinc-300 mx-4"></div>
+                  <span class="text-red-600 font-semibold text-md">Rejected</span>
+              </div>
+              <div class="text-center">
+                  <div class="py-2 px-4 border-dashed text-orange-700 bg-yellow-50 font-medium text-xl rounded-md">
+                      Pendin...
+                  </div>
+              </div>
+          </div>
+      </section>
 
     </section>
+    
     <footer class="font-cy w-full bg-zinc-700 text-white py-8">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 

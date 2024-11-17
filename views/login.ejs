@@ -12,15 +12,15 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
-
-  <title>BPMHS | Addition</title>
+  
+  <title>BPMHS | Login</title>
 </head>
 
 <body class="w-full h-full bg-[#DEFFEE] tracking-tighter">
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
-      <nav class="tracking-tighter mb-20">
+      <nav class="tracking-tighter">
         <header class="header_lg w-full p-8 px-[100px] lg:hidden overflow-x-hidden h-[220px] absolute top-0 left-0 flex justify-between items-start z-50">
           <div class="logo1">
             <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
@@ -151,10 +151,50 @@
           </div>
         </header>
       </nav>
+        
+        <section class="min-h-screen font-cy flex items-center justify-center">
+        <form class="space-y-6 w-full max-w-md p-6">
+          <h2 class="text-center text-3xl font-bold mb-8 text-gray-700 flex items-center gap-2 justify-center">
+            <i class="fas fa-user"></i> LOGIN
+          </h2>
       
+          <div class="space-y-4">
+            <div class="relative">
+              <input type="text" name="username" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Username" required>
+              <i class="fas fa-user-tag input-icon"></i>
+            </div>
       
-
+            <div class="relative flex">
+              <input type="email" name="email" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Email" required>
+              <i class="fas fa-envelope input-icon"></i>
+            </div>
+      
+            <div class="relative">
+              <input type="password" name="password" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Password" required>
+              <i class="fas fa-lock input-icon"></i>
+            </div>
+          </div>
+      
+          <div class="flex items-start mt-4">
+            <input type="checkbox" name="condition" id="condition" class="mt-[2px] mr-2" required>
+            <label for="condition" class="text-left text-gray-600 text-sm">
+              I acknowledge that the information provided is accurate and I agree to abide by the school's
+              <a href="#" class="text-teal-700 underline">policies</a> &
+              <a href="#" class="text-teal-700 underline">terms</a>.
+            </label>
+          </div>
+      
+          <button type="submit" class="w-full py-2 mt-4 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition">
+            Login
+          </button>
+      
+          <p class="text-center text-gray-600 mt-4">
+            Don't have an account? <a href="#" class="text-teal-700 underline">Register</a>
+          </p>
+        </form>
+      </section>
     </section>
+    
     <footer class="font-cy w-full bg-zinc-700 text-white py-8">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 

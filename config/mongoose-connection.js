@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const dbgr = require('debug')('development: app&mongoose');
 
 const connectDB = async () => {
   if (!process.env.MONGODB_URI) {
@@ -7,9 +8,9 @@ const connectDB = async () => {
 
   try {
     const connectionITC = await mongoose.connect(`${process.env.MONGODB_URI}/firstpack`);
-    console.log(`MongoDB connected || DB HOST: ${connectionITC.connection.host}`);
+    dbgr(`MongoDB connected`);
   } catch (error) {
-    console.error('MongoDB connection FAILED:', error.message);
+    dbgr('MongoDB connection FAILED:', error.message);
     throw error;
   }
 };

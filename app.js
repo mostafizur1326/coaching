@@ -5,6 +5,7 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 
+const dbgr = require('debug')('development: app&mongoose');
 const PORT = process.env.PORT || 5000;
 
 const connectDB = require('./config/mongoose-connection.js');
@@ -22,13 +23,14 @@ app.use(logger('dev'));
 connectDB()
   .then(() => {
     
+    
     app.use('/', homeRouter);
     
     
     app.listen(PORT, () => {
-      console.log(`Server running on https://localhost:${PORT}`);
+      dbgr(`Server running on:${PORT}`);
     })
   })
   .catch((error) => {
-    console.log(`MongoDB database connection Failed: ${error}`);
+    dbgr(`MongoDB database connection Failed: ${error}`);
   })
