@@ -49,5 +49,9 @@ router.get('/ab', (req, res) => {
   res.render('about');
 })
 
+router.get('/ex', (req, res) => {
+  res.render('exam');
+})
+
 
 module.exports = router;

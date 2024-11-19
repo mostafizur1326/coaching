@@ -60,6 +60,14 @@ input:focus {
   transform: translateY(-50%);
 }
 
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
 @media (max-width: 425px) {
   nav .header_lg {
     display: none;
