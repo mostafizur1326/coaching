@@ -7,10 +7,19 @@
   src: url(/fonts/Cy.ttf);
 }
 
+@font-face {
+  font-family: hillsidescript;
+  src: url(/fonts/hillsidescript-vnaoe.otf);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -29,6 +38,10 @@ body {
 
 .font-cy {
   font-family: Cy;
+}
+
+.font-hillsidescript {
+  font-family: hillsidescript;
 }
 
 input:focus {

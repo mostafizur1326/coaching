@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-  <title>BPMHS | Blog</title>
+  <title>BPMHS | Notice</title>
 </head>
 
 <body class="w-full h-full bg-[#DEFFEE] tracking-tighter">
@@ -163,10 +163,7 @@
               Join our advanced block platform to share posts, events, and blogs, making your ideas secure and accessible to everyone.
             </p>
             <div class="mt-6 flex space-x-4">
-              <a href="#" class="inline-flex items-center px-6 py-3 text-white bg-teal-600 rounded-lg shadow-md hover:bg-teal-700 transition duration-300">
-                Get Started
-              </a>
-              <a href="#" class="inline-flex items-center px-6 py-3 text-teal-700 bg-teal-100 rounded-lg hover:bg-teal-200 transition duration-300">
+              <a href="#learn_more" class="inline-flex items-center px-6 py-3 text-white bg-teal-600 rounded-lg shadow-md hover:bg-teal-700 transition duration-300">
                 Learn More
               </a>
             </div>
@@ -177,7 +174,7 @@
         </div>
       </section>
       
-       <div class="flex font-cy justify-center border-b border-gray-200">
+       <section class="flex font-cy justify-center border-b border-gray-200">
             <button 
                 class="tab-button px-4 py-2 text-gray-600 border-b-2 border-transparent hover:text-teal-500 focus:outline-none"
                 onclick="openTab('tab1')"
@@ -197,10 +194,10 @@
             >
                 Blog
             </button>
-        </div>
+        </section>
     
         <section id="tab1" class="Notice font-cy tab-content p-4">
-          <section class="py-12 font-cy">
+          <div id="learn_more" class="py-12 font-cy">
             <div class="max-w-7xl mx-auto px-6">
               <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Latest Notices</h2>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -243,7 +240,7 @@
                 </div>
               </div>
             </div>
-          </section>
+          </div>
         </section>
         
         <section id="tab2" class="Events font-cy tab-content p-4 hidden">

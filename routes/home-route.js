@@ -22,7 +22,7 @@ router.get('/re', (req, res) => {
 })
 
 router.get('/a', (req, res) => {
-  res.render('addmition');
+  res.render('admission');
 })
 
 router.get('/ar', (req, res) => {
@@ -34,7 +34,7 @@ router.get('/al', (req, res) => {
 })
 
 router.get('/am', (req, res) => {
-  res.render('addmitionMessage');
+  res.render('admissionMessage');
 })
 
 router.get('/n', (req, res) => {
@@ -43,6 +43,10 @@ router.get('/n', (req, res) => {
 
 router.get('/nv', (req, res) => {
   res.render('noticeView');
+})
+
+router.get('/ab', (req, res) => {
+  res.render('about');
 })
 
 
