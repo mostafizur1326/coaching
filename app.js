@@ -20,8 +20,8 @@ app.use(cookieParser());
 app.use(logger('dev'));
 
 
-//connectDB()
-  //.then(() => {
+connectDB()
+  .then(() => {
     
     
     app.use('/', homeRouter);
@@ -30,7 +30,7 @@ app.use(logger('dev'));
     app.listen(PORT, () => {
       dbgr(`Server running on:${PORT}`);
     })
-  //})
-//  .catch((error) => {
-//    dbgr(`MongoDB database connection Failed: ${error}`);
-  //})
+  })
+  .catch((error) => {
+    dbgr(`MongoDB database connection Failed: ${error}`);
+  })
