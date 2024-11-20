@@ -33,12 +33,28 @@ router.get('/payment', (req, res) => {
   res.render('paymentFees');
 })
 
-router.get('/fees/payment', (req, res) => {
+router.get('/fees/class', (req, res) => {
+  res.render('selectClassFees');
+})
+
+router.get('/fees/class/six/fees', (req, res) => {
   res.render('schoolFees');
 })
 
-router.get('/fees/class', (req, res) => {
-  res.render('selectClass');
+router.get('/fees/class/seven/fees', (req, res) => {
+  res.render('schoolFees');
+})
+
+router.get('/fees/class/eight/fees', (req, res) => {
+  res.render('schoolFees');
+})
+
+router.get('/fees/class/nine/fees', (req, res) => {
+  res.render('schoolFees');
+})
+
+router.get('/fees/class/ten/fees', (req, res) => {
+  res.render('schoolFees');
 })
 
 router.get('/admission', (req, res) => {

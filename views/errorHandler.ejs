@@ -155,8 +155,16 @@
       
       <!--===== ERROR_MESSAGE =====-->
       
-      <section class="font-cy w-full h-[80vh] flex flex-col items-center justify-center">
-        <div class="text-center p-4">
+      <section class="font-cy w-full h-[80vh]">
+        
+        <div class="absolute top-28 left-4 md:ml-20 z-[999]">
+            <button class="text-gray-600 hover:text-gray-800">
+                <a href="/" class="ml-2 font-medium text-sm">Back</a>
+            </button>
+        </div>
+
+        
+        <div class="w-full h-full flex flex-col items-center justify-center text-center p-4">
           <h1 class="text-8xl font-bold"> <%= error.status %></h1>
           <p class="font-medium text-xl"><%= error.message %></p>
           <p class="text-[12px]">The URL you entered <span class="font-bold"><%= error.url %></span> does not correspond to any available page at the moment. Please enter a valid URL.</p>
