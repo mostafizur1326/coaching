@@ -13,6 +13,14 @@ router.get('/payment', (req, res) => {
   res.render('paymentFees');
 })
 
+router.get('/fees/payment', (req, res) => {
+  res.render('schoolFees');
+})
+
+router.get('/fees/class', (req, res) => {
+  res.render('selectClass');
+})
+
 router.get('/admission', (req, res) => {
   res.render('admission');
 })

@@ -5,11 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!--===== FAVICON =====-->
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
 
   <script src="https://cdn.tailwindcss.com"></script>
-
+  
+  <!--===== STYLESHEET =====-->
   <link rel="stylesheet" href="/stylesheets/style.css">
+  
+  <!--===== ICON_URL =====-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
@@ -20,7 +25,13 @@
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
+      
+      <!--====== NAVIGATION_BAR =====-->
+      
       <nav class="tracking-tighter mb-20">
+        
+        <!--====== LS_HEADER =====-->
+        
         <header class="header_lg w-full p-8 px-[100px] lg:hidden overflow-x-hidden h-[220px] absolute top-0 left-0 flex justify-between items-start z-50">
           <div class="logo1">
             <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
@@ -33,11 +44,11 @@
           </div>
 
           <ul class="flex items-center list-none text-xs font-cy">
-            <li><a href="" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Home</a></li>
-            <li><a href="" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
-            <li><a href="" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Notice</a></li>
-            <li><a href="" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Exams</a></li>
-            <li><a href="" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Contact</a></li>
+            <li><a href="/" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Home</a></li>
+            <li><a href="/about" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
+            <li><a href="/notice" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Notice</a></li>
+            <li><a href="/exam" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Exams</a></li>
+            <li><a href="/contact" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Contact</a></li>
 
             <div class="relative">
               <button class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" id="profileButton">
@@ -48,16 +59,17 @@
 
               <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#DEFFEE] text-black border border-gray-200 rounded-lg shadow-lg">
                 <ul class="py-1 dropdown-menu">
-                  <li><a href="#" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-user mr-2"></i> Profile</a></li>
-                  <li><a href="#" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-cog mr-2"></i> Settings</a></li>
-                  <li><a href="#" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-log-out mr-2"></i> Logout</a></li>
+                  <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-user mr-2"></i> Profile</a></li>
+                  <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-cog mr-2"></i> Settings</a></li>
+                  <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-log-out mr-2"></i> Logout</a></li>
                 </ul>
               </div>
             </div>
           </ul>
         </header>
 
-
+        <!--====== SM_HEADER =====-->
+        
         <header class="small_header w-full bg-red-500 relative sm:hidden overflow-hidden">
           <div class="header_head fixed bg-[#DEFFEE69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
 
@@ -80,9 +92,9 @@
 
               <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#DEFFEE] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
                 <ul class="py-1">
-                  <li><a href="#" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-user mr-2"></i> Profile</a></li>
-                  <li><a href="#" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-cog mr-2"></i> Settings</a></li>
-                  <li><a href="#" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-log-out mr-2"></i> Logout</a></li>
+                  <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-user mr-2"></i> Profile</a></li>
+                  <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-cog mr-2"></i> Settings</a></li>
+                  <li><a href="user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-log-out mr-2"></i> Logout</a></li>
                 </ul>
               </div>
             </div>
@@ -99,20 +111,20 @@
 
           <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#DEFFEE] shadow-lg z-[99]">
             <ul class="list-none relative top-1/2 transform -translate-y-1/2 space-y-5">
-              <li><a href="" class="home flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/" class="home flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_home">H</span>
                   <span class="link_home">O</span>
                   <span class="link_home">M</span>
                   <span class="link_home">E</span>
                 </a></li>
-              <li><a href="" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/about" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_about">A</span>
                   <span class="link_about">B</span>
                   <span class="link_about">O</span>
                   <span class="link_about">U</span>
                   <span class="link_about">T</span>
                 </a></li>
-              <li><a href="" class="notice flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/notice" class="notice flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_notice">N</span>
                   <span class="link_notice">O</span>
                   <span class="link_notice">T</span>
@@ -120,14 +132,14 @@
                   <span class="link_notice">C</span>
                   <span class="link_notice">E</span>
                 </a></li>
-              <li><a href="" class="exams flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/exam" class="exams flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_exams">E</span>
                   <span class="link_exams">X</span>
                   <span class="link_exams">A</span>
                   <span class="link_exams">M</span>
                   <span class="link_exams">S</span>
                 </a></li>
-              <li><a href="" class="contact flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/contact" class="contact flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_contact">C</span>
                   <span class="link_contact">O</span>
                   <span class="link_contact">N</span>
@@ -136,30 +148,21 @@
                   <span class="link_contact">C</span>
                   <span class="link_contact">T</span>
                 </a></li>
-              <a href="" class="form flex justify-center border-b border-gray-400 py-5">
-                <button class="singUpBtn_sm w-[90%] h-12 text-2xl text-white bg-black rounded-lg transition duration-500 hover:bg-transparent hover:text-black border-none font-Aclonica">
-                  <span class="link_form">S</span>
-                  <span class="link_form">I</span>
-                  <span class="link_form">G</span>
-                  <span class="link_form">N</span>
-                  <span class="link_form">U</span>
-                  <span class="link_form">P</span>
-                  <i class="bi bi-stars ml-1"></i>
-                </button>
-              </a>
             </ul>
           </div>
         </header>
       </nav>
       
-      <div class="font-cy w-full h-[80vh] flex flex-col items-center justify-center">
+      <!--===== ERROR_MESSAGE =====-->
+      
+      <section class="font-cy w-full h-[80vh] flex flex-col items-center justify-center">
         <div class="text-center p-4">
           <h1 class="text-8xl font-bold"> <%= error.status %></h1>
           <p class="font-medium text-xl"><%= error.message %></p>
           <p class="text-[12px]">The URL you entered <span class="font-bold"><%= error.url %></span> does not correspond to any available page at the moment. Please enter a valid URL.</p>
           <p class="text-[14px]">Thank you.</p>
         </div>
-      </div>
+      </section>
 
     </section>
   </main>
