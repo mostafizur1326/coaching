@@ -15,6 +15,7 @@ errorHandler.use((err, req, res, next) => {
     error: {
       message: isDev ? err.message : 'Something went wrong!',
       status: statusCode,
+      url: req.url
     },
   });
 });
