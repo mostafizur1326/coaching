@@ -9,6 +9,26 @@ router.get('/class', (req, res) => {
   res.render('selectClass');
 })
 
+router.get('/class/six', (req, res) => {
+  res.render('resultForm');
+})
+
+router.get('/class/seven', (req, res) => {
+  res.render('resultForm');
+})
+
+router.get('/class/eight', (req, res) => {
+  res.render('resultForm');
+})
+
+router.get('/class/nine', (req, res) => {
+  res.render('resultForm');
+})
+
+router.get('/class/ten', (req, res) => {
+  res.render('resultForm');
+})
+
 router.get('/payment', (req, res) => {
   res.render('paymentFees');
 })
