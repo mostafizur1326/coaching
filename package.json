@@ -4,8 +4,9 @@
   "description": "initial files structure for roor project ",
   "main": "app.js",
   "scripts": {
-    "dev": "npx nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "dev": "NODE_ENV=development nodemon app.js"
   },
   "author": "Mostafizur Rahman",
   "license": "ISC",

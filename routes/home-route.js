@@ -53,5 +53,20 @@ router.get('/ex', (req, res) => {
   res.render('exam');
 })
 
+router.get('/rf', (req, res) => {
+  res.render('resultForm');
+})
+
+router.get('/sf', (req, res) => {
+  res.render('schoolFees');
+})
+
+router.get('/p', (req, res) => {
+  res.render('paymentFees');
+})
+
+router.use((req, res) => {
+  res.status(404).send("Not Found!");
+})
 
 module.exports = router;

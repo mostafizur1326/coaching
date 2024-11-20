@@ -10,7 +10,12 @@ const PORT = process.env.PORT || 5000;
 
 const connectDB = require('./config/mongoose-connection.js');
 
-const homeRouter = require('./routes/home-route.js');
+const indexRouter = require('./routes/indexRouter.js');
+const userRouter = require('./routes/userRouter.js');
+const studentRouter = require('./routes/studentRouter.js');
+const adminRouter = require('./routes/adminRouter.js');
+
+const errorHandler = require('./middlewares/errorHandler.js');
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -24,8 +29,12 @@ connectDB()
   .then(() => {
     
     
-    app.use('/', homeRouter);
+    app.use('/', indexRouter);
+    app.use('/user', userRouter);
+    app.use('/student', studentRouter);
+    app.use('/admin', adminRouter);
     
+    app.use(errorHandler);
     
     app.listen(PORT, () => {
       dbgr(`Server running on:${PORT}`);
