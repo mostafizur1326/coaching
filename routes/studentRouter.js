@@ -61,7 +61,8 @@ router.get('/admission', (req, res) => {
   res.render('admission');
 })
 
-router.get('/admission/confirmation/successful', (req, res) => {
+router.post('/admission/confirmation/successful', (req, res) => {
+  console.log(req.body)
   res.render('admissionMessage');
 })
 

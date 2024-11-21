@@ -156,8 +156,14 @@
       <!--===== STUDENTS_ADMISSION_FOEM =====-->
   
       <section class="w-full font-cy max-w-4xl p-8 flex flex-col items-center justify-center min-h-screen mx-auto">
-
-        <div class="welcome-message bg-green-100 text-green-800 p-6 rounded-lg shadow-lg mb-8 text-center">
+        
+        <div class="absolute top-28 left-4 md:ml-20 z-[999]">
+            <button class="text-gray-600 hover:text-gray-800">
+                <a href="/s" class="ml-2 font-medium text-sm">Back</a>
+            </button>
+        </div>
+        
+        <div class="welcome-message bg-green-100 text-green-800 p-6 rounded-lg shadow-lg mt-20 mb-8 text-center">
           <p class="text-md font-semibold leading-relaxed">Begin the first step of your educational journey with us—join the admission process today!</p>
         </div>
     
@@ -174,7 +180,7 @@
         </div>
     
         <div class="w-full max-w-lg">
-          <form action="#" method="POST">
+          <form action="/student/admission/confirmation/successful" method="POST">
             <h2 class="text-3xl font-bold mb-8 text-gray-700 flex flex-col gap-2 items-center justify-center">
               <span class="w-16 h-16 bg-zinc-700 text-zinc-200 rounded-full flex items-center justify-center">
                 <i class="fas fa-user text-4xl"></i>
@@ -271,7 +277,7 @@
     
             <div class="mb-4 relative">
               <label for="guardian_contact" class="block text-sm font-medium text-zinc-700">Guardian's Mobile Number</label>
-              <input type="text" id="guardian_contact" name="guardian_contact" class="mt-1 p-3 w-full border border-zinc-500 rounded-md bg-transparent" placeholder="Mobile Number" required>
+              <input type="number" id="guardian_contact" name="guardian_contact" class="mt-1 p-3 w-full border border-zinc-500 rounded-md bg-transparent" placeholder="Mobile Number" required>
               <i class="bx bx-phone absolute top-12 right-3 transform -translate-y-1/2 text-zinc-500"></i>
             </div>
     
@@ -331,9 +337,9 @@
                 <label for="payment_method" class="block text-sm font-medium text-zinc-700">Payment Method</label>
                 <select id="payment_method" name="payment_method" class="mt-1 p-3 w-full opacity-50 border border-zinc-500 rounded-md appearance-none bg-transparent" required>
                   <option>Payment Method</option>
-                  <option value="male">BKash</option>
-                  <option value="female">Nagad</option>
-                  <option value="other">Upay</option>
+                  <option value="bkash">BKash</option>
+                  <option value="nagad">Nagad</option>
+                  <option value="upay">Upay</option>
                 </select>
                 <i class="bx bx-credit-card absolute top-12 right-3 transform -translate-y-1/2 text-zinc-500"></i>
               </div>
@@ -357,9 +363,9 @@
             </div>
             
             <div class="mt-6 mb-36">
-              <button type="submit" class="w-full py-2 mt-4 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition">
+                <button type="submit" class="w-full py-2 mt-4 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition">
                 Submit
-              </button>
+                </button>
             </div>
           </form>
         </div>
