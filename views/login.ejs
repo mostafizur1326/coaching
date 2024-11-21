@@ -25,133 +25,6 @@
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
-      
-      <!--====== NAVIGATION_BAR =====-->
-      
-      <nav class="tracking-tighter mb-20">
-        
-        <!--====== LS_HEADER =====-->
-        
-        <header class="header_lg w-full p-8 px-[100px] lg:hidden overflow-x-hidden h-[220px] absolute top-0 left-0 flex justify-between items-start z-50">
-          <div class="logo1">
-            <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
-              <span>B</span>
-              <span>P</span>
-              <span>M</span>
-              <span>H</span>
-              <span>S</span>
-            </h1>
-          </div>
-
-          <ul class="flex items-center list-none text-xs font-cy">
-            <li><a href="/" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Home</a></li>
-            <li><a href="/about" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
-            <li><a href="/notice" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Notice</a></li>
-            <li><a href="/exam" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Exams</a></li>
-            <li><a href="/contact" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Contact</a></li>
-
-            <div class="relative">
-              <button class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" id="profileButton">
-                <i class="bx bx-user-circle text-4xl text-black absolute flex items-center justify-center">
-                  <!-- <img src="" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">-->
-                </i>
-              </button>
-
-              <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#DEFFEE] text-black border border-gray-200 rounded-lg shadow-lg">
-                <ul class="py-1 dropdown-menu">
-                  <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-user mr-2"></i> Profile</a></li>
-                  <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-cog mr-2"></i> Settings</a></li>
-                  <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-log-out mr-2"></i> Logout</a></li>
-                </ul>
-              </div>
-            </div>
-          </ul>
-        </header>
-
-        <!--====== SM_HEADER =====-->
-        
-        <header class="small_header w-full bg-red-500 relative sm:hidden overflow-hidden">
-          <div class="header_head fixed bg-[#DEFFEE69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
-
-            <div class="sm_logo font-bold text-2xl z-[999] overflow-hidden">
-              <h1 class="text-4xl flex tracking-tight font-Baumans px-1">
-                <span>B</span>
-                <span>P</span>
-                <span>M</span>
-                <span>H</span>
-                <span>S</span>
-              </h1>
-            </div>
-
-            <div class="relative">
-              <button id="menuToggle" class="w-10 h-10 flex items-center justify-center overflow-hidden text-4xl text-gray-700 rounded-full absolute left-[35px] top-[-20px]">
-                <i class="bx bx-user-circle user_i absolute flex items-center justify-center">
-                  <!--  <img src="" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">-->
-                </i>
-              </button>
-
-              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#DEFFEE] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
-                <ul class="py-1">
-                  <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-user mr-2"></i> Profile</a></li>
-                  <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-cog mr-2"></i> Settings</a></li>
-                  <li><a href="user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-log-out mr-2"></i> Logout</a></li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="overflow-hidden px-2 relative right-2">
-              <div class="menu flex justify-center items-center w-20 h-6 border border-gray-600 rounded-full cursor-pointer relative">
-                <span class="icons absolute flex justify-center items-center">
-                  <img src="/images/svg/border-menu.svg" alt="" class="menu_icon min-w-[80px] h-20 flex justify-center items-center opacity-80 absolute">
-                  <i class="bx bx-x cross_icon text-2xl i absolute top-[-440px]"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#DEFFEE] shadow-lg z-[99]">
-            <ul class="list-none relative top-1/2 transform -translate-y-1/2 space-y-5">
-              <li><a href="/" class="home flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
-                  <span class="link_home">H</span>
-                  <span class="link_home">O</span>
-                  <span class="link_home">M</span>
-                  <span class="link_home">E</span>
-                </a></li>
-              <li><a href="/about" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
-                  <span class="link_about">A</span>
-                  <span class="link_about">B</span>
-                  <span class="link_about">O</span>
-                  <span class="link_about">U</span>
-                  <span class="link_about">T</span>
-                </a></li>
-              <li><a href="/notice" class="notice flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
-                  <span class="link_notice">N</span>
-                  <span class="link_notice">O</span>
-                  <span class="link_notice">T</span>
-                  <span class="link_notice">I</span>
-                  <span class="link_notice">C</span>
-                  <span class="link_notice">E</span>
-                </a></li>
-              <li><a href="/exam" class="exams flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
-                  <span class="link_exams">E</span>
-                  <span class="link_exams">X</span>
-                  <span class="link_exams">A</span>
-                  <span class="link_exams">M</span>
-                  <span class="link_exams">S</span>
-                </a></li>
-              <li><a href="/contact" class="contact flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
-                  <span class="link_contact">C</span>
-                  <span class="link_contact">O</span>
-                  <span class="link_contact">N</span>
-                  <span class="link_contact">T</span>
-                  <span class="link_contact">A</span>
-                  <span class="link_contact">C</span>
-                  <span class="link_contact">T</span>
-                </a></li>
-            </ul>
-          </div>
-        </header>
-      </nav>
         
       <!--===== USER_LOGIN_FOEM =====-->
         
@@ -192,7 +65,7 @@
             </button>
         
             <p class="text-center text-gray-600 mt-4">
-              Don't have an account? <a href="#" class="text-teal-700 underline">Register</a>
+              Don't have an account? <a href="/user/register" class="text-teal-700 underline">Register</a>
             </p>
           </form>
       </section>

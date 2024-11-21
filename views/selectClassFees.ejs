@@ -28,7 +28,7 @@
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
       
-      <!--====== NAVIGATION_BAR =====-->
+            <!--====== NAVIGATION_BAR =====-->
       
       <nav class="tracking-tighter mb-20">
         
@@ -58,12 +58,24 @@
                   <!-- <img src="" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">-->
                 </i>
               </button>
-
+              
               <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#DEFFEE] text-black border border-gray-200 rounded-lg shadow-lg">
                 <ul class="py-1 dropdown-menu">
-                  <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-user mr-2"></i> Profile</a></li>
-                  <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-cog mr-2"></i> Settings</a></li>
-                  <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-log-out mr-2"></i> Logout</a></li>
+                  <% if (isLoggedIn) { %>
+                    <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-user mr-2"></i> Profile
+                    </a></li>
+                    <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-cog mr-2"></i> Settings
+                    </a></li>
+                    <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-log-out mr-2"></i> Logout
+                    </a></li>
+                  <% } else { %>
+                    <li><a href="/user/login" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-log-in mr-2"></i> Login
+                    </a></li>
+                  <% } %>
                 </ul>
               </div>
             </div>
@@ -94,9 +106,21 @@
 
               <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#DEFFEE] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
                 <ul class="py-1">
-                  <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-user mr-2"></i> Profile</a></li>
-                  <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-cog mr-2"></i> Settings</a></li>
-                  <li><a href="user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white"><i class="bx bx-log-out mr-2"></i> Logout</a></li>
+                  <% if (isLoggedIn) { %>
+                    <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-user mr-2"></i> Profile
+                    </a></li>
+                    <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-cog mr-2"></i> Settings
+                    </a></li>
+                    <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-log-out mr-2"></i> Logout
+                    </a></li>
+                  <% } else { %>
+                    <li><a href="/user/login" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-log-in mr-2"></i> Login
+                    </a></li>
+                  <% } %>
                 </ul>
               </div>
             </div>
