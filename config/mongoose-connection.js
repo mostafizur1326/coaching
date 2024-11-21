@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbgr = require('debug')('development: app&mongoose');
+const dbgr = require('debug')('development: app');
 
 const connectDB = async () => {
   if (!process.env.MONGODB_URI) {
