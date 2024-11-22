@@ -50,7 +50,7 @@ const verificationEmail = async (email) => {
       html: htmlContent,
     });
 
-    console.log("Email sent: %s", info.messageId);
+    dbgr("Email sent: %s", info.messageId);
     
   } catch (error) {
     dbgr("Error sending email:", error);

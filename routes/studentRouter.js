@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+const { createStudent } = require("../controllers/students-controller");
+
+const upload = require("../middlewares/upload");
+const isLoggedIn = require("../middlewares/isLoggedIn");
+
 router.get('/result', (req, res) => {
   res.render('resultForm');
 })
@@ -57,12 +62,11 @@ router.get('/fees/class/ten/fees', (req, res) => {
   res.render('schoolFees');
 })
 
-router.get('/admission', (req, res) => {
+router.get('/admission', isLoggedIn, (req, res) => {
   res.render('admission');
 })
 
-router.post('/admission/confirmation/successful', (req, res) => {
-  console.log(req.body)
+router.post('/admission/confirmation/successful', upload, createStudent, (req, res) => {
   res.render('admissionMessage');
 })
 
@@ -73,5 +77,6 @@ router.get('/settings', (req, res) => {
 router.get('/profile', (req, res) => {
   res.render('profile');
 })
+
 
 module.exports = router;
