@@ -14,6 +14,9 @@ const isLoggedIn = require("../middlewares/isLoggedIn");
 
 const sendedOTP = OTP;
 
+
+
+
 router.get('/register', (req, res) => {
   res.render('registration');
 });
@@ -31,14 +34,13 @@ router.post('/register', async (req, res) => {
       confirmpassword,
       condition,
     });
-    
   }
 
   try {
     const salt = await bcrypt.genSalt(13);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = userModel.create({
+    const newUser = await userModel.create({
       fullname,
       email,
       number,
@@ -47,19 +49,17 @@ router.post('/register', async (req, res) => {
       condition,
     });
 
-    await newUser.save();
-
     try {
       await verificationEmail(email);
-      return res.status(201).redirect('/user/verify')
       dbgr("User account created successfully. Verification email sent.");
-    } catch (emailError) {
-      return res.status(500).redirect('/user/error')
+      return res.status(201).redirect('/user/verify');
+    } catch (error) {
       dbgr("Error sending verification email.");
+      return res.status(500).redirect('/user/error');
     }
   } catch (err) {
-    return res.status(500)
     dbgr(err.message);
+    return res.status(500).render('error', { error: err.message });
   }
 });
 
