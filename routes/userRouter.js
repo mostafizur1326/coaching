@@ -19,17 +19,19 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-  const { fullname, email, number, password, confirmpassword, condition } = req.body;
+  const { fullname, username, email, number, password, confirmpassword, condition } = req.body;
 
   if (password !== confirmpassword) {
-    return res.status(400).render('registration', {
+    return res.status(400).render('registrationError', {
       fullname,
+      username,
       email,
       number,
       password,
       confirmpassword,
       condition,
     });
+    
   }
 
   try {
@@ -49,10 +51,10 @@ router.post('/register', async (req, res) => {
 
     try {
       await verificationEmail(email);
-      return res.status(201)
+      return res.status(201).redirect('/user/verify')
       dbgr("User account created successfully. Verification email sent.");
     } catch (emailError) {
-      return res.status(500)
+      return res.status(500).redirect('/user/error')
       dbgr("Error sending verification email.");
     }
   } catch (err) {
@@ -61,7 +63,6 @@ router.post('/register', async (req, res) => {
   }
 });
 
-module.exports = router;
 router.get('/verify', (req, res) => {
   res.render('verification');
 });
@@ -82,6 +83,9 @@ router.post('/verify', (req, res) => {
   }
 });
 
+router.get('/error', (req, res) => {
+  res.render('errorHandler');
+});
 
 router.get('/login', (req, res) => {
   res.render('login');

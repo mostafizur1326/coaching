@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     default: `student_${Date.now()}`
   },
   email: {
-    type: Date,
+    type: String,
   },
   number: {
     type: String,
