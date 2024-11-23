@@ -96,7 +96,6 @@ router.post('/login', async (req, res) => {
 
   try {
     const user = await userModel.findOne({ email });
-    console.log(user);
 
     if (!user) {
       return res.redirect('/user/register');
@@ -104,18 +103,18 @@ router.post('/login', async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
-      console.log('Login successful');
+      dbgr('Login successful');
       const token = jwt.sign({ email, userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '6h' });
       
       res.cookie('token', token);
       return res.redirect('/');
     } else {
-      console.log('Invalid credentials');
+      dbgr('Invalid credentials');
       return res.render('loginError', { message: 'Invalid email or password!' });
     }
   } catch (error) {
     dbgr('Error during login:', error);
-    res.status(500).render({ message: 'Something went wrong!' });
+    res.status(500).render('loginError',{ message: 'Something went wrong!' });
   }
 });
 
