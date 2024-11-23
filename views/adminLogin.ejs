@@ -42,10 +42,10 @@
 <body class="bg-[#DEFFEE] tracking-tighter flex flex-col items-center justify-center min-h-screen">
 
   <section class="font-cy w-full max-w-lg p-8 rounded-lg">
-    <div class="w-full flex items-center justify-center text-center">
+      <div class="font-cy fixed top-0 left-1/2 transform -translate-x-1/2 w-[350px] bg-green-500 rounded-bl-lg rounded-br-lg shadow-md">
         <% if (messages.success) { %>
-        <p class="bg-green-300 px-3 py-6 text-center absolute top-0"><%= messages.success %></p>
-      <% } %>
+        <p class="p-4 text-center"><%= messages.success %></p>
+        <% } %>
       </div>
     <!--===== ADMIN_LOGIN_FOEM =====-->
     

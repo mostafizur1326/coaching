@@ -55,7 +55,7 @@ router.post('/register', async (req, res) => {
     res.cookie('token', token);
 
     await verificationEmail(email);
-
+    req.flash('success', 'Check your email inbox & dial your verification code.');
     return res.status(201).redirect("/user/verify");
   } catch (error) {
     dbgr("Error creating user:", error);
