@@ -111,11 +111,11 @@ router.post('/login', async (req, res) => {
       return res.redirect('/');
     } else {
       console.log('Invalid credentials');
-      return res.render('login', { error: 'Invalid email or password!' });
+      return res.render('loginError', { message: 'Invalid email or password!' });
     }
   } catch (error) {
-    console.error('Error during login:', error);
-    res.status(500).send('Something went wrong!');
+    dbgr('Error during login:', error);
+    res.status(500).render({ message: 'Something went wrong!' });
   }
 });
 

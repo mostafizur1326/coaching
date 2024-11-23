@@ -33,7 +33,13 @@
           <h2 class="text-center text-3xl font-bold mb-8 text-gray-700 flex items-center gap-2 justify-center">
             <i class="fas fa-user"></i> LOGIN
           </h2>
-      
+          
+          <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
+            <p class="font-medium">Oops! Something went wrong:</p>
+            <p class="text-sm"><%= message %></p>
+          </div>
+  
+            
           <div class="space-y-4">
             <div class="relative">
               <input type="email" name="email" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Email">
@@ -48,7 +54,7 @@
             </div>
           </div>
       
-          <div class="flex items-start relative top-4">
+          <div class="flex items-start relative top-8">
             <input type="checkbox" name="condition" id="condition" class="mt-[2px] mr-2">
             <label for="condition" class="text-left text-gray-600 text-sm">
               I acknowledge that the information provided is accurate and I agree to abide by the school's
@@ -58,7 +64,7 @@
             <span class="error-message hidden text-red-500 text-sm ml-2">You must agree to the terms</span>
           </div>
       
-          <button type="submit" class="w-full py-2 relative top-6 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition">
+          <button type="submit" class="w-full py-2 relative top-8 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition">
             Login
           </button>
       

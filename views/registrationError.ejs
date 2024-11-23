@@ -29,17 +29,17 @@
       
       <section class="min-h-screen flex flex-col items-center justify-center p-8 font-cy">
         
-        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
-          <p class="font-medium">Oops! Something went wrong:</p>
-          <p class="text-sm"><%= message %></p>
-        </div>
-
-        
         <form class="space-y-6" action="/user/register" method="POST" onsubmit="return validateForm()">
           <h2 class="text-center text-3xl font-bold mb-8 text-gray-700 flex items-center gap-2 justify-center">
             <i class="fas fa-user"></i> REGISTER
           </h2>
-      
+          
+          <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
+            <p class="font-medium">Oops! Something went wrong:</p>
+            <p class="text-sm"><%= message %></p>
+          </div>
+
+          
           <div class="space-y-4">
             <div class="relative">
               <input 
