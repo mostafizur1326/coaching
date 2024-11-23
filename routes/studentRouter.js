@@ -5,7 +5,7 @@ const { createStudent } = require("../controllers/students-controller");
 
 const upload = require("../utils/upload");
 
-const isLoggedIn = require("../middlewares/isLoggedIn");
+const { isLoggedIn } = require("../middlewares/isLoggedIn");
 
 router.get('/result', isLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
@@ -96,6 +96,21 @@ router.get('/profile', isLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
   res.render('profile', { isLoggedIn });
 })
+
+router.get('/profile/avatar', isLoggedIn, (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  res.render('studentAvatar', { isLoggedIn });
+});
+
+router.post('/profile/avatar', isLoggedIn, /*upload.single('avatar'),*/ async (req, res) => {
+  const { email } = req.user.email;
+  console.log(req.file)
+  const user = await userModel.findOne({ email });
+  console.log(email)
+  user.photo = req.file.filename;
+  await user.save();
+  res.redirect('/student/profile');
+});
 
 
 module.exports = router;

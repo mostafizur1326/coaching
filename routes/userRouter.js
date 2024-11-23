@@ -9,7 +9,7 @@ const userModel = require('../models/user-model');
 
 const { verificationEmail, OTP } = require('../controllers/email-verification');
 
-const isLoggedIn = require("../middlewares/isLoggedIn");
+const { isLoggedIn } = require("../middlewares/isLoggedIn");
 
 const sendedOTP = OTP;
 
@@ -79,6 +79,7 @@ router.post('/verify', (req, res) => {
   if (sendedOTP !== enteredOTP) {
     res.status(500).render('verificationFailed', { errorMessage: "The verification code you entered is incorrect. Please try again." });
   } else {
+    req.flash('success', 'Account created successfully! Please login.');
     res.status(200).redirect('/user/login');
   }
 });
@@ -122,5 +123,6 @@ router.get('/logout', (req, res) => {
   res.cookie('token', '');
   res.redirect('/user/login');
 });
+
 
 module.exports = router;

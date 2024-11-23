@@ -42,7 +42,11 @@
 <body class="bg-[#DEFFEE] tracking-tighter flex flex-col items-center justify-center min-h-screen">
 
   <section class="font-cy w-full max-w-lg p-8 rounded-lg">
-    
+    <div class="w-full flex items-center justify-center text-center">
+        <% if (messages.success) { %>
+        <p class="bg-green-300 px-3 py-6 text-center absolute top-0"><%= messages.success %></p>
+      <% } %>
+      </div>
     <!--===== ADMIN_LOGIN_FOEM =====-->
     
     <form class="space-y-6" action="" method="POST">
@@ -52,13 +56,7 @@
         </span>
         <span class="inline-block">Admin | Login</span>
       </h2>
-
-      <div class="space-y-4">
-        <div class="relative">
-          <input type="text" name="username" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Username" required>
-          <i class="fas fa-user-tag input-icon"></i>
-        </div>
-
+      
         <div class="relative">
           <input type="email" name="email" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Email" required>
           <i class="fas fa-envelope input-icon"></i>

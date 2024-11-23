@@ -25,7 +25,11 @@
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
-        
+      <div class="w-full flex items-center justify-center text-center">
+        <% if (messages.success) { %>
+        <p class="bg-green-300 px-3 py-6 text-center absolute top-0"><%= messages.success %></p>
+      <% } %>
+      </div>
       <!--===== USER_LOGIN_FOEM =====-->
         
       <section class="min-h-screen relative top-[-25px] font-cy flex items-center justify-center">

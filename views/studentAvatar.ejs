@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-  <title>BPMHS | Profile</title>
+  <title>BPMHS | Avatar</title>
 </head>
 
 <body class="w-full h-full bg-[#DEFFEE] tracking-tighter">
@@ -30,42 +30,20 @@
     <section class="font-cy w-full max-w-md p-8">
       <div class="absolute top-10 left-4 md:ml-20 z-[999]">
         <button class="text-gray-600 hover:text-gray-800">
-          <a href="/" class="ml-2 font-medium text-sm">Back</a>
+          <a href="/student/profile" class="ml-2 font-medium text-sm">Back</a>
         </button>
       </div>
 
       <div class="w-full flex flex-col items-center justify-center mt-28">
-        <!-- Header -->
         <div class="flex flex-col items-center justify-center gap-14 mb-8">
-          <a href="/student/profile/avatar" class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" id="profileButton">
-              <i class="bx bx-user-circle text-[120px] text-black absolute flex items-center justify-center">
-                <img src="" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">
-              </i>
-          </a>
-          
-          <h1 class="text-3xl font-bold text-gray-800">Student Profile</h1>
-          <p class="text-gray-500 mt-[-45px]">Update your personal information</p>
+          <h1 class="text-3xl font-bold text-gray-800">Profile</h1>
+          <p class="text-gray-500 mt-[-45px]">Upload your Photo</p>
         </div>
-
-        <!-- User Information Section -->
-        <div class="p-4 rounded-lg mb-6 shadow-sm">
-          <h2 class="text-xl font-semibold text-gray-700 mb-4">Personal Information</h2>
-          <div class="space-y-2">
-            <p class="text-gray-600"><span class="font-medium">Full Name:</span> John Doe</p>
-            <p class="text-gray-600"><span class="font-medium">Username:</span> johndoe</p>
-            <p class="text-gray-600"><span class="font-medium">Email:</span> john.doe@example.com</p>
-          </div>
-        </div>
-
-        <!-- Update Forms -->
         <div class="space-y-6">
-          <!-- Update Full Name -->
-          <form action="/update-fullname" method="POST" class="space-y-3">
-            <label for="fullname" class="block text-sm font-medium text-gray-700">Update Full Name</label>
+          <form action="/student/profile/avatar" method="POST" enctype="multipart/form-data" class="space-y-3">
             <input
-              type="text"
-              id="fullname"
-              name="fullname"
+              type="file"
+              name="avatar"
               placeholder="Enter your full name"
               class="w-full bg-transparent p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-600"
             />
@@ -73,43 +51,7 @@
               type="submit"
               class="w-full py-2 bg-teal-600 text-white rounded-md font-medium hover:bg-teal-700"
             >
-              Update Full Name
-            </button>
-          </form>
-
-          <!-- Update Username -->
-          <form action="/update-username" method="POST" class="space-y-3">
-            <label for="username" class="block text-sm font-medium text-gray-700">Update Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Enter your username"
-              class="w-full bg-transparent p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-600"
-            />
-            <button
-              type="submit"
-              class="w-full py-2 bg-teal-600 text-white rounded-md font-medium hover:bg-teal-700"
-            >
-              Update Username
-            </button>
-          </form>
-
-          <!-- Update Password -->
-          <form action="/update-password" method="POST" class="space-y-3">
-            <label for="password" class="block text-sm font-medium text-gray-700">Update Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter your new password"
-              class="w-full bg-transparent p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-600"
-            />
-            <button
-              type="submit"
-              class="w-full py-2 bg-teal-600 text-white rounded-md font-medium hover:bg-teal-700"
-            >
-              Update Password
+              Upload
             </button>
           </form>
         </div>
