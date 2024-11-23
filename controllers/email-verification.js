@@ -2,9 +2,11 @@ require('dotenv').config();
 const nodemailer = require("nodemailer");
 const { generateOTP } = require("../utils/otp-generator.js");
 
+const dbgr = require('debug')('app: app');
+
 const OTP = generateOTP();
 
-const verificationEmail = async (email) => {
+const verificationEmail = async (email, token) => {
 
   const htmlContent = `
   <!DOCTYPE html>

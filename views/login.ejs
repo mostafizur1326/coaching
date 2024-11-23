@@ -28,47 +28,45 @@
         
       <!--===== USER_LOGIN_FOEM =====-->
         
-      <section class="min-h-screen font-cy flex items-center justify-center">
-          <form class="space-y-6 w-full max-w-md p-6">
-            <h2 class="text-center text-3xl font-bold mb-8 text-gray-700 flex items-center gap-2 justify-center">
-              <i class="fas fa-user"></i> LOGIN
-            </h2>
-        
-            <div class="space-y-4">
-              <div class="relative">
-                <input type="text" name="username" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Username" required>
-                <i class="fas fa-user-tag input-icon"></i>
-              </div>
-        
-              <div class="relative flex">
-                <input type="email" name="email" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Email" required>
-                <i class="fas fa-envelope input-icon"></i>
-              </div>
-        
-              <div class="relative">
-                <input type="password" name="password" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Password" required>
-                <i class="fas fa-lock input-icon"></i>
-              </div>
+        <section class="min-h-screen font-cy flex items-center justify-center">
+        <form id="loginForm" action="/user/login" method="POST" class="space-y-6 w-full max-w-md p-6">
+          <h2 class="text-center text-3xl font-bold mb-8 text-gray-700 flex items-center gap-2 justify-center">
+            <i class="fas fa-user"></i> LOGIN
+          </h2>
+      
+          <div class="space-y-4">
+            <div class="relative">
+              <input type="email" name="email" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Email">
+              <i class="fas fa-envelope input-icon"></i>
+              <span class="error-message hidden text-red-500 text-sm absolute -bottom-5 left-0">Email is</span>
             </div>
-        
-            <div class="flex items-start mt-4">
-              <input type="checkbox" name="condition" id="condition" class="mt-[2px] mr-2" required>
-              <label for="condition" class="text-left text-gray-600 text-sm">
-                I acknowledge that the information provided is accurate and I agree to abide by the school's
-                <a href="#" class="text-teal-700 underline">policies</a> &
-                <a href="#" class="text-teal-700 underline">terms</a>.
-              </label>
+      
+            <div class="relative">
+              <input type="password" name="password" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Password">
+              <i class="fas fa-lock input-icon"></i>
+              <span class="error-message hidden text-red-500 text-sm absolute -bottom-5 left-0">Password is</span>
             </div>
+          </div>
+      
+          <div class="flex items-start mt-4">
+            <input type="checkbox" name="condition" id="condition" class="mt-[2px] mr-2">
+            <label for="condition" class="text-left text-gray-600 text-sm">
+              I acknowledge that the information provided is accurate and I agree to abide by the school's
+              <a href="#" class="text-teal-700 underline">policies</a> &
+              <a href="#" class="text-teal-700 underline">terms</a>.
+            </label>
+            <span class="error-message hidden text-red-500 text-sm ml-2">You must agree to the terms</span>
+          </div>
+      
+          <button type="submit" class="w-full py-2 mt-4 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition">
+            Login
+          </button>
+      
+          <p class="text-center text-gray-600 mt-4">
+            Don't have an account? <a href="/user/register" class="text-teal-700 underline">Register</a>
+          </p>
+        </form>
         
-            <button type="submit" class="w-full py-2 mt-4 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition">
-              Login
-            </button>
-        
-            <p class="text-center text-gray-600 mt-4">
-              Don't have an account? <a href="/user/register" class="text-teal-700 underline">Register</a>
-            </p>
-          </form>
-      </section>
     </section>
     
     <!--====== FOOTER =====-->
@@ -105,6 +103,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="/javascripts/navberAnimation.js"></script>
+  <script src="/javascripts/loginFormValidation.js"></script>
 </body>
 
 </html>

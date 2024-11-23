@@ -5,7 +5,7 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 
-const dbgr = require('debug')('development: app');
+const dbgr = require('debug')('app: app');
 const PORT = process.env.PORT || 5000;
 
 const connectDB = require('./config/mongoose-connection.js');
@@ -16,14 +16,14 @@ const studentRouter = require('./routes/studentRouter.js');
 const adminRouter = require('./routes/adminRouter.js');
 
 const errorHandler = require('./middlewares/errorHandler.js');
-const isLoggedIn = require('./middlewares/isLoggedIn.js');
+//const isLoggedIn = require('./middlewares/isLoggedIn.js');
 
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(isLoggedIn);
+//app.use(isLoggedIn);
 app.use(logger('dev'));
 
 connectDB()
