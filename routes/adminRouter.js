@@ -94,6 +94,11 @@ router.get('/admission/management', adminIsLoggedIn, (req, res) => {
   res.render('admissionManagement', { isLoggedIn });
 })
 
+router.get('/admission/management/student/details', adminIsLoggedIn, (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  res.render('studentDetails', { isLoggedIn });
+})
+
 router.get('/post/management', adminIsLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
   res.render('postManagement', { isLoggedIn });
