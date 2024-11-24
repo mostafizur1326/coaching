@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { createStudent } = require("../controllers/students-controller");
+const { createStudent } = require("../controllers/admission-students-controller");
 
 const upload = require("../utils/upload");
 
@@ -86,9 +86,6 @@ router.get('/admission', isLoggedIn, (req, res) => {
 
 router.post('/admission/confirmation/successful', upload, createStudent, isLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
-  
-  
-  
   res.render('admissionMessage', { isLoggedIn });
 })
 

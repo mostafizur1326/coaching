@@ -59,6 +59,7 @@ const createStudent = async (req, res) => {
     });
 
     await newAdmittedStudent.save();
+    console.log(newAdmittedStudent);
     res.status(201).json({ message: "Student added successfully", student: newAdmittedStudent });
   } catch (error) {
     console.error(error);
