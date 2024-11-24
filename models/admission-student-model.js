@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const studentSchema = new mongoose.Schema({
+const admissionStudentSchema = new mongoose.Schema({
   student_name: {
     type: String,
   },
@@ -8,6 +8,9 @@ const studentSchema = new mongoose.Schema({
     type: Date,
   },
   gender: {
+    type: String,
+  },
+  student_photo: {
     type: String,
   },
   religion: {
@@ -36,7 +39,6 @@ const studentSchema = new mongoose.Schema({
   },
   guardian_email: {
     type: String,
-    
   },
   guardian_profession: {
     type: String,
@@ -53,8 +55,9 @@ const studentSchema = new mongoose.Schema({
   transfer_certificate: {
     type: String
   },
-  student_photo: {
+  condition: {
     type: String,
+    default: 'off'
   },
   avatar: {
     type: String,
@@ -69,6 +72,10 @@ const studentSchema = new mongoose.Schema({
   transaction_id: {
     type: String,
   },
+  condition2: {
+    type: String,
+    default: 'off'
+  },
 }, { timestamps: true });
 
-module.exports = mongoose.model("Student", studentSchema);
+module.exports = mongoose.model("AdmittedStudent", admissionStudentSchema);

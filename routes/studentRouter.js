@@ -7,6 +7,8 @@ const upload = require("../utils/upload");
 
 const { isLoggedIn } = require("../middlewares/isLoggedIn");
 
+//admission-student-model
+
 router.get('/result', isLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
   res.render('resultForm', { isLoggedIn });
@@ -77,13 +79,16 @@ router.get('/fees/class/ten/fees', isLoggedIn, (req, res) => {
   res.render('schoolFees', { isLoggedIn });
 })
 
-router.get('/admission', isLoggedIn, isLoggedIn, (req, res) => {
+router.get('/admission', isLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
   res.render('admission', { isLoggedIn });
 })
 
 router.post('/admission/confirmation/successful', upload, createStudent, isLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
+  
+  
+  
   res.render('admissionMessage', { isLoggedIn });
 })
 
