@@ -10,7 +10,7 @@ function isLoggedIn(req, res, next) {
 }
 
 function adminIsLoggedIn(req, res, next) {
-  if (!req.cookies.token) return res.redirect('/admin/bpmhs/author/login');
+  if (!req.cookies.token) return res.redirect('/admin/login');
   else {
     const data = jwt.verify(req.cookies.token, process.env.JWT_SECRET_KEY);
     req.user = data;

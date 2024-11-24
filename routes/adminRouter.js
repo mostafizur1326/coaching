@@ -13,11 +13,11 @@ const adminModel = require('../models/admin-model');
 const { adminIsLoggedIn } = require("../middlewares/isLoggedIn");
 
 
-router.get('/bpmhs/author/registration', (req, res) => {
+router.get('/registration', (req, res) => {
   res.render('adminRegistration');
 })
 
-router.post('/bpmhs/author/registration', async (req, res) => {
+router.post('/registration', async (req, res) => {
   const { fullname, username, email, password, condition } = req.body;
   try {
     const adminCount = await adminModel.countDocuments();
@@ -45,25 +45,24 @@ router.post('/bpmhs/author/registration', async (req, res) => {
       res.cookie('token', token);
 
       req.flash('success', 'Admin account created successfully! Please login.');
-      return res.status(200).redirect('/admin/bpmhs/author/login');
+      return res.status(200).redirect('/admin/login');
     }
   } catch (error) {
     return res.status(500).render("adminRegistrationError", { message: "An unexpected error occurred. Please try again later." });
   }
 });
 
-router.get('/bpmhs/author/login', (req, res) => {
+router.get('/login', (req, res) => {
   res.render('adminLogin');
 })
 
-router.post('/bpmhs/author/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const admin = await adminModel.findOne({ email });
 
     if (!admin) {
-      return res.redirect('/user/register');
+      return res.redirect('/admin/register');
     }
 
     const isMatch = await bcrypt.compare(password, admin.password);
@@ -71,7 +70,7 @@ router.post('/bpmhs/author/login', async (req, res) => {
       const token = jwt.sign({ email, adminId: admin._id }, process.env.JWT_SECRET_KEY, { expiresIn: '6h' });
       
       res.cookie('token', token);
-      return res.redirect('/admin/bpmhs/author/home');
+      return res.redirect('/admin/dashboard');
     } else {
       return res.render('adminLoginError', { message: 'Invalid email or password!' });
     }
@@ -82,36 +81,50 @@ router.post('/bpmhs/author/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
   res.cookie('token', '');
-  res.redirect('/admin/bpmhs/author/login');
+  res.redirect('/admin/login');
 });
 
-
-router.get('/bpmhs/author/home', adminIsLoggedIn, (req, res) => {
+router.get('/dashboard', adminIsLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('index', { isLoggedIn });
+  res.render('dashboard', { isLoggedIn });
 })
 
-router.get('/bpmhs/author/about', (req, res) => {
+router.get('/admission/management', adminIsLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('about', { isLoggedIn });
+  res.render('admissionManagement', { isLoggedIn });
 })
 
-/*router.get('/bpmhs/author/notice', (req, res) => {
+router.get('/post/management', adminIsLoggedIn, (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  res.render('postManagement', { isLoggedIn });
+})
+
+router.get('/result/management', adminIsLoggedIn, (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  res.render('resultManagement', { isLoggedIn });
+})
+
+router.get('/others/management', adminIsLoggedIn, (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  res.render('othersManagement', { isLoggedIn });
+})
+
+/*router.get('/notice', (req, res) => {
   res.render('notice');
 })
 
-router.get('/bpmhs/author/exam', (req, res) => {
+router.get('/exam', (req, res) => {
   res.render('exam');
 })
 
-router.get('/bpmhs/author/contact', (req, res) => {
+router.get('/contact', (req, res) => {
   res.render('contact');
 })
 */
 
 router.get('/logout', (req, res) => {
   res.cookie('token', '');
-  res.redirect('/admin/bpmhs/author//login');
+  res.redirect('/admin/login');
 });
 
 module.exports = router;
