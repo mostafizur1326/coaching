@@ -85,7 +85,8 @@ router.post('/verify', (req, res) => {
 });
 
 router.get('/error', (req, res) => {
-  res.render('errorHandler');
+  const isLoggedIn = req.cookies.token;
+  res.render('errorHandler', { isLoggedIn });
 });
 
 router.get('/login', (req, res) => {

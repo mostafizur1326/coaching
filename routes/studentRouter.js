@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { createStudent } = require("../controllers/admission-students-controller");
+const admissionStudentModel = require("../models/admission-student-model");
 
 const upload = require("../utils/upload");
 
@@ -84,10 +84,79 @@ router.get('/admission', isLoggedIn, (req, res) => {
   res.render('admission', { isLoggedIn });
 })
 
-router.post('/admission/confirmation/successful', upload, createStudent, isLoggedIn, (req, res) => {
+router.post('/admission/confirmation/successful', isLoggedIn, upload, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('admissionMessage', { isLoggedIn });
-})
+
+  try {
+    const {
+      student_name,
+      dob,
+      gender,
+      religion,
+      nationality,
+      class_name,
+      father_name,
+      mother_name,
+      guardian_contact,
+      guardian_email,
+      guardian_profession,
+      permanent_address,
+      current_address,
+      previous_school,
+      payment_method,
+      sending_number,
+      transaction_id,
+      condition,
+      condition2,
+    } = req.body;
+
+    const { student_photo, mother_nid, father_nid, transfer_certificate } = req.files;
+
+    const existingAdmittedStudent = await admissionStudentModel.findOne({
+      $or: [{ guardian_email }, { transaction_id }],
+    });
+
+    let newAdmittedStudent = null;
+
+    if (existingAdmittedStudent) {
+      req.flash('existing', 'This transaction ID has already been used, & the student already exists.');
+      return res.status(409).redirect('/student/admission');
+    } else {
+      newAdmittedStudent = await admissionStudentModel.create({
+        student_name,
+        dob,
+        gender,
+        religion,
+        nationality,
+        class_name,
+        father_name,
+        mother_name,
+        guardian_contact,
+        guardian_email,
+        guardian_profession,
+        permanent_address,
+        current_address,
+        previous_school,
+        condition,
+        payment_method,
+        sending_number,
+        transaction_id,
+        condition2,
+        student_photo: student_photo?.[0]?.path,
+        father_nid: father_nid?.[0]?.path,
+        mother_nid: mother_nid?.[0]?.path,
+        transfer_certificate: transfer_certificate?.[0]?.path,
+      });
+    }
+
+    console.log(newAdmittedStudent);
+    res.status(201).render('admissionMessage', { isLoggedIn });
+  } catch (error) {
+    console.error(error);
+    req.flash('error', 'Something went wrong! Please try again.');
+    res.status(500).redirect('/student/admission');
+  }
+});
 
 router.get('/settings', isLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;

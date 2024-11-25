@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const dbgr = require('debug')('app: app');
 
 const adminModel = require('../models/admin-model');
+const admissionStudentModel = require('../models/admission-student-model');
 
 //const { verificationEmail, OTP } = require('../controllers/email-welcome');
 
@@ -37,10 +38,8 @@ router.post('/registration', async (req, res) => {
       });
 
       const admin = await adminModel.findOne({ email });
-      const token = jwt.sign(
-        { email, adminId: admin._id },
-        process.env.JWT_SECRET_KEY,
-        { expiresIn: '6h' }
+      const token = jwt.sign({ email, adminId: admin._id },
+        process.env.JWT_SECRET_KEY, { expiresIn: '6h' }
       );
       res.cookie('token', token);
 
@@ -62,20 +61,20 @@ router.post('/login', async (req, res) => {
     const admin = await adminModel.findOne({ email });
 
     if (!admin) {
-      return res.redirect('/admin/register');
+      return res.redirect('/admin/registration');
     }
 
     const isMatch = await bcrypt.compare(password, admin.password);
     if (isMatch) {
       const token = jwt.sign({ email, adminId: admin._id }, process.env.JWT_SECRET_KEY, { expiresIn: '6h' });
-      
+
       res.cookie('token', token);
       return res.redirect('/admin/dashboard');
     } else {
       return res.render('adminLoginError', { message: 'Invalid email or password!' });
     }
   } catch (error) {
-    res.status(500).render('loginError',{ message: 'Something went wrong!' });
+    res.status(500).render('loginError', { message: 'Something went wrong!' });
   }
 });
 
@@ -89,15 +88,59 @@ router.get('/dashboard', adminIsLoggedIn, (req, res) => {
   res.render('dashboard', { isLoggedIn });
 })
 
-router.get('/admission/management', adminIsLoggedIn, (req, res) => {
+router.get('/admission/management', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('admissionManagement', { isLoggedIn });
+
+  try {
+    const allAdmittedStudent = await admissionStudentModel.find();
+
+    let pendingStudents = allAdmittedStudent.filter(admittedStudent => admittedStudent.student_status === 'pending');
+
+    let approvedStudents = allAdmittedStudent.filter(admittedStudent => admittedStudent.student_status === 'approved');
+
+    let rejectedStudents = allAdmittedStudent.filter(admittedStudent => admittedStudent.student_status === 'rejected');
+    
+    res.status(201).render('admissionManagement', { isLoggedIn, pendingStudents, approvedStudents, rejectedStudents });
+  } catch (error) {
+    res.status(500).render('errorHandler', { isLoggedIn, error });
+  }
 })
 
-router.get('/admission/management/student/details', adminIsLoggedIn, (req, res) => {
+router.get('/admitted/student/details/:student_id', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('studentDetails', { isLoggedIn });
-})
+  try {
+    const student_id = req.params.student_id;
+    const student = await admissionStudentModel.findOne({ _id: student_id })
+    
+    res.render('studentDetails', { isLoggedIn, student });
+  } catch (error) {
+    res.status(500).render('errorHandler', { isLoggedIn, error });
+  }
+});
+
+router.get('/admitted/student/approved/:student_id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  try {
+    const student_id = req.params.student_id;
+    const student = await admissionStudentModel.findOneAndUpdate({ _id: student_id,  student_status: 'approved'})
+
+    res.redirect('/admin/admission/management');
+  } catch (error) {
+    res.status(500).render('errorHandler', { isLoggedIn, error });
+  }
+});
+
+router.get('/admitted/student/rejected/:student_id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  try {
+    const student_id = req.params.student_id;
+    const student = await admissionStudentModel.findOneAndUpdate({ _id: student_id, student_status: 'rejected' })
+
+    res.redirect('/admin/admission/management');
+  } catch (error) {
+    res.status(500).render('errorHandler', { isLoggedIn, error });
+  }
+});
 
 router.get('/post/management', adminIsLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
@@ -113,19 +156,6 @@ router.get('/others/management', adminIsLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
   res.render('othersManagement', { isLoggedIn });
 })
-
-/*router.get('/notice', (req, res) => {
-  res.render('notice');
-})
-
-router.get('/exam', (req, res) => {
-  res.render('exam');
-})
-
-router.get('/contact', (req, res) => {
-  res.render('contact');
-})
-*/
 
 router.get('/logout', (req, res) => {
   res.cookie('token', '');

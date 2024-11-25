@@ -31,7 +31,7 @@ const createStudent = async (req, res) => {
       transfer_certificate
     } = req.files;
 
-    const newAdmittedStudent = admissionStudentModel.create({
+    const newAdmittedStudent = await admissionStudentModel.create({
       student_name,
       dob,
       gender,
@@ -55,15 +55,14 @@ const createStudent = async (req, res) => {
       father_nid: father_nid?.[0]?.path,
       mother_nid: mother_nid?.[0]?.path,
       transfer_certificate: transfer_certificate?.[0]?.path,
-      student_status: 'pending'
     });
 
-    await newAdmittedStudent.save();
     console.log(newAdmittedStudent);
     res.status(201).json({ message: "Student added successfully", student: newAdmittedStudent });
   } catch (error) {
     console.error(error);
-    res.status(500).render('errorHandler', { message: "Internal Server Error" });
+    req.flash('error', 'Something want wrong! Please try aging.')
+    res.status(500).redirect('/student/admission');
   }
 };
 

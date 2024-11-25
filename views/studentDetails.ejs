@@ -187,7 +187,7 @@
 
             <!-- Student Photo -->
             <div class="h-48 flex items-center justify-center">
-                <img src="https://via.placeholder.com/300" alt="Student Photo" class="object-cover h-full w-auto">
+                <img src="<%= student.student_photo %>" alt="Student Photo" class="object-cover h-full w-auto">
             </div>
 
             <!-- Student Information -->
@@ -195,7 +195,7 @@
                 <!-- Name -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Name:</label>
-                    <p class="text-lg text-gray-800 font-semibold">John Doe</p>
+                    <p class="text-lg text-gray-800 font-semibold"><%= student.student_name %></p>
                 </div>
 
                 <!-- Roll -->
@@ -207,62 +207,93 @@
                 <!-- Date of Birth -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Date of Birth:</label>
-                    <p class="text-gray-800">2002-01-01</p>
+                    <p class="text-gray-800"><%= new Date(student.dob).toLocaleDateString() %></p>
                 </div>
 
                 <!-- Gender -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Gender:</label>
-                    <p class="text-gray-800">Male</p>
+                    <p class="text-gray-800"><%= student.gender %></p>
                 </div>
-
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Class:</label>
+                    <p class="text-gray-800"><%= student.class_name %></p>
+                </div>
+                
                 <!-- Religion -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Religion:</label>
-                    <p class="text-gray-800">Christianity</p>
+                    <p class="text-gray-800"><%= student.religion %></p>
                 </div>
 
                 <!-- Nationality -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Nationality:</label>
-                    <p class="text-gray-800">American</p>
+                    <p class="text-gray-800"><%= student.nationality %></p>
                 </div>
 
                 <!-- Parent Info -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Mother's Name:</label>
-                    <p class="text-gray-800">Jane Doe</p>
+                    <p class="text-gray-800"><%= student.mother_name %></p>
                 </div>
 
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Father's Name:</label>
-                    <p class="text-gray-800">Jack Doe</p>
+                    <p class="text-gray-800"><%= student.father_name %></p>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Guardian Contact:</label>
+                    <p class="text-gray-800"><%= student.guardian_contact %></p>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Guardian Email:</label>
+                    <p class="text-gray-800"><%= student.guardian_email %></p>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Guardian Profession:</label>
+                    <p class="text-gray-800"><%= student.guardian_profession %></p>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Current Address:</label>
+                    <p class="text-gray-800"><%= student.current_address %></p>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Permanent Address:</label>
+                    <p class="text-gray-800"><%= student.permanent_address %></p>
                 </div>
 
                 <!-- Previous School -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Previous School:</label>
-                    <p class="text-gray-800">ABC High School</p>
+                    <p class="text-gray-800"><%= student.previous_school %></p>
                 </div>
 
                 <!-- Payment Info -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Payment Method:</label>
-                    <p class="text-gray-800">Bkash</p>
+                    <p class="text-gray-800"><%= student.payment_method %></p>
                 </div>
 
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Transaction ID:</label>
-                    <p class="text-gray-800">TXN12345</p>
+                    <p class="text-gray-800"><%= student.transaction_id %></p>
                 </div>
 
                 <!-- External Links -->
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-700">Related Documents:</label>
                     <div class="flex flex-col gap-2 mt-2">
-                        <a href="https://via.placeholder.com/150" target="_blank" class="text-teal-600 hover:underline">View Student Photo</a>
-                        <a href="#" target="_blank" class="text-teal-600 hover:underline">View Mother's NID</a>
-                        <a href="#" target="_blank" class="text-teal-600 hover:underline">View Father's NID</a>
+                        <a href="<%= student.student_photo %>" target="_blank" class="text-teal-600 hover:underline">View Student Photo</a>
+                        <a href="<%= student.mother_nid %>" target="_blank" class="text-teal-600 hover:underline">View Mother's NID</a>
+                        <a href="<%= student.father_nid %>" target="_blank" class="text-teal-600 hover:underline">View Father's NID</a>
+                        <a href="<%= student.transfer_certificate %>" target="_blank" class="text-teal-600 hover:underline">View Transfer Certificate</a>
                     </div>
                 </div>
             </div>

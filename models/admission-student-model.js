@@ -76,6 +76,10 @@ const admissionStudentSchema = new mongoose.Schema({
     type: String,
     default: 'off'
   },
+  student_status: {
+    type: String,
+    default: 'pending'
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model("AdmittedStudent", admissionStudentSchema);
