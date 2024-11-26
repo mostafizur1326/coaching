@@ -80,6 +80,10 @@ const admissionStudentSchema = new mongoose.Schema({
     type: String,
     default: 'pending'
   },
+  role: {
+    type: String,
+    default: 'user'
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model("AdmittedStudent", admissionStudentSchema);

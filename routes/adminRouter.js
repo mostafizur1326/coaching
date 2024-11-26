@@ -66,6 +66,30 @@ router.post('/login', async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, admin.password);
     if (isMatch) {
+      const token = jwt.sign({ email, adminId: admin._id, role: admin.role }, process.env.JWT_SECRET_KEY, { expiresIn: '6h' });
+
+      // Ensure token is set correctly, possibly add more options like `secure` or `httpOnly`
+      res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+      return res.redirect('/admin/dashboard');
+    } else {
+      return res.render('adminLoginError', { message: 'Invalid email or password!' });
+    }
+  } catch (error) {
+    res.status(500).render('adminLoginError', { message: 'Something went wrong!' });
+  }
+});
+
+/*router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const admin = await adminModel.findOne({ email });
+
+    if (!admin) {
+      return res.redirect('/admin/registration');
+    }
+
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (isMatch) {
       const token = jwt.sign({ email, adminId: admin._id }, process.env.JWT_SECRET_KEY, { expiresIn: '6h' });
 
       res.cookie('token', token);
@@ -74,14 +98,9 @@ router.post('/login', async (req, res) => {
       return res.render('adminLoginError', { message: 'Invalid email or password!' });
     }
   } catch (error) {
-    res.status(500).render('loginError', { message: 'Something went wrong!' });
+    res.status(500).render('adminLoginError', { message: 'Something went wrong!' });
   }
-});
-
-router.get('/logout', (req, res) => {
-  res.cookie('token', '');
-  res.redirect('/admin/login');
-});
+});*/
 
 router.get('/dashboard', adminIsLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
