@@ -129,7 +129,10 @@ router.get('/admitted/student/details/:student_id', adminIsLoggedIn, async (req,
   const isLoggedIn = req.cookies.token;
   try {
     const student_id = req.params.student_id;
-    const student = await admissionStudentModel.findOne({ _id: student_id })
+    const student = await admissionStudentModel.findOne({ _id: student_id });
+    
+    student.student_photo = student.student_photo;
+    await student.save();
     
     res.render('studentDetails', { isLoggedIn, student });
   } catch (error) {

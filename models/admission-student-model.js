@@ -12,6 +12,7 @@ const admissionStudentSchema = new mongoose.Schema({
   },
   student_photo: {
     type: String,
+    default: 'default.png'
   },
   religion: {
     type: String,

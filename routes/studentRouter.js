@@ -116,13 +116,11 @@ router.post('/admission/confirmation/successful', isLoggedIn, upload, async (req
       $or: [{ guardian_email }, { transaction_id }],
     });
 
-    let newAdmittedStudent = null;
-
     if (existingAdmittedStudent) {
       req.flash('existing', 'This transaction ID has already been used, & the student already exists.');
       return res.status(409).redirect('/student/admission');
     } else {
-      newAdmittedStudent = await admissionStudentModel.create({
+      const newAdmittedStudent = await admissionStudentModel.create({
         student_name,
         dob,
         gender,
@@ -142,17 +140,15 @@ router.post('/admission/confirmation/successful', isLoggedIn, upload, async (req
         sending_number,
         transaction_id,
         condition2,
-        student_photo: student_photo?.[0]?.path,
-        father_nid: father_nid?.[0]?.path,
-        mother_nid: mother_nid?.[0]?.path,
-        transfer_certificate: transfer_certificate?.[0]?.path,
+        student_photo: student_photo ? student_photo[0].filename : null,
+        father_nid: father_nid ? father_nid[0].filename : null,
+        mother_nid: mother_nid ? mother_nid[0].filename : null,
+        transfer_certificate: transfer_certificate ? transfer_certificate[0].filename : null,
       });
     }
 
-    console.log(newAdmittedStudent);
     res.status(201).render('admissionMessage', { isLoggedIn });
   } catch (error) {
-    console.error(error);
     req.flash('error', 'Something went wrong! Please try again.');
     res.status(500).redirect('/student/admission');
   }
