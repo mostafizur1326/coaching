@@ -118,7 +118,7 @@ router.get('/admission/management', adminIsLoggedIn, async (req, res) => {
     let approvedStudents = allAdmittedStudent.filter(admittedStudent => admittedStudent.student_status === 'approved');
 
     let rejectedStudents = allAdmittedStudent.filter(admittedStudent => admittedStudent.student_status === 'rejected');
-    
+
     res.status(201).render('admissionManagement', { isLoggedIn, pendingStudents, approvedStudents, rejectedStudents });
   } catch (error) {
     res.status(500).render('errorHandler', { isLoggedIn, error });
@@ -130,17 +130,14 @@ router.get('/admitted/student/details/:student_id', adminIsLoggedIn, async (req,
   try {
     const student_id = req.params.student_id;
     const student = await admissionStudentModel.findOne({ _id: student_id });
-    
-    student.student_photo = student.student_photo;
-    await student.save();
-    
+
     res.render('studentDetails', { isLoggedIn, student });
   } catch (error) {
     res.status(500).render('errorHandler', { isLoggedIn, error });
   }
 });
 
-router.get('/admitted/student/approved/:student_id', adminIsLoggedIn, async (req, res) => {
+/*router.get('/admitted/student/approved/:student_id', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
   try {
     const student_id = req.params.student_id;
@@ -157,6 +154,40 @@ router.get('/admitted/student/rejected/:student_id', adminIsLoggedIn, async (req
   try {
     const student_id = req.params.student_id;
     const student = await admissionStudentModel.findOneAndUpdate({ _id: student_id, student_status: 'rejected' })
+
+    res.redirect('/admin/admission/management');
+  } catch (error) {
+    res.status(500).render('errorHandler', { isLoggedIn, error });
+  }
+});*/
+
+router.get('/admitted/student/rejected/:student_id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  try {
+    const student_id = req.params.student_id;
+
+    const student = await admissionStudentModel.findOneAndUpdate({ _id: student_id }, { $set: { student_status: 'rejected' } }, { new: true });
+
+    if (!student) {
+      return res.status(404).render('Student not found');
+    }
+
+    res.redirect('/admin/admission/management');
+  } catch (error) {
+    res.status(500).render('errorHandler', { isLoggedIn, error });
+  }
+});
+
+router.get('/admitted/student/approved/:student_id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  try {
+    const student_id = req.params.student_id;
+
+    const student = await admissionStudentModel.findOneAndUpdate({ _id: student_id }, { $set: { student_status: 'approved' } }, { new: true });
+
+    if (!student) {
+      return res.status(404).render('Student not found');
+    }
 
     res.redirect('/admin/admission/management');
   } catch (error) {
