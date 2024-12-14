@@ -10,12 +10,12 @@ const flash = require('connect-flash');
 const dbgr = require('debug')('app: app');
 const PORT = process.env.PORT || 5000;
 
-const connectDB = require('./config/mongoose-connection.js');
+//const connectDB = require('./config/mongoose-connection.js');
 
 const indexRouter = require('./routes/indexRouter.js');
-const userRouter = require('./routes/userRouter.js');
+/*const userRouter = require('./routes/userRouter.js');
 const studentRouter = require('./routes/studentRouter.js');
-const adminRouter = require('./routes/adminRouter.js');
+const adminRouter = require('./routes/adminRouter.js');*/
 
 const errorHandler = require('./middlewares/errorHandler.js');
 
@@ -38,21 +38,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(logger('dev'));
 
-connectDB()
-  .then(() => {
+//connectDB()
+  //.then(() => {
     
     
     app.use('/', indexRouter);
-    app.use('/user', userRouter);
-    app.use('/student', studentRouter);
-    app.use('/admin', adminRouter);
+    //app.use('/user', userRouter);
+    //app.use('/student', studentRouter);
+  //  app.use('/admin', adminRouter);
     
     app.use(errorHandler);
     
     app.listen(PORT, () => {
       dbgr(`Server running on:${PORT}`);
     })
-  })
-  .catch((error) => {
-    dbgr(`MongoDB database connection Failed: ${error}`);
-  })
+///  })
+  //.catch((error) => {
+  //  dbgr(`MongoDB database connection Failed: ${error}`);
+  //})

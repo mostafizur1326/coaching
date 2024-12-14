@@ -7,7 +7,7 @@ const connectDB = async () => {
   }
 
   try {
-    const connectionITC = await mongoose.connect(`${process.env.MONGODB_URI}/bpmhs`);
+    const connectionITC = await mongoose.connect(`${process.env.MONGODB_URI}/stec`);
     dbgr(`MongoDB connected`);
   } catch (error) {
     dbgr('MongoDB connection FAILED:', error.message);
