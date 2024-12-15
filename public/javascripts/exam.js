@@ -1,14 +1,14 @@
 function guideTapber() {
-  document.getElementById("tab1").classList.add("text-teal-700", "border-b-2", "border-teal-500");
+  document.getElementById("tab1").classList.add("text-blue-900", "border-b-2", "border-blue-500");
   document.getElementById("content1").classList.add("active");
 
   const tabs = document.querySelectorAll(".tab-btn");
   tabs.forEach(tab => {
     tab.addEventListener("click", function() {
-      tabs.forEach(t => t.classList.remove("text-teal-700", "border-b-2", "border-teal-500"));
+      tabs.forEach(t => t.classList.remove("text-blue-900", "border-b-2", "border-blue-500"));
       document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
 
-      tab.classList.add("text-teal-700", "border-b-2", "border-teal-500");
+      tab.classList.add("text-blue-900", "border-b-2", "border-blue-500");
 
       const target = tab.id.replace('tab', 'content');
       document.getElementById(target).classList.add("active");

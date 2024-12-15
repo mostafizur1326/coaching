@@ -18,38 +18,36 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-  <title>BPMHS | Notice</title>
+  <title>STEC | Blog</title>
 </head>
 
-<body class="w-full h-full bg-[#DEFFEE] tracking-tighter">
+<body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
       
-            <!--====== NAVIGATION_BAR =====-->
+      <!--====== NAVIGATION_BAR =====-->
       
-      <nav class="tracking-tighter mb-20">
+      <nav class="tracking-tighter font-cy">
         
         <!--====== LS_HEADER =====-->
         
         <header class="header_lg w-full p-8 px-[100px] lg:hidden overflow-x-hidden h-[220px] absolute top-0 left-0 flex justify-between items-start z-50">
           <div class="logo1">
-            <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
-              <span>B</span>
-              <span>P</span>
-              <span>M</span>
-              <span>H</span>
-              <span>S</span>
-            </h1>
+            <a href="/" class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
+              <img src="/images/logo.png" class="w-[65px]" />
+            </a>
           </div>
 
-          <ul class="flex items-center list-none text-xs font-cy">
-            <li><a href="/" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Home</a></li>
-            <li><a href="/about" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
-            <li><a href="/notice" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-transparent bg-black hover:text-zinc-900 text-[#e9f1ef]">Notice</a></li>
-            <li><a href="/exam" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Exams</a></li>
+          <ul class="flex items-center mt-6 list-none text-xs font-cy">
+            <li><a href="/" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-transparent hover:bg-black hover:text-[#e9f1ef]">Home</a></li>
+            <li><a href="/about" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
+            <li><a href="/exams" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Exams</a></li>
+            <li><a href="/payment/class" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Payment</a></li>
+            <li><a href="/blog" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-transparent bg-black hover:text-zinc-900 text-white">Blog</a></li>
             <li><a href="/contact" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Contact</a></li>
-
+          </ul>
+          
             <div class="relative">
               <button class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" id="profileButton">
                 <i class="bx bx-user-circle text-4xl text-black absolute flex items-center justify-center">
@@ -57,19 +55,13 @@
                 </i>
               </button>
               
-              <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#DEFFEE] text-black border border-gray-200 rounded-lg shadow-lg">
+              <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#F5FAFF] text-black border border-gray-200 rounded-lg shadow-lg">
                 <ul class="py-1 dropdown-menu">
                   <% if (isLoggedIn) { %>
-                    <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-user mr-2"></i> Profile
-                    </a></li>
-                    <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-cog mr-2"></i> Settings
-                    </a></li>
                     <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-out mr-2"></i> Logout
                     </a></li>
-                  <% } else { %>
+                    <% } else { %>
                     <li><a href="/user/login" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-in mr-2"></i> Login
                     </a></li>
@@ -77,22 +69,17 @@
                 </ul>
               </div>
             </div>
-          </ul>
         </header>
 
         <!--====== SM_HEADER =====-->
         
         <header class="small_header w-full bg-red-500 relative sm:hidden overflow-hidden">
-          <div class="header_head fixed bg-[#DEFFEE69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
+          <div class="header_head fixed bg-[#F5FAFF69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
 
             <div class="sm_logo font-bold text-2xl z-[999] overflow-hidden">
-              <h1 class="text-4xl flex tracking-tight font-Baumans px-1">
-                <span>B</span>
-                <span>P</span>
-                <span>M</span>
-                <span>H</span>
-                <span>S</span>
-              </h1>
+              <a href="/" class="ml-6 text-black font-Baumans font-bold flex cursor-pointer">
+                <img src="/images/logo.png" class="w-[65px]" />
+              </a>
             </div>
 
             <div class="relative">
@@ -102,15 +89,9 @@
                 </i>
               </button>
 
-              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#DEFFEE] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
+              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#F5FAFF] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
                 <ul class="py-1">
                   <% if (isLoggedIn) { %>
-                    <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-user mr-2"></i> Profile
-                    </a></li>
-                    <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-cog mr-2"></i> Settings
-                    </a></li>
                     <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-out mr-2"></i> Logout
                     </a></li>
@@ -133,35 +114,43 @@
             </div>
           </div>
 
-          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#DEFFEE] shadow-lg z-[99]">
+          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#F5FAFF] shadow-lg z-[99]">
             <ul class="list-none relative top-1/2 transform -translate-y-1/2 space-y-5">
-              <li><a href="/" class="home flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/" class="home flex justify-center text-[30px] font-Aclonica border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
                   <span class="link_home">H</span>
                   <span class="link_home">O</span>
                   <span class="link_home">M</span>
                   <span class="link_home">E</span>
                 </a></li>
-              <li><a href="/about" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/about" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
                   <span class="link_about">A</span>
                   <span class="link_about">B</span>
                   <span class="link_about">O</span>
                   <span class="link_about">U</span>
                   <span class="link_about">T</span>
                 </a></li>
-              <li><a href="/notice" class="notice flex justify-center text-[30px] font-Aclonica border-b border-gray-400 py-5 transition-all hover:bg-transparent bg-black hover:text-zinc-900 text-[#e9f1ef]">
-                  <span class="link_notice">N</span>
-                  <span class="link_notice">O</span>
-                  <span class="link_notice">T</span>
-                  <span class="link_notice">I</span>
-                  <span class="link_notice">C</span>
-                  <span class="link_notice">E</span>
-                </a></li>
-              <li><a href="/exam" class="exams flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                <li><a href="/exams" class="exams flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_exams">E</span>
                   <span class="link_exams">X</span>
                   <span class="link_exams">A</span>
                   <span class="link_exams">M</span>
                   <span class="link_exams">S</span>
+                </a></li>
+                <li><a href="/payment/class" class="payment flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                  <span class="link_payment">P</span>
+                  <span class="link_payment">A</span>
+                  <span class="link_payment">Y</span>
+                  <span class="link_payment">M</span>
+                  <span class="link_payment">E</span>
+                  <span class="link_payment">C</span>
+                  <span class="link_payment">T</span>
+                </a></li>
+              <li><a href="/blog" class="notice flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-transparent bg-black hover:text-zinc-900 text-white">
+                  <span class="link_notice">B</span>
+                  <span class="link_notice">L</span>
+                  <span class="link_notice">O</span>
+                  <span class="link_notice">I</span>
+                  <span class="link_notice">G</span>
                 </a></li>
               <li><a href="/contact" class="contact flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_contact">C</span>
@@ -179,18 +168,18 @@
       
       <!--===== NOTICE_HERO =====-->
       
-      <section class="relative font-cy">
+      <section class="relative font-cy mt-56">
         <div class="lg:flex lg:items-center lg:justify-between max-w-7xl mx-auto p-6 lg:py-12">
           <div class="lg:ml-20 lg:w-full flex flex-col items-center justify-center">
             <h1 class="text-4xl text-center font-extrabold text-gray-900 leading-tight sm:text-5xl md:text-6xl">
               <span class="block">Transform Your Ideas</span>
-              <span class="block text-teal-600">into Reality</span>
+              <span class="block text-blue-600">into Reality</span>
             </h1>
             <p class="mt-4 text-md text-center text-gray-600 sm:max-w-md sm:text-xl">
               Join our advanced block platform to share posts, events, and blogs, making your ideas secure and accessible to everyone.
             </p>
             <div class="mt-6 flex space-x-4">
-              <a href="#learn_more" class="inline-flex items-center px-6 py-3 text-white bg-teal-600 rounded-lg shadow-md hover:bg-teal-700 transition duration-300">
+              <a href="#learn_more" class="inline-flex items-center px-6 py-3 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
                 Learn More
               </a>
             </div>
@@ -205,20 +194,20 @@
       
        <section id="learn_more" class="flex font-cy justify-center border-b border-gray-200">
             <button 
-                class="tab-button px-4 py-2 text-gray-600 border-b-2 border-transparent hover:text-teal-500 focus:outline-none"
+                class="tab-button px-4 py-2 text-gray-600 border-b-2 border-transparent hover:text-blue-500 focus:outline-none"
                 onclick="openTab('tab1')"
                 id="defaultTab"
             >
                 Notice
             </button>
             <button 
-                class="tab-button px-4 py-2 text-gray-600 border-b-2 border-transparent hover:text-teal-500 focus:outline-none"
+                class="tab-button px-4 py-2 text-gray-600 border-b-2 border-transparent hover:text-blue-500 focus:outline-none"
                 onclick="openTab('tab2')"
             >
                 Events
             </button>
             <button 
-                class="tab-button px-4 py-2 text-gray-600 border-b-2 border-transparent hover:text-teal-500 focus:outline-none"
+                class="tab-button px-4 py-2 text-gray-600 border-b-2 border-transparent hover:text-blue-500 focus:outline-none"
                 onclick="openTab('tab3')"
             >
                 Blog
@@ -233,38 +222,38 @@
               <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Latest Notices</h2>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         
-                <div class="bg-[#DEFFEE] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <div class="h-48 bg-cover bg-center">
                    <!-- image -->
                   </div>
                   <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Exciting Post Title</h3>
                     <p class="text-gray-600 mb-4">A captivating description of the post that draws the reader in...</p>
-                    <a href="/notice/view" class="block w-full text-center bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition">
+                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
                       View More
                     </a>
                   </div>
                 </div>
         
-                <div class="bg-[#DEFFEE] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <div class="h-48 bg-cover bg-center">
                     <!-- image -->
                   </div>
                   <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Another Interesting Post</h3>
                     <p class="text-gray-600 mb-4">Explore the details of this fascinating post and engage further...</p>
-                    <a href="/notice/view" class="block w-full text-center bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition">
+                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
                       View More
                     </a>
                   </div>
                 </div>
                 
-                <div class="bg-[#DEFFEE] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <div class="h-48 bg-cover bg-center"></div>
                   <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Yet Another Amazing Post</h3>
                     <p class="text-gray-600 mb-4">Dive into this post to learn more and be inspired...</p>
-                    <a href="/notice/view" class="block w-full text-center bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-500 transition">
+                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-500 transition">
                       View More
                     </a>
                   </div>
@@ -282,38 +271,38 @@
               <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Latest Events</h2>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         
-                <div class="bg-[#DEFFEE] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <div class="h-48 bg-cover bg-center">
                    <!-- image -->
                   </div>
                   <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Exciting Post Title</h3>
                     <p class="text-gray-600 mb-4">A captivating description of the post that draws the reader in...</p>
-                    <a href="/notice/view" class="block w-full text-center bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition">
+                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
                       View More
                     </a>
                   </div>
                 </div>
         
-                <div class="bg-[#DEFFEE] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <div class="h-48 bg-cover bg-center">
                     <!-- image -->
                   </div>
                   <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Another Interesting Post</h3>
                     <p class="text-gray-600 mb-4">Explore the details of this fascinating post and engage further...</p>
-                    <a href="/notice/view" class="block w-full text-center bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition">
+                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
                       View More
                     </a>
                   </div>
                 </div>
                 
-                <div class="bg-[#DEFFEE] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <div class="h-48 bg-cover bg-center"></div>
                   <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Yet Another Amazing Post</h3>
                     <p class="text-gray-600 mb-4">Dive into this post to learn more and be inspired...</p>
-                    <a href="/notice/view" class="block w-full text-center bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-500 transition">
+                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-500 transition">
                       View More
                     </a>
                   </div>
@@ -331,38 +320,38 @@
               <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Latest Blogs</h2>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         
-                <div class="bg-[#DEFFEE] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <div class="h-48 bg-cover bg-center">
                    <!-- image -->
                   </div>
                   <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Exciting Post Title</h3>
                     <p class="text-gray-600 mb-4">A captivating description of the post that draws the reader in...</p>
-                    <a href="/notice/view" class="block w-full text-center bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition">
+                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
                       View More
                     </a>
                   </div>
                 </div>
         
-                <div class="bg-[#DEFFEE] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <div class="h-48 bg-cover bg-center">
                     <!-- image -->
                   </div>
                   <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Another Interesting Post</h3>
                     <p class="text-gray-600 mb-4">Explore the details of this fascinating post and engage further...</p>
-                    <a href="/notice/view" class="block w-full text-center bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition">
+                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
                       View More
                     </a>
                   </div>
                 </div>
                 
-                <div class="bg-[#DEFFEE] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <div class="h-48 bg-cover bg-center"></div>
                   <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Yet Another Amazing Post</h3>
                     <p class="text-gray-600 mb-4">Dive into this post to learn more and be inspired...</p>
-                    <a href="/notice/view" class="block w-full text-center bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-500 transition">
+                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-500 transition">
                       View More
                     </a>
                   </div>
@@ -373,79 +362,22 @@
         </section>
     </section>
     
-    <!--===== SUBSCRIBE_SECTION =====-->
-    
-    <section class="relative font-cy isolate overflow-hidden py-16 sm:py-24 lg:py-32">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
-          <div class="max-w-xl lg:max-w-lg">
-            <h2 class="text-4xl font-semibold tracking-tight text-zinc-900">Subscribe to our newsletter</h2>
-            <p class="mt-4 text-lg text-gray-800">Nostrud amet eu ullamco nisi aute in ad minim nostrud adipisicing velit quis. Duis tempor incididunt dolore.</p>
-            <div class="mt-6 flex max-w-md gap-x-4">
-              <label for="email-address" class="sr-only">Email address</label>
-              <input id="email-address" name="email" type="email" autocomplete="email" required class="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-zinc-700 shadow-sm focus:ring-teal-500 sm:text-sm/6" placeholder="Enter your email">
-              <button type="submit" class="flex-none rounded-md bg-teal-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-teal-700 focus-visible:outline-teal-500">Subscribe</button>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
-            <div class="flex flex-col items-start">
-              <div class="rounded-md  p-2 ring-1 ring-white/10">
-                <svg class="size-6 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                </svg>
-              </div>
-              <dt class="mt-4 text-base font-semibold text-zinc-600">Weekly articles</dt>
-              <dd class="mt-2 text-base/7 text-gray-600">Non laboris consequat cupidatat laborum magna. Eiusmod non irure cupidatat duis commodo amet.</dd>
-            </div>
-            <div class="flex flex-col items-start">
-              <div class="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
-                <svg class="size-6 text-zinc-800" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.05 4.575a1.575 1.575 0 1 0-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 0 1 3.15 0v1.5m-3.15 0 .075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 0 1 3.15 0V15M6.9 7.575a1.575 1.575 0 1 0-3.15 0v8.175a6.75 6.75 0 0 0 6.75 6.75h2.018a5.25 5.25 0 0 0 3.712-1.538l1.732-1.732a5.25 5.25 0 0 0 1.538-3.712l.003-2.024a.668.668 0 0 1 .198-.471 1.575 1.575 0 1 0-2.228-2.228 3.818 3.818 0 0 0-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0 1 16.35 15m.002 0h-.002" />
-                </svg>
-              </div>
-              <dt class="mt-4 text-base font-semibold text-zinc-600">No spam</dt>
-              <dd class="mt-2 text-base/7 text-gray-500">Officia excepteur ullamco ut sint duis proident non adipisicing. Voluptate incididunt anim.</dd>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!--===== BRENNER_SECTION =====-->
-    
-    <section class="relative w-full  font-cy flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
-      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm">
-        <p class="text-sm/6 text-gray-900">
-          <strong class="font-semibold">BPMHS 2025</strong><svg viewBox="0 0 2 2" class="mx-2 inline size-0.5 fill-current" aria-hidden="true"><circle cx="1" cy="1" r="1" /></svg>Join us in Denver from June 7 – 9 to see what’s coming next.
-        </p>
-        <a href="#" class="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900">Register now <span aria-hidden="true">&rarr;</span></a>
-      </div>
-    </section>
-
     <!--====== FOOTER =====-->
     
-    <footer class="font-cy w-full bg-zinc-700 text-white py-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div class="flex flex-wrap justify-center space-x-4 text-sm mb-6">
-          <a href="/" class="hover:text-gray-300">Home</a>
-          <a href="/about" class="hover:text-gray-300">About Us</a>
-          <a href="/notice" class="hover:text-gray-300">Blog</a>
-          <a href="/student/admission" class="hover:text-gray-300">Admissions</a>
-          <a href="/contact" class="hover:text-gray-300">Contact</a>
-        </div>
-
-        <div class="flex justify-center space-x-6 mb-6">
-          <a href="#" class="hover:text-gray-300"><i class="fab fa-facebook"></i></a>
+    <footer class="relative font-cy w-full bg-blue-700 text-white py-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex justify-center space-x-6 mb-6 px-4 sm:px-6 lg:px-8">
+          <a href="https://www.facebook.com/mdpobarul.islam.92" target="_blank" class="hover:text-blue-600"><i class="fab fa-facebook"></i></a>
           <a href="#" class="hover:text-gray-300"><i class="fab fa-instagram"></i></a>
           <a href="#" class="hover:text-gray-300"><i class="fab fa-twitter"></i></a>
           <a href="#" class="hover:text-gray-300"><i class="fab fa-youtube"></i></a>
         </div>
 
-        <div class="text-center text-sm">
-          <p>BPMHS - Excellence in Education</p>
-          <p>Email: <a href="mailto:info@bpmhs.edu" class="hover:text-gray-300">info@bpmhs.edu</a> | Phone: <a href="tel:+123456789" class="hover:text-gray-300">+1 234 567 89</a></p>
-          <p class="mt-2">© 2024 BPMHS. All rights reserved.</p>
+        
+        <div class="text-center text-sm mb-6 px-4 sm:px-6 lg:px-8">
+          <p>STEC - Excellence in Coaching</p>
+          <p>Email: <a href="mailto:swapnotoryeducare@gmail.com" class="hover:text-gray-300">swapnotoryeducare@gmail.com</a> | Phone: <a href="tel:+8801896434842" class="hover:text-gray-300">+8801896434842</a></p>
+          <p class="w-full relative top-12">© 2025 STEC. All rights reserved.</p>
         </div>
       </div>
     </footer>

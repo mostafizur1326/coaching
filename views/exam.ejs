@@ -29,38 +29,36 @@
     }
   </style>
 
-  <title>BPMHS | Exams</title>
+  <title>STEC | Exams</title>
 </head>
 
-<body class="w-full h-full bg-[#DEFFEE] tracking-tighter">
+<body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
       
-            <!--====== NAVIGATION_BAR =====-->
+        <!--====== NAVIGATION_BAR =====-->
       
-      <nav class="tracking-tighter mb-20">
+      <nav class="tracking-tighter font-cy">
         
         <!--====== LS_HEADER =====-->
         
         <header class="header_lg w-full p-8 px-[100px] lg:hidden overflow-x-hidden h-[220px] absolute top-0 left-0 flex justify-between items-start z-50">
           <div class="logo1">
-            <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
-              <span>B</span>
-              <span>P</span>
-              <span>M</span>
-              <span>H</span>
-              <span>S</span>
-            </h1>
+            <a href="/" class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
+              <img src="/images/logo.png" class="w-[65px]" />
+            </a>
           </div>
 
-          <ul class="flex items-center list-none text-xs font-cy">
-            <li><a href="/" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Home</a></li>
-            <li><a href="/about" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
-            <li><a href="/notice" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Notice</a></li>
-            <li><a href="/exam" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-transparent bg-black hover:text-zinc-900 text-[#e9f1ef]">Exams</a></li>
+          <ul class="flex items-center mt-6 list-none text-xs font-cy">
+            <li><a href="/" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-transparent hover:bg-black hover:text-[#e9f1ef]">Home</a></li>
+            <li><a href="/about" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
+            <li><a href="/exams" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-transparent bg-black hover:text-zinc-900 text-white">Exams</a></li>
+            <li><a href="/payment/class" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Payment</a></li>
+            <li><a href="/blog" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Blog</a></li>
             <li><a href="/contact" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Contact</a></li>
-
+          </ul>
+          
             <div class="relative">
               <button class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" id="profileButton">
                 <i class="bx bx-user-circle text-4xl text-black absolute flex items-center justify-center">
@@ -68,19 +66,13 @@
                 </i>
               </button>
               
-              <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#DEFFEE] text-black border border-gray-200 rounded-lg shadow-lg">
+              <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#F5FAFF] text-black border border-gray-200 rounded-lg shadow-lg">
                 <ul class="py-1 dropdown-menu">
                   <% if (isLoggedIn) { %>
-                    <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-user mr-2"></i> Profile
-                    </a></li>
-                    <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-cog mr-2"></i> Settings
-                    </a></li>
                     <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-out mr-2"></i> Logout
                     </a></li>
-                  <% } else { %>
+                    <% } else { %>
                     <li><a href="/user/login" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-in mr-2"></i> Login
                     </a></li>
@@ -88,22 +80,17 @@
                 </ul>
               </div>
             </div>
-          </ul>
         </header>
 
         <!--====== SM_HEADER =====-->
         
         <header class="small_header w-full bg-red-500 relative sm:hidden overflow-hidden">
-          <div class="header_head fixed bg-[#DEFFEE69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
+          <div class="header_head fixed bg-[#F5FAFF69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
 
             <div class="sm_logo font-bold text-2xl z-[999] overflow-hidden">
-              <h1 class="text-4xl flex tracking-tight font-Baumans px-1">
-                <span>B</span>
-                <span>P</span>
-                <span>M</span>
-                <span>H</span>
-                <span>S</span>
-              </h1>
+              <a href="/" class="ml-6 text-black font-Baumans font-bold flex cursor-pointer">
+                <img src="/images/logo.png" class="w-[65px]" />
+              </a>
             </div>
 
             <div class="relative">
@@ -113,15 +100,9 @@
                 </i>
               </button>
 
-              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#DEFFEE] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
+              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#F5FAFF] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
                 <ul class="py-1">
                   <% if (isLoggedIn) { %>
-                    <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-user mr-2"></i> Profile
-                    </a></li>
-                    <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-cog mr-2"></i> Settings
-                    </a></li>
                     <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-out mr-2"></i> Logout
                     </a></li>
@@ -144,35 +125,43 @@
             </div>
           </div>
 
-          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#DEFFEE] shadow-lg z-[99]">
+          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#F5FAFF] shadow-lg z-[99]">
             <ul class="list-none relative top-1/2 transform -translate-y-1/2 space-y-5">
-              <li><a href="/" class="home flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/" class="home flex justify-center text-[30px] font-Aclonica border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
                   <span class="link_home">H</span>
                   <span class="link_home">O</span>
                   <span class="link_home">M</span>
                   <span class="link_home">E</span>
                 </a></li>
-              <li><a href="/about" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/about" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
                   <span class="link_about">A</span>
                   <span class="link_about">B</span>
                   <span class="link_about">O</span>
                   <span class="link_about">U</span>
                   <span class="link_about">T</span>
                 </a></li>
-              <li><a href="/notice" class="notice flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
-                  <span class="link_notice">N</span>
-                  <span class="link_notice">O</span>
-                  <span class="link_notice">T</span>
-                  <span class="link_notice">I</span>
-                  <span class="link_notice">C</span>
-                  <span class="link_notice">E</span>
-                </a></li>
-              <li><a href="/exam" class="exams flex justify-center text-[30px] font-Aclonica border-b border-gray-400 py-5 transition-all thover:bg-transparent bg-black hover:text-zinc-900 text-[#e9f1ef]">
+                <li><a href="/exams" class="exams flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-transparent bg-black hover:text-zinc-900 text-white">
                   <span class="link_exams">E</span>
                   <span class="link_exams">X</span>
                   <span class="link_exams">A</span>
                   <span class="link_exams">M</span>
                   <span class="link_exams">S</span>
+                </a></li>
+                <li><a href="/payment/class" class="payment flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                  <span class="link_payment">P</span>
+                  <span class="link_payment">A</span>
+                  <span class="link_payment">Y</span>
+                  <span class="link_payment">M</span>
+                  <span class="link_payment">E</span>
+                  <span class="link_payment">C</span>
+                  <span class="link_payment">T</span>
+                </a></li>
+              <li><a href="/blog" class="notice flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                  <span class="link_notice">B</span>
+                  <span class="link_notice">L</span>
+                  <span class="link_notice">O</span>
+                  <span class="link_notice">I</span>
+                  <span class="link_notice">G</span>
                 </a></li>
               <li><a href="/contact" class="contact flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_contact">C</span>
@@ -194,16 +183,16 @@
         <div class="relative bg-cover bg-center h-[70vh]">
           <div class="container mx-auto px-6 lg:px-20 flex flex-col justify-center items-start h-full">
             <h1 class="text-4xl lg:text-5xl font-bold mb-4">
-              Examination <span class="text-teal-600">Portal</span>
+              Examination <span class="text-blue-600">Portal</span>
             </h1>
             <p class="text-lg lg:text-xl mb-6 max-w-2xl">
               Access important updates about upcoming exams, schedules, and results. Stay informed and prepared for success.
             </p>
             <div class="flex space-x-4">
-              <a href="#schedule" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+              <a href="#schedule" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition">
                 View Exam Schedule
               </a>
-              <a href="/student/class" class="bg-green-100 hover:bg-green-200 border border-teal-600 text-teal-600 font-semibold py-3 px-6 rounded-lg transition">
+              <a href="/student/class" class="bg-blue-100 hover:bg-blue-200 border border-blue-600 text-blue-600 font-semibold py-3 px-6 rounded-lg transition">
                 Check Results
               </a>
             </div>
@@ -220,10 +209,10 @@
                   <img src="" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">
                 </i>
           </div>
-           Headmaster
+           Coaching Director
         </h1>
         <p class="text-base text-justify leading-relaxed">
-          Dear students,
+          Dear students,  
           Exams are not just tests of knowledge but also tests of patience, discipline, and hard work. Prepare well, keep faith in yourself, and success will follow. We are here to support and guide you at every step.
         </p>
       </section>
@@ -232,9 +221,9 @@
       
       <section id="schedule" class="font-cy max-w-7xl mx-auto px-4 mt-8">
         <div class="flex justify-center mt-28 mb-20 space-x-8">
-            <button id="tab1" class="tab-btn text-md font-semibold">Exam Schedule</button>
-            <button id="tab2" class="tab-btn text-md text-teal-800 font-semibold">Exam Guidelines</button>
-            <button id="tab3" class="tab-btn text-md text-teal-800 font-semibold">Exam Subjects</button>
+            <button id="tab1" class="tab-btn text-md text-blue-800 font-semibold">Exam Schedule</button>
+            <button id="tab2" class="tab-btn text-md text-blue-800 font-semibold">Exam Guidelines</button>
+            <button id="tab3" class="tab-btn text-md text-blue-800 font-semibold">Exam Subjects</button>
         </div>
        </section>
        
@@ -243,10 +232,10 @@
        <section class="font-cy max-w-7xl mx-auto px-4 mt-8">
         <!-- Exam Schedule -->
          <div id="content1" class="tab-content">
-          <h2 class="text-2xl font-semibold text-center text-teal-800 mb-6">Exam Schedule</h2>
-          <table class="min-w-full table-auto bg-green- shadow-lg rounded-lg text-sm">
+          <h2 class="text-2xl font-semibold text-center text-blue-800 mb-6">Exam Schedule</h2>
+          <table class="min-w-full table-auto bg-blue- shadow-lg rounded-lg text-sm">
             <thead>
-              <tr class="bg-green-200">
+              <tr class="bg-blue-200">
                 <th class="px-6 py-4 text-left">Date</th>
                 <th class="px-6 py-4 text-left">Time</th>
                 <th class="px-6 py-4 text-left">Subject</th>
@@ -271,13 +260,13 @@
              </tbody>
           </table>
           <div class="flex items-center justify-center">
-            <a href="#" class="px-4 py-2 bg-teal-600 rounded-md hover:bg-teal-700 text-white mt-4">Download PDF</a>
+            <a href="#" class="px-4 py-2 bg-blue-600 rounded-md hover:bg-blue-700 text-white mt-4">Download PDF</a>
           </div>
         </div>
 
         <!-- Exam Guidelines -->
           <div id="content2" class="tab-content p-10">
-            <h2 class="text-2xl font-semibold text-center text-teal-800 mb-6">Exam Guidelines</h2>
+            <h2 class="text-2xl font-semibold text-center text-blue-800 mb-6">Exam Guidelines</h2>
             <ul class="list-decimal list-inside space-y-2 text-lg">
                 <li>Be present on time before the exam starts.</li>
                 <li>Bringing mobile phones inside the exam hall is prohibited.</li>
@@ -287,7 +276,7 @@
 
         <!-- Exam Subjects -->
           <div id="content3" class="tab-content p-10">
-            <h2 class="text-2xl font-semibold text-center text-teal-800 mb-6">Exam Subjects</h2>
+            <h2 class="text-2xl font-semibold text-center text-blue-800 mb-6">Exam Subjects</h2>
             <ul class="list-decimal list-inside space-y-2 text-lg">
                 <li>Bangla</li>
                 <li>Mathematics</li>
@@ -388,7 +377,7 @@
           </div>
       
           <!-- Class Ten -->
-          <div class="bg-green-200 rounded-lg shadow-md p-6 border border-gray-200 transition-all duration-300">
+          <div class="bg-blue-200 rounded-lg shadow-md p-6 border border-gray-200 transition-all duration-300">
             <div class="flex justify-between items-center">
               <p class="text-md font-medium">Class Ten</p>
               <button class="toggle-btn p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300" data-target="ten-info">
@@ -398,7 +387,7 @@
               </button>
             </div>
             <div id="ten-info" class="hidden-content overflow-hidden max-h-0 transition-all duration-500">
-              <div class="mt-4 bg-green-300 p-4 rounded-md">
+              <div class="mt-4 bg-blue-300 p-4 rounded-md">
                 <p>1. Identify important topics from your syllabus and prioritize them during your study sessions.</p>
                 <p>2. Memorize and practice key formulas and equations in Math, Physics, and Chemistry.</p>
                 <p>3. Practice writing essays and compositions in English and Bengali regularly.</p>
@@ -415,10 +404,12 @@
       <section class="font-cy max-w-4xl mx-auto mt-12 px-6 py-8 border border-gray-200">
         <h2 class="text-2xl font-semibold mb-4 text-center">Dear Students</h2>
         <p class="text-base text-justify leading-relaxed">
-          Success is a journey, not a destination. Your determination, patience, and resilience will define your future.
-          Each failure is a stepping stone to greatness, and every small effort adds up to something incredible.
-          Do not compare your progress with others. Run your own race at your own pace. The seeds you plant today will bloom into beautiful flowers tomorrow.
-          Always believe in your potential, and let your dreams be bigger than your fears. The world is full of opportunities, and you are capable of achieving greatness.
+          Success is a journey, not a destination. Your determination, patience, and resilience will define your future. 
+          Each failure is a stepping stone to greatness, and every small effort adds up to something incredible. 
+          Do not compare your progress with others. Run your own race at your own pace. 
+          The seeds you plant today will bloom into beautiful flowers tomorrow. 
+          Always believe in your potential, and let your dreams be bigger than your fears. 
+          The world is full of opportunities, and you are capable of achieving greatness.
         </p>
       </section>
 
@@ -426,28 +417,20 @@
     
     <!--====== FOOTER =====-->
     
-    <footer class="font-cy w-full bg-zinc-700 text-white py-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div class="flex flex-wrap justify-center space-x-4 text-sm mb-6">
-          <a href="/" class="hover:text-gray-300">Home</a>
-          <a href="/about" class="hover:text-gray-300">About Us</a>
-          <a href="/notice" class="hover:text-gray-300">Blog</a>
-          <a href="/student/admission" class="hover:text-gray-300">Admissions</a>
-          <a href="/contact" class="hover:text-gray-300">Contact</a>
-        </div>
-
-        <div class="flex justify-center space-x-6 mb-6">
-          <a href="#" class="hover:text-gray-300"><i class="fab fa-facebook"></i></a>
+    <footer class="relative font-cy w-full bg-blue-700 text-white py-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex justify-center space-x-6 mb-6 px-4 sm:px-6 lg:px-8">
+          <a href="https://www.facebook.com/mdpobarul.islam.92" target="_blank" class="hover:text-blue-600"><i class="fab fa-facebook"></i></a>
           <a href="#" class="hover:text-gray-300"><i class="fab fa-instagram"></i></a>
           <a href="#" class="hover:text-gray-300"><i class="fab fa-twitter"></i></a>
           <a href="#" class="hover:text-gray-300"><i class="fab fa-youtube"></i></a>
         </div>
 
-        <div class="text-center text-sm">
-          <p>BPMHS - Excellence in Education</p>
-          <p>Email: <a href="mailto:info@bpmhs.edu" class="hover:text-gray-300">info@bpmhs.edu</a> | Phone: <a href="tel:+123456789" class="hover:text-gray-300">+1 234 567 89</a></p>
-          <p class="mt-2">© 2024 BPMHS. All rights reserved.</p>
+        
+        <div class="text-center text-sm mb-6 px-4 sm:px-6 lg:px-8">
+          <p>STEC - Excellence in Coaching</p>
+          <p>Email: <a href="mailto:swapnotoryeducare@gmail.com" class="hover:text-gray-300">swapnotoryeducare@gmail.com</a> | Phone: <a href="tel:+8801896434842" class="hover:text-gray-300">+8801896434842</a></p>
+          <p class="w-full relative top-12">© 2025 STEC. All rights reserved.</p>
         </div>
       </div>
     </footer>

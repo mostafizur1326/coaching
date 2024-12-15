@@ -97,12 +97,12 @@ pendingTab.click();
 
 // Helper functions to manage active tabs
 function setActiveTab(tab) {
-  tab.classList.add("border-teal-600", "text-teal-600");
+  tab.classList.add("border-blue-600", "text-blue-600");
 }
 
 function resetActiveTab(tabs) {
   tabs.forEach(tab => {
-    tab.classList.remove("border-teal-600", "text-teal-600");
+    tab.classList.remove("border-blue-600", "text-blue-600");
     tab.classList.add("border-transparent", "text-gray-700");
   });
 }

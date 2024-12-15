@@ -13,17 +13,23 @@ router.get('/about', (req, res) => {
   res.render('about', { isLoggedIn });
 })
 
-router.get('/notice', (req, res) => {
+router.get('/payment/class', (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('notice', { isLoggedIn });
+  res.render('selectClassFees', { isLoggedIn });
 })
 
-router.get('/notice/view', isLoggedIn, (req, res) => {
+
+router.get('/blog', (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('noticeView', { isLoggedIn });
+  res.render('blog', { isLoggedIn });
 })
 
-router.get('/exam', (req, res) => {
+router.get('/blog/view', isLoggedIn, (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  res.render('blogView', { isLoggedIn });
+})
+
+router.get('/exams', (req, res) => {
   const isLoggedIn = req.cookies.token;
   res.render('exam', { isLoggedIn });
 })

@@ -18,38 +18,36 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-  <title>BPMHS | Home</title>
+  <title>STEC | Home</title>
 </head>
 
-<body class="w-full h-full bg-[#DEFFEE] tracking-tighter">
+<body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
       
       <!--====== NAVIGATION_BAR =====-->
       
-      <nav class="tracking-tighter">
+      <nav class="tracking-tighter font-cy">
         
         <!--====== LS_HEADER =====-->
         
         <header class="header_lg w-full p-8 px-[100px] lg:hidden overflow-x-hidden h-[220px] absolute top-0 left-0 flex justify-between items-start z-50">
           <div class="logo1">
-            <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
-              <span>B</span>
-              <span>P</span>
-              <span>M</span>
-              <span>H</span>
-              <span>S</span>
-            </h1>
+            <a href="/" class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
+              <img src="/images/logo.png" class="w-[65px]" />
+            </a>
           </div>
 
-          <ul class="flex items-center list-none text-xs font-cy">
-            <li><a href="/" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-transparent bg-black hover:text-zinc-900 text-[#e9f1ef]">Home</a></li>
-            <li><a href="/about" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
-            <li><a href="/notice" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Notice</a></li>
-            <li><a href="/exam" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Exams</a></li>
+          <ul class="flex items-center mt-6 list-none text-xs font-cy">
+            <li><a href="/" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-transparent bg-black hover:text-zinc-900 text-white">Home</a></li>
+            <li><a href="/about" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
+            <li><a href="/exams" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Exams</a></li>
+            <li><a href="/payment/class" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Payment</a></li>
+            <li><a href="/blog" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Blog</a></li>
             <li><a href="/contact" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Contact</a></li>
-
+          </ul>
+          
             <div class="relative">
               <button class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" id="profileButton">
                 <i class="bx bx-user-circle text-4xl text-black absolute flex items-center justify-center">
@@ -57,15 +55,9 @@
                 </i>
               </button>
               
-              <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#DEFFEE] text-black border border-gray-200 rounded-lg shadow-lg">
+              <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#F5FAFF] text-black border border-gray-200 rounded-lg shadow-lg">
                 <ul class="py-1 dropdown-menu">
                   <% if (isLoggedIn) { %>
-                    <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-user mr-2"></i> Profile
-                    </a></li>
-                    <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-cog mr-2"></i> Settings
-                    </a></li>
                     <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-out mr-2"></i> Logout
                     </a></li>
@@ -77,22 +69,17 @@
                 </ul>
               </div>
             </div>
-          </ul>
         </header>
 
         <!--====== SM_HEADER =====-->
         
         <header class="small_header w-full bg-red-500 relative sm:hidden overflow-hidden">
-          <div class="header_head fixed bg-[#DEFFEE69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
+          <div class="header_head fixed bg-[#F5FAFF69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
 
             <div class="sm_logo font-bold text-2xl z-[999] overflow-hidden">
-              <h1 class="text-4xl flex tracking-tight font-Baumans px-1">
-                <span>B</span>
-                <span>P</span>
-                <span>M</span>
-                <span>H</span>
-                <span>S</span>
-              </h1>
+              <a href="/" class="ml-6 text-black font-Baumans font-bold flex cursor-pointer">
+                <img src="/images/logo.png" class="w-[65px]" />
+              </a>
             </div>
 
             <div class="relative">
@@ -102,15 +89,9 @@
                 </i>
               </button>
 
-              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#DEFFEE] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
+              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#F5FAFF] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
                 <ul class="py-1">
                   <% if (isLoggedIn) { %>
-                    <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-user mr-2"></i> Profile
-                    </a></li>
-                    <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-cog mr-2"></i> Settings
-                    </a></li>
                     <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-out mr-2"></i> Logout
                     </a></li>
@@ -133,35 +114,43 @@
             </div>
           </div>
 
-          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#DEFFEE] shadow-lg z-[99]">
+          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#F5FAFF] shadow-lg z-[99]">
             <ul class="list-none relative top-1/2 transform -translate-y-1/2 space-y-5">
-              <li><a href="/" class="home flex justify-center text-[30px] font-Aclonica border-b border-gray-400 py-5 transition-all hover:bg-transparent bg-black hover:text-zinc-900 text-[#e9f1ef]">
+              <li><a href="/" class="home flex justify-center text-[30px] font-Aclonica border-b border-gray-400 py-5 transition-all hover:bg-transparent bg-black hover:text-zinc-900 text-white">
                   <span class="link_home">H</span>
                   <span class="link_home">O</span>
                   <span class="link_home">M</span>
                   <span class="link_home">E</span>
                 </a></li>
-              <li><a href="/about" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/about" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
                   <span class="link_about">A</span>
                   <span class="link_about">B</span>
                   <span class="link_about">O</span>
                   <span class="link_about">U</span>
                   <span class="link_about">T</span>
                 </a></li>
-              <li><a href="/notice" class="notice flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
-                  <span class="link_notice">N</span>
-                  <span class="link_notice">O</span>
-                  <span class="link_notice">T</span>
-                  <span class="link_notice">I</span>
-                  <span class="link_notice">C</span>
-                  <span class="link_notice">E</span>
-                </a></li>
-              <li><a href="/exam" class="exams flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                <li><a href="/exams" class="exams flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_exams">E</span>
                   <span class="link_exams">X</span>
                   <span class="link_exams">A</span>
                   <span class="link_exams">M</span>
                   <span class="link_exams">S</span>
+                </a></li>
+                <li><a href="/payment/class" class="payment flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                  <span class="link_payment">P</span>
+                  <span class="link_payment">A</span>
+                  <span class="link_payment">Y</span>
+                  <span class="link_payment">M</span>
+                  <span class="link_payment">E</span>
+                  <span class="link_payment">C</span>
+                  <span class="link_payment">T</span>
+                </a></li>
+              <li><a href="/blog" class="notice flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                  <span class="link_notice">B</span>
+                  <span class="link_notice">L</span>
+                  <span class="link_notice">O</span>
+                  <span class="link_notice">I</span>
+                  <span class="link_notice">G</span>
                 </a></li>
               <li><a href="/contact" class="contact flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_contact">C</span>
@@ -179,81 +168,98 @@
       
       <!--===== HOME_HERO =====-->
       
-      <section class="font-cy shadow-md h-screen rounded-bl-[80px] rounded-br-[80px] relative overflow-hidden">
-        <div class="container mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between h-full px-4">
-    
-          <div class="flex justify-center items-center h-screen">
-            <div class="lg:w-1/2 space-y-4">
-              <p class="text-sm uppercase tracking-wide">Welcome to our</p>
-              <h1 class="text-5xl font-bold leading-tight">BPMHS</h1>
-              <p class="text-zinc-400 text-sm lg:text-base max-w-xs">
-                Baliadangi Pilot Model High School- is a place where education meets excellence. We strive to create an environment that fosters growth, curiosity, and knowledge.
-              </p>
-              <div class="space-x-4 mt-6">
-                <button class="bg-teal-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-teal-700 transition duration-300"><a href="/student/admission">Admission</a></button>
-                <a href="/about" class="bg-teal-100 text-zinc-800 border border-teal-500 font-semibold py-2 px-6 rounded-lg hover:bg-teal-300 transition duration-300">
-                  Learn More
-                </a>
-              </div>
+      <section class="font-cy w-full md:flex justify-between shadow-md sm:h-[220vh] md:h-screen h-[145vh] rounded-bl-[80px] rounded-br-[80px] relative overflow-hidden">
+        
+        <div class="w-full md:w-1/2 px-4 flex flex-col justify-center sm:h-1/2 sm:items-start sm:px-6 h-1/2 mt-12 md:mt-36 items-center">
+          <div class="space-y-4">
+            <p class="text-[10px] relative top-[18px] tracking-wide mt-4">Welcome to our <b>Coaching</b></p>
+            <h1 class="text-5xl relative top-[5px] font-bold leading-none">STEC</h1>
+            <p class="text-zinc-400 text-sm lg:text-base max-w-xs">
+              Swapnotory Edu Care— a place where learning meets excellence. We strive to create an environment that fosters growth, curiosity, and creativity. With modern teaching methods, skilled educators, and the latest technology, we prepare students to achieve their dreams.
+            </p>
+            <div class="space-x-4 mt-6">
+              <button class="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
+                <a href="/student/payment">Fees</a>
+              </button>
+              <a href="/about" class="bg-blue-100 text-zinc-800 border border-blue-500 font-semibold py-2 px-6 rounded-lg hover:bg-blue-300 transition duration-300">
+                Learn More
+              </a>
             </div>
           </div>
-    
-          <div class="absolute bottom-28 right-6 sm:right-28">
-            <a href="/notice" class="text-zinc-400 text-sm">View All</a>
-          </div>
-          <div class="absolute flex items-center justify-center bottom-36 right-6 sm:right-28  w-12 h-12 rounded-full border border-zinc-200">
-            <a href="#get_started">
-              <i class='bx bx-down-arrow-alt text-zinc-800 text-2xl'></i>
-            </a>
+        </div>
+        
+        <div class="relative w-full md:w-1/2 h-1/2 sm:h-1/2 sm:top-6 flex justify-center items-center mt-[-150px] md:mt-36">
+          <div class="w-[95%] h-[70%] flex items-center justify-center overflow-hidden rounded-xl relative bg-blue-400">
+            <!-- Carousel Wrapper -->
+            <div class="carousel flex transition-transform duration-500 ease-in-out w-full h-full">
+              <!-- Slide 1 -->
+              <div class="carousel-item flex-shrink-0 w-full h-full bg-cover bg-center" style="background-image: url('https://via.placeholder.com/400x300');">
+              </div>
+              <!-- Slide 2 -->
+              <div class="carousel-item flex-shrink-0 w-full h-full bg-cover bg-center" style="background-image: url('https://via.placeholder.com/400x300/FF0000');">
+              </div>
+              <!-- Slide 3 -->
+              <div class="carousel-item flex-shrink-0 w-full h-full bg-cover bg-center" style="background-image: url('https://via.placeholder.com/400x300/00FF00');">
+              </div>
+              <!-- Slide 4 -->
+              <div class="carousel-item flex-shrink-0 w-full h-full bg-cover bg-center" style="background-image: url('https://via.placeholder.com/400x300/e1e1e1');">
+              </div>
+            </div>
+        
+            <!-- Navigation Buttons -->
+            <button id="prev" class="absolute top-1/2 left-4 transform -translate-y-1/2 text-white rounded-full p-2 hover:bg-gray-200">
+              ❮
+            </button>
+            <button id="next" class="absolute top-1/2 right-4 transform -translate-y-1/2 text-white rounded-full p-2 hover:bg-gray-200">
+              ❯
+            </button>
           </div>
         </div>
-    
-        <div class="absolute bottom-4 left-0 w-full flex justify-around items-center border-t text-[12px] py-4 sm:py-2">
-          <a href="/student/class" class="text-zinc-700">Result</a>
-          <a href="/notice#learn_more" class="text-zinc-700">Blog</a>
-          <a href="/student/fees/class" class="text-zinc-700">Fees</a>
-          <div class="w-[1px] h-[30px] bg-zinc-300"></div>
-          <div class="flex gap-2 border-r border-zinc-300">
-            <a href="#" target="_blank" class="text-white bg-teal-500 px-2 py-2 rounded-full flex items-center justify-center gap-2">sl@gmail.com</a>
-            <a href="#" target="_blank" class="text-white bg-teal-500 px-2 py-2 rounded-full flex items-center justify-center gap-2">+880170000000</a>
-          </div>
+        
+        <div class="absolute bottom-12 right-6 right-28">
+            <a href="/blog" class="text-zinc-400 text-sm">View All</a>
         </div>
-      </section>
+        <div class="absolute flex items-center justify-center bottom-20 right-6 right-28 w-12 h-12 rounded-full border border-zinc-200">
+          <a href="#get_started">
+            <i class='bx bx-down-arrow-alt text-zinc-800 text-2xl'></i>
+          </a>
+        </div>
+     </section>
       
       <!--===== HOW_TO_WORK_SITE_VIDEO_SECTION =====-->
       
       <section id="get_started" class="font-cy w-full flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 justify-center pt-28 pb-10">
-          <div class="w-80 h-96 bg-teal-100 rounded-br-[30px] rounded-tr-[30px] overflow-hidden self-start">
+          <div class="w-80 h-96 bg-blue-50 rounded-br-[30px] rounded-tr-[30px] overflow-hidden self-start">
             <div class="w-full h-2/3 overflow-hidden">
               <video controls="true" muted="true" poster="/images/poster1.png" class="w-full h-full object-cover">
                 <source src="">
               </video>
             </div>
             <div>
-              <h1 class="px-6 pt-2 text-sm font-semibold">How to Apply for Admission on the School Website – Step-by-Step Guide</h1>
-              <p class="px-6 pt-2 text-[10px]">Create an account on the website, fill out the application form, upload required documents, pay the fee, submit the application, and check the status.</p>
+              <h1 class="px-6 pt-2 text-sm font-semibold">Full View of the Coaching Website – Step-by-Step Guide</h1>
+              <p class="px-6 pt-2 text-[10px]">In this video, you will get a complete view of the coaching website and learn about all its features. It explains in detail how to create an account, fill out the form, upload documents, and submit your application.</p>
             </div>
           </div>
-          <div class="w-80 h-96 bg-green-100 overflow-hidden rounded-[30px] mx-0">
+          <div class="w-80 h-96 bg-green-50 overflow-hidden rounded-[30px] mx-0">
             <div class="w-full h-2/3 overflow-hidden">
               <video controls="true" muted="true" poster="/images/poster2.png" class="w-full h-full object-cover">
                 <source src="">
               </video>
             </div>
             <div>
-              <h1 class="px-6 pt-2 text-sm font-semibold">How to Pay School Fees Online – Complete Tutorial</h1>
-              <p class="px-6 pt-2 text-[10px]">To pay school fees, log in to the school website, click "Pay Fees," choose a payment method, and confirm with an OTP.</p>
+              <h1 class="px-6 pt-2 text-sm font-semibold">How to Pay Coaching Fees Online – Complete Tutorial</h1>
+              <p class="px-6 pt-2 text-[10px]">To pay coaching fees, log in to the coaching website, click "Payment," choose a payment method, and confirm by providing the transaction ID and sending number.</p>
             </div>
           </div>
-          <div class="w-80 h-96 bg-orange-100 rounded-tl-[30px] rounded-bl-[30px] overflow-hidden self-end">
+          <div class="w-80 h-96 bg-orange-50 rounded-tl-[30px] rounded-bl-[30px] overflow-hidden self-end">
             <div class="w-full h-2/3 overflow-hidden">
               <video controls="true" muted="true" poster="/images/poster3.png" class="w-full h-full object-cover">
                 <source src="">
               </video>
             </div>
             <div class="">
-              <h1 class="px-6 pt-2 text-sm font-semibold">How to Check Your School Results Online – Access Guide</h1>
-              <p class="px-6 pt-2 text-[10px]">Log in to the school website, go to the "Results" section, enter your roll number and required details, and view your results. You can download or print it.</p>
+              <h1 class="px-6 pt-2 text-sm font-semibold">How to Check Your Coaching Results Online – Access Guide</h1>
+              <p class="px-6 pt-2 text-[10px]">Log in to the coaching website, go to the "Exams" section, select the "Result" option, choose your class, and provide the required details. Then view your results. You can download or print it.</p>
             </div>
           </div>
       </section>
@@ -264,23 +270,22 @@
         <div class="max-w-7xl mx-auto">
           <div class="text-center mb-10">
             <h2 class="text-3xl font-extrabold text-gray-900">
-              Explore <span class="text-teal-700">Our School's</span> Vibrant Campus
+              Explore <span class="text-blue-700">Our Coaching's</span> Vibrant Campus
             </h2>
             <p class="mt-4 text-lg text-gray-600">
-              Our school is designed to foster a dynamic and engaging learning environment. From modern classrooms to state-of-the-art laboratories, every corner of our campus is built to inspire creativity and innovation. Here are some highlights of our facilities:
+              Our coaching is designed to foster a dynamic and engaging learning environment. From modern classrooms to state-of-the-art laboratories, every corner of our campus is built to inspire creativity and innovation. Here are some highlights of our facilities:
             </p>
             <p class="mt-4 text-lg text-gray-600">
-              We invite you to visit and experience the vibrant energy of our campus firsthand!
-            </p>
+              We invite you to visit and experience the vibrant energy of our campus firsthand!</p>
           </div>
   
           <div class="flex items-center justify-center gap-6">
-            <div class="rounded-lg overflow-hidden shadow-md">
+            <div class="rounded-lg bg-zinc-400 overflow-hidden shadow-md">
               <img src="/images/places/place0.jpg" alt="Image 1" class="w-full h-full object-cover" />
             </div>
           </div>
           <div class="mt-6 flex justify-center gap-4">
-              <button class="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700">
+              <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
                 <a href="/about#campus" class="flex items-center justify-center gap-2">View others places <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-4.418 0-8 1.79-8 4v1h16v-1c0-2.21-3.582-4-8-4z" /></svg></a>
               </button>
             </div>
@@ -300,17 +305,17 @@
               <!-- image -->
             </div>
             <div class="px-4 py-2">
-              <h1 class="text-md font-semibold pb-2">Visit the Post Page!</h1>
-              <p class="text-[11px]">Come to our post page and enjoy the best content. Here, you'll find the latest and most popular posts, providing you with informative and entertaining experiences. Stay updated with daily content and follow your favorite posts!</p>
+              <h1 class="text-md font-semibold pb-2">Explore Coaching-Related Posts!</h1>
+              <p class="text-[11px]">Visit our post page and enjoy the best content about coaching. Here, you'll find updates, teaching methods, tips, and other essential information related to coaching. Stay updated regularly and enhance your learning journey!</p>
             </div>
           </div>
         </div>
       
         <div class="w-full h-full md:w-1/2 mb-6 md:mb-0 flex items-center justify-center">
           <div class="px-4 py-2 flex flex-col items-center justify-center">
-            <p class="w-full text-center text-[12px] text-zinc-500">Visit the blocks now to check the latest updates and important notices, and make sure to get the information you need.</p>
+            <p class="w-full text-center text-[12px] text-zinc-500">Visit our blocks now to check the latest updates and important notices. Make sure you're getting all the information you need.</p>
             <div class="flex items-center justify-center">
-              <a href="/notice#learn_more" class="mt-2 text-zinc-600 bg-[#DEFFEE69] py-2 px-2 text-sm rounded border">
+              <a href="/blog#learn_more" class="mt-2 text-zinc-600 bg-[#F5FAFF69] py-2 px-2 text-sm rounded border">
                 Check out</a>
               <button class="flex items-center justify-center w-12 h-12 rounded-full mt-2">
                 <i class="bx bx-user-circle text-zinc-600 text-2xl text-black absolute flex items-center justify-center">
@@ -320,7 +325,7 @@
             </div>
           </div>
         </div>
-      </section>
+    </section>
       
       <!--===== TEACHERS_SECTION =====-->
       
@@ -341,13 +346,13 @@
             </div>
 
             <div class="w-full px-4 py-2">
-              <p class="text-sm text-center text-zinc-500">Teachers assist in the holistic development of students in various ways. They fulfill their responsibilities to help students grow and enhance their capabilities. Those who wish to get to know the teachers better and learn about their work can visit the teacher's page for detailed information.</p>
+              <p class="text-sm text-center text-zinc-500">Teachers play an essential role in guiding students on their learning journey. They not only teach lessons but also help shape students' perspectives on life, values, and goals. Those who are interested in learning more about the teachers and their contributions can visit the teacher's page to gather more information.</p>  
             </div>
           </div>
 
           <div class="w-full h-full flex flex-col items-center justify-center md:w-1/2">
             <div class="w-full px-4 py-2">
-              <p class="text-sm text-center text-zinc-500">Teachers play an essential role in guiding students on their learning journey. They not only teach lessons but also help shape students' perspectives on life, values, and goals. Those who are interested in learning more about the teachers and their contributions can visit the teacher's page to gather more information.</p>
+              <p class="text-sm text-center text-zinc-500">Teachers assist in the holistic development of students in various ways. They fulfill their responsibilities to help students grow and enhance their capabilities. Those who wish to get to know the teachers better and learn about their work can visit the teacher's page for detailed information.</p>
             </div>
 
             <div class="w-full flex gap-4 items-center justify-center">
@@ -365,20 +370,20 @@
         </div>
 
         <div class="w-full h-[50px] flex items-center justify-center mt-10 md:mt-0">
-          <a href="/about#teachers" class="border border-teal-600 text-zinc-600 text-sm hover:text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition duration-300">View Our Teachers<i class="fas fa-user ml-2 "></i></a>
+          <a href="/about#teachers" class="border border-blue-600 text-zinc-600 text-sm hover:text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300">View Our Teachers<i class="fas fa-user ml-2 "></i></a>
         </div>
       </section>
       
       <!--===== MESSAGE_SECTION =====-->
       
-      <section class="font-cy relative bg-cover bg-center h-screen" style="background-image: url('/images/places/place0.jpg');">
-          <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+      <section class="font-cy relative bg-cover bg-center h-screen bg-zinc-400" style="background-image: url('/images/places/place0.jpg');">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
           <div class="relative flex flex-col justify-center items-center h-full text-center text-white px-4">
             <h1 class="text-2xl md:text-5xl font-bold mt-4">
               ❝Empowering Minds, Shaping Futures❞
             </h1>
             <p class="mt-4 text-md md:text-xl max-w-2xl">
-              At our school, we believe in nurturing every student's potential and inspiring a lifelong love for learning. Together, we strive for excellence, creativity, and integrity in everything we do.
+              At our coaching, we believe in nurturing every student's potential and inspiring a lifelong love for learning. Together, we strive for excellence, creativity, and integrity in everything we do.
             </p>
             <p class="text-[13px] md:text-lg bg-gray-800 bg-opacity-70 px-4 py-2 mt-6 rounded-full">
               - Dedicated to the growth and success of every student
@@ -389,29 +394,21 @@
     </section>
     
     <!--====== FOOTER =====-->
-    
-    <footer class="font-cy w-full bg-zinc-700 text-white py-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="flex flex-wrap justify-center space-x-4 text-sm mb-6">
-          <a href="/" class="hover:text-gray-300">Home</a>
-          <a href="/about" class="hover:text-gray-300">About Us</a>
-          <a href="/notice" class="hover:text-gray-300">Blog</a>
-          <a href="/student/admission" class="hover:text-gray-300">Admissions</a>
-          <a href="/contact" class="hover:text-gray-300">Contact</a>
-        </div>
-
-        <div class="flex justify-center space-x-6 mb-6">
-          <a href="#" class="hover:text-gray-300"><i class="fab fa-facebook"></i></a>
+    <footer class="relative font-cy w-full bg-blue-700 text-white py-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex justify-center space-x-6 mb-6 px-4 sm:px-6 lg:px-8">
+          <a href="https://www.facebook.com/mdpobarul.islam.92" target="_blank" class="hover:text-blue-600"><i class="fab fa-facebook"></i></a>
           <a href="#" class="hover:text-gray-300"><i class="fab fa-instagram"></i></a>
           <a href="#" class="hover:text-gray-300"><i class="fab fa-twitter"></i></a>
           <a href="#" class="hover:text-gray-300"><i class="fab fa-youtube"></i></a>
         </div>
 
-        <div class="text-center text-sm">
-          <p>BPMHS - Excellence in Education</p>
-          <p>Email: <a href="mailto:info@bpmhs.edu" class="hover:text-gray-300">info@bpmhs.edu</a> | Phone: <a href="tel:+123456789" class="hover:text-gray-300">+1 234 567 89</a></p>
-          <p class="mt-2">© 2024 BPMHS. All rights reserved.</p>
+        
+        <div class="text-center text-sm mb-6 px-4 sm:px-6 lg:px-8">
+          <p>STEC - Excellence in Coaching</p>
+          <p>Email: <a href="mailto:swapnotoryeducare@gmail.com" class="hover:text-gray-300">swapnotoryeducare@gmail.com</a> | Phone: <a href="tel:+8801896434842" class="hover:text-gray-300">+8801896434842</a></p>
+          <p class="w-full relative top-12">© 2025 STEC. All rights reserved.</p>
         </div>
       </div>
     </footer>

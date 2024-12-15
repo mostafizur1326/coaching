@@ -5,17 +5,18 @@ function navigation() {
     cross_icon: document.querySelector(".cross_icon"),
     home: document.querySelector(".home"),
     about: document.querySelector(".about"),
-    notice: document.querySelector(".notice"),
     exams: document.querySelector(".exams"),
+    payment: document.querySelector(".payment"),
+    notice: document.querySelector(".notice"),
     contact: document.querySelector(".contact"),
     profileButton: document.getElementById("profileButton"),
     dropdownMenu: document.getElementById("dropdownMenu")
   };
 
-  const links = [elements.home, elements.about, elements.notice, elements.exams, elements.contact];
+  const links = [elements.home, elements.about, elements.exams, elements.notice, elements.payment, elements.contact];
 
   const timeline = gsap.timeline();
-  timeline.from(".sm_logo h1 span", { y: 80, duration: 0.5, stagger: 0.1 })
+  timeline.from(".sm_logo a img", { y:200, duration: 0.5, stagger: 0.1 })
     .from(".menu", { y: 80, duration: 0.5 })
     .from(".user_i", { y: 80, duration: 0.5 });
 
@@ -91,5 +92,32 @@ function toggleMenu() {
   });
 }
 
+function carousel() {
+  const carousel = document.querySelector(".carousel");
+  const items = document.querySelectorAll(".carousel-item");
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  const totalItems = items.length;
+
+  let currentIndex = 0;
+
+  const updateCarousel = () => {
+    const offset = -currentIndex * 100;
+    carousel.style.transform = `translateX(${offset}%)`;
+  };
+
+  prev.addEventListener("click", () => {
+    currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalItems - 1;
+    updateCarousel();
+  });
+
+  next.addEventListener("click", () => {
+    currentIndex = (currentIndex < totalItems - 1) ? currentIndex + 1 : 0;
+    updateCarousel();
+  });
+}
+
+
 window.addEventListener("DOMContentLoaded", navigation);
 window.addEventListener("DOMContentLoaded", toggleMenu);
+window.addEventListener("DOMContentLoaded", carousel);
