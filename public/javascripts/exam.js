@@ -15,7 +15,6 @@ function guideTapber() {
     });
   });
 }
-guideTapber();
 
 function classInfoHigth() {
   const buttons = document.querySelectorAll('.toggle-btn');
@@ -40,4 +39,6 @@ function classInfoHigth() {
     });
   });
 }
+
+guideTapber();
 classInfoHigth();

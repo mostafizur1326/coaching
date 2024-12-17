@@ -18,18 +18,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
   
-  <title>BPMHS | Login</title>
+  <title>STEC | Login</title>
 </head>
 
-<body class="w-full h-full bg-[#DEFFEE] tracking-tighter">
+<body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
-        <div class="font-cy fixed top-0 left-1/2 transform -translate-x-1/2 w-[350px] bg-green-500 text-white rounded-bl-lg rounded-br-lg shadow-md">
-        <% if (messages.success) { %>
-        <p class="p-4 text-center"><%= messages.success %></p>
-        <% } %>
-      </div>
       <!--===== USER_LOGIN_FOEM =====-->
         
       <section class="min-h-screen relative top-[-25px] font-cy flex items-center justify-center">
@@ -37,7 +32,13 @@
           <h2 class="text-center text-3xl font-bold mb-8 text-gray-700 flex items-center gap-2 justify-center">
             <i class="fas fa-user"></i> LOGIN
           </h2>
-      
+          
+          <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
+            <p class="font-medium">Oops! Something went wrong:</p>
+            <p class="text-sm"><%= message %></p>
+          </div>
+  
+            
           <div class="space-y-4">
             <div class="relative">
               <input type="email" name="email" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Email">
@@ -52,22 +53,22 @@
             </div>
           </div>
       
-          <div class="flex items-start relative top-4">
+          <div class="flex items-start relative top-8">
             <input type="checkbox" name="condition" id="condition" class="mt-[2px] mr-2">
             <label for="condition" class="text-left text-gray-600 text-sm">
               I acknowledge that the information provided is accurate and I agree to abide by the school's
-              <a href="#" class="text-teal-700 underline">policies</a> &
-              <a href="#" class="text-teal-700 underline">terms</a>.
+              <a href="#" class="text-blue-700 underline">policies</a> &
+              <a href="#" class="text-blue-700 underline">terms</a>.
             </label>
             <span class="error-message hidden text-red-500 text-sm ml-2">You must agree to the terms</span>
           </div>
       
-          <button type="submit" id="submitBtn" class="w-full py-2 relative top-6 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition">
+          <button type="submit" id="submitBtn" class="w-full py-2 relative top-8 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
             Login
           </button>
       
           <p class="text-center text-gray-600 relative top-10">
-            Don't have an account? <a href="/user/register" class="text-teal-700 underline">Register</a>
+            Don't have an account? <a href="/user/register" class="text-blue-700 underline">Register</a>
           </p>
         </form>
       </section>

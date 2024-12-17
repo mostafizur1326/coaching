@@ -60,6 +60,10 @@ input:focus {
   transform: translateY(-50%);
 }
 
+.hidden {
+  display: none;
+}
+
 
 @media (max-width: 425px) {
   nav .header_lg {

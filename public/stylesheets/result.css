@@ -61,7 +61,7 @@ body {
 }
 
 .result_hero .result_form .result_field_class:hover {
-  border: 1px solid rgba(67, 80, 172, 0.8);
+  border: 1px solid #4350ACCC;
   box-shadow: 0 4px 16px rgba(67, 80, 172, 0.5);
 }
 

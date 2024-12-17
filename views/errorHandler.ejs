@@ -18,38 +18,36 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-  <title>BPMHS | <%= error.status %></title>
+  <title>STEC | <%= error.status %></title>
 </head>
 
-<body class="w-full h-full bg-[#DEFFEE] tracking-tighter">
+<body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
       
-            <!--====== NAVIGATION_BAR =====-->
+        <!--====== NAVIGATION_BAR =====-->
       
-      <nav class="tracking-tighter mb-20">
+       <nav class="tracking-tighter font-cy">
         
         <!--====== LS_HEADER =====-->
         
         <header class="header_lg w-full p-8 px-[100px] lg:hidden overflow-x-hidden h-[220px] absolute top-0 left-0 flex justify-between items-start z-50">
           <div class="logo1">
-            <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
-              <span>B</span>
-              <span>P</span>
-              <span>M</span>
-              <span>H</span>
-              <span>S</span>
-            </h1>
+            <a href="/" class="text-3xl text-black font-Baumans font-bold flex cursor-pointer">
+              <img src="/images/logo.png" class="w-[65px]" />
+            </a>
           </div>
 
-          <ul class="flex items-center list-none text-xs font-cy">
-            <li><a href="/" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Home</a></li>
-            <li><a href="/about" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
-            <li><a href="/notice" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Notice</a></li>
-            <li><a href="/exam" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Exams</a></li>
+          <ul class="flex items-center mt-6 list-none text-xs font-cy">
+            <li><a href="/" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Home</a></li>
+            <li><a href="/about" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">About</a></li>
+            <li><a href="/exams" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Exams</a></li>
+            <li><a href="/payment/class" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Payment</a></li>
+            <li><a href="/blog" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Blog</a></li>
             <li><a href="/contact" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Contact</a></li>
-
+          </ul>
+          
             <div class="relative">
               <button class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" id="profileButton">
                 <i class="bx bx-user-circle text-4xl text-black absolute flex items-center justify-center">
@@ -57,19 +55,13 @@
                 </i>
               </button>
               
-              <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#DEFFEE] text-black border border-gray-200 rounded-lg shadow-lg">
+              <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#F5FAFF] text-black border border-gray-200 rounded-lg shadow-lg">
                 <ul class="py-1 dropdown-menu">
                   <% if (isLoggedIn) { %>
-                    <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-user mr-2"></i> Profile
-                    </a></li>
-                    <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-cog mr-2"></i> Settings
-                    </a></li>
                     <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-out mr-2"></i> Logout
                     </a></li>
-                  <% } else { %>
+                    <% } else { %>
                     <li><a href="/user/login" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-in mr-2"></i> Login
                     </a></li>
@@ -77,22 +69,17 @@
                 </ul>
               </div>
             </div>
-          </ul>
         </header>
 
         <!--====== SM_HEADER =====-->
         
         <header class="small_header w-full bg-red-500 relative sm:hidden overflow-hidden">
-          <div class="header_head fixed bg-[#DEFFEE69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
+          <div class="header_head fixed bg-[#F5FAFF69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
 
             <div class="sm_logo font-bold text-2xl z-[999] overflow-hidden">
-              <h1 class="text-4xl flex tracking-tight font-Baumans px-1">
-                <span>B</span>
-                <span>P</span>
-                <span>M</span>
-                <span>H</span>
-                <span>S</span>
-              </h1>
+              <a href="/" class="ml-6 text-black font-Baumans font-bold flex cursor-pointer">
+                <img src="/images/logo.png" class="w-[65px]" />
+              </a>
             </div>
 
             <div class="relative">
@@ -102,15 +89,9 @@
                 </i>
               </button>
 
-              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#DEFFEE] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
+              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#F5FAFF] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
                 <ul class="py-1">
                   <% if (isLoggedIn) { %>
-                    <li><a href="/student/profile" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-user mr-2"></i> Profile
-                    </a></li>
-                    <li><a href="/student/settings" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
-                      <i class="bx bx-cog mr-2"></i> Settings
-                    </a></li>
                     <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
                       <i class="bx bx-log-out mr-2"></i> Logout
                     </a></li>
@@ -133,35 +114,43 @@
             </div>
           </div>
 
-          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#DEFFEE] shadow-lg z-[99]">
+          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#F5FAFF] shadow-lg z-[99]">
             <ul class="list-none relative top-1/2 transform -translate-y-1/2 space-y-5">
-              <li><a href="/" class="home flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/" class="home flex justify-center text-[30px] font-Aclonica border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
                   <span class="link_home">H</span>
                   <span class="link_home">O</span>
                   <span class="link_home">M</span>
                   <span class="link_home">E</span>
                 </a></li>
-              <li><a href="/about" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+              <li><a href="/about" class="about flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
                   <span class="link_about">A</span>
                   <span class="link_about">B</span>
                   <span class="link_about">O</span>
                   <span class="link_about">U</span>
                   <span class="link_about">T</span>
                 </a></li>
-              <li><a href="/notice" class="notice flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
-                  <span class="link_notice">N</span>
-                  <span class="link_notice">O</span>
-                  <span class="link_notice">T</span>
-                  <span class="link_notice">I</span>
-                  <span class="link_notice">C</span>
-                  <span class="link_notice">E</span>
-                </a></li>
-              <li><a href="/exam" class="exams flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                <li><a href="/exams" class="exams flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_exams">E</span>
                   <span class="link_exams">X</span>
                   <span class="link_exams">A</span>
                   <span class="link_exams">M</span>
                   <span class="link_exams">S</span>
+                </a></li>
+                <li><a href="/payment/class" class="payment flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                  <span class="link_payment">P</span>
+                  <span class="link_payment">A</span>
+                  <span class="link_payment">Y</span>
+                  <span class="link_payment">M</span>
+                  <span class="link_payment">E</span>
+                  <span class="link_payment">C</span>
+                  <span class="link_payment">T</span>
+                </a></li>
+              <li><a href="/blog" class="notice flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                  <span class="link_notice">B</span>
+                  <span class="link_notice">L</span>
+                  <span class="link_notice">O</span>
+                  <span class="link_notice">I</span>
+                  <span class="link_notice">G</span>
                 </a></li>
               <li><a href="/contact" class="contact flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
                   <span class="link_contact">C</span>

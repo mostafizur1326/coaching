@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!--===== FAVICON =====-->
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!--===== STYLESHEET =====-->
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  
+  <!--===== ICON_URL =====-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
+
+  <style>
+    .hidden {
+      display: none;
+    }
+    
+    .teacher-tab-content {
+      display: none;
+    }
+    
+    .teacher-tab-content.active {
+      display: block;
+    }
+  </style>
+  
+  <title>ADMIM | Teachers Management</title>
+</head>
+
+<body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
+
+  <main class="flex flex-col min-h-screen">
+    <section class="flex-grow">
+      
+      <section class="font-cy max-w-4xl mx-auto px-4 py-6 mt-56">
+        
+        <div class="absolute top-28 left-4 md:ml-20 z-[999]">
+            <button class="text-gray-600 hover:text-gray-800">
+                <a href="/admin/dashboard" class="ml-2 font-medium text-sm">←Back</a>
+            </button>
+        </div>
+        
+        <!-- Dropdown Navigation -->
+        <div class="relative">
+          <button id="teachersDropdownButton" 
+                  class="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg flex justify-between items-center focus:outline-none">
+            <span>Teachers Navigation</span>
+            <i id="teachersDropdownIcon" class="bx bx-chevron-down text-xl"></i>
+          </button>
+    
+          <!-- Dropdown Content -->
+          <div id="teachersDropdownMenu" class="hidden shadow-lg rounded-lg mt-2">
+            <button class="teacher-tab-button block w-full text-left px-4 py-2 border-b focus:outline-none" data-target="all-teachers">All Teachers</button>
+            <button class="teacher-tab-button block w-full text-left px-4 py-2 focus:outline-none" data-target="add-teacher">Add Teacher</button>
+          </div>
+        </div>
+        
+        <!-- Tab Content -->
+        <div class="p-4 rounded-lg shadow mt-6">
+          <!-- All Teachers -->
+          <div id="all-teachers" class="teacher-tab-content">
+            <h2 class="text-lg font-bold text-gray-700 mb-4">All Teachers</h2>
+            <div class="space-y-2">
+              <p class="flex justify-between items-center px-2 py-2 transition hover:bg-zinc-200">
+                <span>Teacher 1 - Subject: Math</span>
+                <a href="#"><i class="bx bx-show text-gray-700 text-xl"></i></a>
+              </p>
+              <p class="flex justify-between items-center px-2 py-2 transition hover:bg-zinc-200">
+                <span>Teacher 2 - Subject: Science</span>
+                <a href="#"><i class="bx bx-show text-gray-700 text-xl"></i></a>
+              </p>
+              <p class="flex justify-between items-center px-2 py-2 transition hover:bg-zinc-200">
+                <span>Teacher 3 - Subject: English</span>
+                <a href="#"><i class="bx bx-show text-gray-700 text-xl"></i></a>
+              </p>
+            </div>
+          </div>
+        
+          <!-- Add Teacher -->
+          <div id="add-teacher" class="teacher-tab-content">
+            <h2 class="text-lg text-center font-bold text-gray-700 mb-4">Add a New Teacher</h2>
+            <form class="space-y-4 p-4">
+              <div>
+                <label for="teacher-name" class="block text-gray-700">Teacher Name</label>
+                <input type="text" id="teacher-name" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter name">
+              </div>
+              <div>
+                <label for="teacher-subject" class="block text-gray-700">Subject</label>
+                <input type="text" id="teacher-subject" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter subject">
+              </div>
+              <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Teacher</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="/javascripts/dashboardAllTeachers.js"></script>
+</body>
+
+</html>

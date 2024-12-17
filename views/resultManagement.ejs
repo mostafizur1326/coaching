@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
+
+  <title>ADMIN | Result Management</title>
+</head>
+
+<body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
+
+  <main class="flex flex-col min-h-screen">
+    <section class="flex-grow">
+      
+      <nav class="tracking-tighter font-cy">
+        
+        <!--====== LS_HEADER =====-->
+        
+        <header class="header_lg w-full p-8 px-[100px] lg:hidden overflow-x-hidden h-[220px] absolute top-0 left-0 flex justify-between items-start z-50">
+          <div class="logo1">
+            <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer mt-4">
+              <span>A</span>
+              <span>D</span>
+              <span>M</span>
+              <span>I</span>
+              <span>N</span>
+            </h1>
+          </div>
+
+          <ul class="flex items-center mt-6 list-none text-xs font-cy">
+            <li><a href="/admin/dashboard" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Dashboard</a></li>
+            <li><a href="/admin/post/management" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Post</a></li>
+            <li><a href="/admin/result/management" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-transparent bg-black hover:text-zinc-900 text-white">Result</a></li>
+            <li><a href="/admin/fee/management" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Fee</a></li>
+          </ul>
+          
+            <div class="relative">
+              <button class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" id="profileButton">
+                <i class="bx bx-user-circle text-4xl text-black absolute flex items-center justify-center">
+                  <!-- <img src="" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">-->
+                </i>
+              </button>
+              
+              <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#F5FAFF] text-black border border-gray-200 rounded-lg shadow-lg">
+                <ul class="py-1 dropdown-menu">
+                  <% if (isLoggedIn) { %>
+                    <li><a href="/admin/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-log-out mr-2"></i> Logout
+                    </a></li>
+                    <% } else { %>
+                    <li><a href="/admin/login" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-log-in mr-2"></i> Login
+                    </a></li>
+                  <% } %>
+                </ul>
+              </div>
+            </div>
+        </header>
+
+        <!--====== SM_HEADER =====-->
+        
+        <header class="small_header w-full bg-red-500 relative sm:hidden overflow-hidden">
+          <div class="header_head fixed bg-[#F5FAFF69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
+
+          <div class="sm_logo overflow-hidden">
+            <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer mt-4">
+              <span>A</span>
+              <span>D</span>
+              <span>M</span>
+              <span>I</span>
+              <span>N</span>
+            </h1>
+          </div>
+
+            <div class="relative">
+              <button id="menuToggle" class="w-10 h-10 flex items-center justify-center overflow-hidden text-4xl text-gray-700 rounded-full absolute left-[35px] top-[-20px]">
+                <i class="bx bx-user-circle user_i absolute flex items-center justify-center">
+                  <!--  <img src="" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">-->
+                </i>
+              </button>
+
+              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#F5FAFF] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
+                <ul class="py-1">
+                  <% if (isLoggedIn) { %>
+                    <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-log-out mr-2"></i> Logout
+                    </a></li>
+                  <% } else { %>
+                    <li><a href="/user/login" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-log-in mr-2"></i> Login
+                    </a></li>
+                  <% } %>
+                </ul>
+              </div>
+            </div>
+
+            <div class="overflow-hidden px-2 relative right-2">
+              <div class="menu flex justify-center items-center w-20 h-6 border border-gray-600 rounded-full cursor-pointer relative">
+                <span class="icons absolute flex justify-center items-center">
+                  <img src="/images/svg/border-menu.svg" alt="" class="menu_icon min-w-[80px] h-20 flex justify-center items-center opacity-80 absolute">
+                  <i class="bx bx-x cross_icon text-2xl i absolute top-[-440px]"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#F5FAFF] shadow-lg z-[99]">
+            <ul class="list-none relative top-1/2 transform -translate-y-1/2 space-y-5">
+              <li><a href="/admin/dashboard" class="dashboard flex justify-center text-[30px] font-Aclonica border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
+                  <span class="link_dashboard">D</span>
+                  <span class="link_dashboard">a</span>
+                  <span class="link_dashboard">s</span>
+                  <span class="link_dashboard">h</span>
+                  <span class="link_dashboard">b</span>
+                  <span class="link_dashboard">o</span>
+                  <span class="link_dashboard">a</span>
+                  <span class="link_dashboard">r</span>
+                  <span class="link_dashboard">d</span>
+                </a></li>
+              <li><a href="/admin/post/management" class="post flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                  <span class="link_post">P</span>
+                  <span class="link_post">o</span>
+                  <span class="link_post">s</span>
+                  <span class="link_post">t</span>
+                </a></li>
+              <li><a href="/admin/result/management" class="result flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-transparent bg-black hover:text-zinc-900 text-white">
+                  <span class="link_result">R</span>
+                  <span class="link_result">e</span>
+                  <span class="link_result">s</span>
+                  <span class="link_result">u</span>
+                  <span class="link_result">l</span>
+                  <span class="link_result">t</span>
+                </a></li>
+              <li><a href="/admin/fees/management" class="fee flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
+                  <span class="link_fee">F</span>
+                  <span class="link_fee">e</span>
+                  <span class="link_fee">e</span>
+                </a></li>
+            </ul>
+          </div>
+        </header>
+      </nav>
+      
+      <section class="font-cy max-w-4xl mx-auto px-4 py-6 mt-36">
+          <p class="text-sm text-blue-700 text-center p-4 rounded-lg shadow-sm">
+            Select your class and upload the result file for the specific class. Then click the 'Upload' button to publish the result.
+          </p>
+          <!-- Navigation Button -->
+          <div class="relative">
+            <div id="resultDropdownButton" class="w-full bg-blue-600 text-white font-medium py-3 px-4 rounded flex justify-between items-center">
+              <span>Result Publish Navigation</span>
+              <i id="dropdownIcon" class="bx bx-chevron-down text-xl"></i>
+            </div>
+      
+            <!-- Dropdown Menu -->
+            <div id="resultDropdownMenu" class="hidden overflow-hidden transition-all duration-300 rounded shadow-lg mt-2">
+              <button data-target="class-6" class="tab-button block w-full text-left px-4 py-2 border-b hover:bg-blue-50">Class 6</button>
+              <button data-target="class-7" class="tab-button block w-full text-left px-4 py-2 border-b hover:bg-blue-50">Class 7</button>
+              <button data-target="class-8" class="tab-button block w-full text-left px-4 py-2 border-b hover:bg-blue-50">Class 8</button>
+              <button data-target="class-9" class="tab-button block w-full text-left px-4 py-2 border-b hover:bg-blue-50">Class 9</button>
+              <button data-target="class-10" class="tab-button block w-full text-left px-4 py-2 hover:bg-blue-50">Class 10</button>
+            </div>
+          </div>
+      
+          <!-- Tab Content -->
+          <div id="tabContent" class="mt-8">
+            <!-- Class 6 -->
+            <div id="class-6" class="tab-content hidden">
+              <h2 class="text-lg font-bold text-center text-gray-700">Upload Result for Class 6</h2>
+              <form action="#" method="POST" enctype="multipart/form-data" class="mt-6 flex justify-center">
+                <div class="w-full">
+                  <div class="dropzone flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg h-48 cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-gray-400 text-6xl mb-3"></i>
+                    <p class="text-gray-600">Drop your .xlsx file here or click to upload</p>
+                    <input type="file" accept=".xlsx" class="hidden fileInput" required>
+                  </div>
+                  <button class="uploadBTN mt-4 w-full bg-blue-600 text-white py-2 rounded">Upload File</button>
+                </div>
+              </form>
+            </div>
+            <!-- Class 7 -->
+            <div id="class-7" class="tab-content hidden">
+              <h2 class="text-lg font-bold text-center text-gray-700">Upload Result for Class 7</h2>
+              <form action="#" method="POST" enctype="multipart/form-data" class="mt-6 flex justify-center">
+                <div class="w-full">
+                  <div class="dropzone flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg h-48 cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-gray-400 text-6xl mb-3"></i>
+                    <p class="text-gray-600">Drop your .xlsx file here or click to upload</p>
+                    <input type="file" accept=".xlsx" class="hidden fileInput" required>
+                  </div>
+                  <button class="uploadBTN mt-4 w-full bg-blue-600 text-white py-2 rounded">Upload File</button>
+                </div>
+              </form>
+            </div>
+            <!-- Class 8 -->
+            <div id="class-8" class="tab-content hidden">
+              <h2 class="text-lg font-bold text-center text-gray-700">Upload Result for Class 8</h2>
+              <form action="#" method="POST" enctype="multipart/form-data" class="mt-6 flex justify-center">
+                <div class="w-full">
+                  <div class="dropzone flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg h-48 cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-gray-400 text-6xl mb-3"></i>
+                    <p class="text-gray-600">Drop your .xlsx file here or click to upload</p>
+                    <input type="file" accept=".xlsx" class="hidden fileInput" required>
+                  </div>
+                  <button class="uploadBTN mt-4 w-full bg-blue-600 text-white py-2 rounded">Upload File</button>
+                </div>
+              </form>
+            </div>
+            <!-- Class 9 -->
+            <div id="class-9" class="tab-content hidden">
+              <h2 class="text-lg font-bold text-center text-gray-700">Upload Result for Class 9</h2>
+              <form action="#" method="POST" enctype="multipart/form-data" class="mt-6 flex justify-center">
+                <div class="w-full">
+                  <div class="dropzone flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg h-48 cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-gray-400 text-6xl mb-3"></i>
+                    <p class="text-gray-600">Drop your .xlsx file here or click to upload</p>
+                    <input type="file" accept=".xlsx" class="hidden fileInput" required>
+                  </div>
+                  <button class="uploadBTN mt-4 w-full bg-blue-600 text-white py-2 rounded">Upload File</button>
+                </div>
+              </form>
+            </div>
+            <!-- Class 10 -->
+            <div id="class-10" class="tab-content hidden">
+              <h2 class="text-lg font-bold text-center text-gray-700">Upload Result for Class 10</h2>
+              <form action="#" method="POST" enctype="multipart/form-data" class="mt-6 flex justify-center">
+                <div class="w-full">
+                  <div class="dropzone flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg h-48 cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-gray-400 text-6xl mb-3"></i>
+                    <p class="text-gray-600">Drop your .xlsx file here or click to upload</p>
+                    <input type="file" accept=".xlsx" class="hidden fileInput" required>
+                  </div>
+                  <button class="uploadBTN mt-4 w-full bg-blue-600 text-white py-2 rounded">Upload File</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+    </section>
+  </main>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="/javascripts/dashboardResult.js"></script>
+  <script src="/javascripts/adminNavberAnimation.js"></script>
+</body>
+
+</html>

@@ -18,40 +18,49 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-  <title>BPMHS | Register</title>
+  <title>STEC | Register</title>
 </head>
 
-<body class="w-full h-full bg-[#DEFFEE] tracking-tighter">
+<body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
 
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
       <!--===== USER_REGISTRATION_FOEM =====-->
       
-      <section class="min-h-screen flex items-center justify-center p-8 font-cy">
+      <section class="min-h-screen flex flex-col items-center justify-center p-8 font-cy">
+        
         <form class="space-y-6" action="/user/register" method="POST" onsubmit="return validateForm()">
           <h2 class="text-center text-3xl font-bold mb-8 text-gray-700 flex items-center gap-2 justify-center">
             <i class="fas fa-user"></i> REGISTER
           </h2>
-      
+          
+          <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
+            <p class="font-medium">Oops! Something went wrong:</p>
+            <p class="text-sm"><%= message %></p>
+          </div>
+
+          
           <div class="space-y-4">
             <div class="relative">
               <input 
                 type="text" 
-                name="fullname"
+                name="fullname" 
                 class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" 
-                placeholder="Full Name">
+                placeholder="Full Name"
+                >
               <i class="fas fa-user input-icon"></i>
-              <span class="error-message hidden text-red-500 text-sm absolute ml-2 -bottom-5 left-0">Full Name is required</span>
+              <span class="error-message hidden text-red-500 text-sm absolute -bottom-5 left-0">Full Name is required</span>
             </div>
-      
+            
             <div class="relative">
               <input 
                 type="text" 
                 name="username" 
                 class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" 
-                placeholder="Username">
+                placeholder="Username"
+                >
               <i class="fas fa-user-tag input-icon"></i>
-              <span class="error-message hidden text-red-500 text-sm absolute ml-2 -bottom-5 left-0">Username is required</span>
+              <span class="error-message hidden text-red-500 text-sm absolute -bottom-5 left-0">Username is required</span>
             </div>
       
             <div class="relative">
@@ -60,8 +69,8 @@
                 name="email" 
                 class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" 
                 placeholder="Email">
-              <i class="fas fa-envelope input-icon"></i>
-              <span class="error-message hidden text-red-500 text-sm absolute ml-2 -bottom-5 left-0">Email is required</span>
+                <i class="fas fa-envelope input-icon"></i>
+              <span class="error-message hidden text-red-500 text-sm absolute -bottom-5 left-0">Email is required</span>
             </div>
       
             <div class="relative">
@@ -71,7 +80,7 @@
                 class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" 
                 placeholder="Number">
               <i class="fas fa-phone-alt input-icon"></i>
-              <span class="error-message hidden text-red-500 text-sm absolute ml-2 -bottom-5 left-0">Number is required</span>
+              <span class="error-message hidden text-red-500 text-sm absolute -bottom-5 left-0">Number is required</span>
             </div>
       
             <div class="relative">
@@ -81,7 +90,7 @@
                 class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" 
                 placeholder="Password">
               <i class="fas fa-lock input-icon"></i>
-              <span class="error-message hidden text-red-500 text-sm absolute ml-2 -bottom-5 left-0">Password is required</span>
+              <span class="error-message hidden text-red-500 text-sm absolute -bottom-5 left-0">Password is required</span>
             </div>
       
             <div class="relative">
@@ -91,7 +100,7 @@
                 class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" 
                 placeholder="Confirm Password">
               <i class="fas fa-lock input-icon"></i>
-              <span class="error-message hidden text-red-500 text-sm absolute ml-2 -bottom-5 left-0">Confirm Password is required</span>
+              <span class="error-message hidden text-red-500 text-sm absolute -bottom-5 left-0">Confirm Password is required</span>
             </div>
           </div>
       
@@ -103,20 +112,20 @@
               class="mt-[2px] mr-2">
             <label for="condition" class="text-left text-gray-600 text-sm">
               I acknowledge that the information provided is accurate and I agree to abide by the school's 
-              <a href="#" class="text-teal-700 underline">policies</a> & 
-              <a href="#" class="text-teal-700 underline">terms</a>.
+              <a href="#" class="text-blue-700 underline">policies</a> & 
+              <a href="#" class="text-blue-700 underline">terms</a>.
             </label>
             <span class="error-message hidden text-red-500 text-sm ml-2">You must agree to the terms</span>
           </div>
       
           <button 
             type="submit" 
-            class="w-full py-2 mt-4 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition">
+            class="w-full py-2 mt-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
             Register
           </button>
       
           <p class="text-center text-gray-600 mt-4">
-            Already have an account? <a href="/user/login" class="text-teal-700 underline">Login</a>
+            Already have an account? <a href="/user/login" class="text-blue-700 underline">Login</a>
           </p>
         </form>
       </section>
@@ -130,7 +139,7 @@
   
   <script src="/javascripts/submitForm.js"></script>
   <script src="/javascripts/navberAnimation.js"></script>
-  <script src="/javascripts/registrationFormValidation.js.js"></script>
+  <script src="/javascripts/registrationFormValidation.js"></script>
 </body>
 
 </html>

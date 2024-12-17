@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!--===== FAVICON =====-->
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!--===== STYLESHEET =====-->
+  <link rel="stylesheet" href="/stylesheets/style.css">
+
+  <!--===== ICON_URL =====-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
+
+  <title>ADMIM | Fee Management</title>
+</head>
+
+<body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
+
+  <main class="flex flex-col min-h-screen">
+    <section class="flex-grow">
+
+      <!--====== NAVIGATION_BAR =====-->
+
+      <nav class="tracking-tighter font-cy">
+
+        <!--====== LS_HEADER =====-->
+
+        <header class="header_lg w-full p-8 px-[100px] lg:hidden overflow-x-hidden h-[220px] absolute top-0 left-0 flex justify-between items-start z-50">
+          <div class="logo1">
+            <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer mt-4">
+              <span>A</span>
+              <span>D</span>
+              <span>M</span>
+              <span>I</span>
+              <span>N</span>
+            </h1>
+          </div>
+
+          <ul class="flex items-center mt-6 list-none text-xs font-cy">
+            <li><a href="/admin/dashboard" class="py-1 px-4 rounded-full transition-all duration-500  hover:bg-black hover:text-[#e9f1ef]">Dashboard</a></li>
+            <li><a href="/admin/post/management" class="py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Post</a></li>
+            <li><a href="/admin/result/management" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-black hover:text-[#e9f1ef]">Result</a></li>
+            <li><a href="/admin/fee/management" class="text-black py-1 px-4 rounded-full transition-all duration-500 hover:bg-transparent bg-black hover:text-zinc-900 text-white">Fee</a></li>
+          </ul>
+
+          <div class="relative">
+            <button class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" id="profileButton">
+              <i class="bx bx-user-circle text-4xl text-black absolute flex items-center justify-center">
+                <!-- <img src="" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">-->
+              </i>
+            </button>
+
+            <div id="dropdownMenu" class="hidden flex flex-col absolute right-0 mt-2 w-48 bg-[#F5FAFF] text-black border border-gray-200 rounded-lg shadow-lg">
+              <ul class="py-1 dropdown-menu">
+                <% if (isLoggedIn) { %>
+                <li><a href="/admin/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                    <i class="bx bx-log-out mr-2"></i> Logout
+                  </a></li>
+                <% } else { %>
+                <li><a href="/admin/login" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                    <i class="bx bx-log-in mr-2"></i> Login
+                  </a></li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <!--====== SM_HEADER =====-->
+
+        <header class="small_header w-full bg-red-500 relative sm:hidden overflow-hidden">
+          <div class="header_head fixed bg-[#F5FAFF69] backdrop-blur-sm top-0 left-0 w-full h-20 flex justify-between items-center px-5 shadow-lg z-[109]">
+
+            <div class="sm_logo overflow-hidden">
+              <h1 class="text-3xl text-black font-Baumans font-bold flex cursor-pointer mt-4">
+                <span>A</span>
+                <span>D</span>
+                <span>M</span>
+                <span>I</span>
+                <span>N</span>
+              </h1>
+            </div>
+
+            <div class="relative">
+              <button id="menuToggle" class="w-10 h-10 flex items-center justify-center overflow-hidden text-4xl text-gray-700 rounded-full absolute left-[35px] top-[-20px]">
+                <i class="bx bx-user-circle user_i absolute flex items-center justify-center">
+                  <!--  <img src="" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">-->
+                </i>
+              </button>
+
+              <div id="menuDropdown" class="hidden absolute right-[-100px] mt-10 w-48 bg-[#F5FAFF] text-gray-800 font-cy border border-zinc-100 rounded-lg shadow-lg">
+                <ul class="py-1">
+                  <% if (isLoggedIn) { %>
+                  <li><a href="/user/logout" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-log-out mr-2"></i> Logout
+                    </a></li>
+                  <% } else { %>
+                  <li><a href="/user/login" class="flex items-center px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">
+                      <i class="bx bx-log-in mr-2"></i> Login
+                    </a></li>
+                  <% } %>
+                </ul>
+              </div>
+            </div>
+
+            <div class="overflow-hidden px-2 relative right-2">
+              <div class="menu flex justify-center items-center w-20 h-6 border border-gray-600 rounded-full cursor-pointer relative">
+                <span class="icons absolute flex justify-center items-center">
+                  <img src="/images/svg/border-menu.svg" alt="" class="menu_icon min-w-[80px] h-20 flex justify-center items-center opacity-80 absolute">
+                  <i class="bx bx-x cross_icon text-2xl i absolute top-[-440px]"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu_list fixed right-[-425px] top-7 w-[424px] h-screen bg-[#F5FAFF] shadow-lg z-[99]">
+            <ul class="list-none relative top-1/2 transform -translate-y-1/2 space-y-5">
+              <li><a href="/admin/dashboard" class="dashboard flex justify-center text-[30px] font-Aclonica border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
+                  <span class="link_dashboard">D</span>
+                  <span class="link_dashboard">a</span>
+                  <span class="link_dashboard">s</span>
+                  <span class="link_dashboard">h</span>
+                  <span class="link_dashboard">b</span>
+                  <span class="link_dashboard">o</span>
+                  <span class="link_dashboard">a</span>
+                  <span class="link_dashboard">r</span>
+                  <span class="link_dashboard">d</span>
+                </a></li>
+              <li><a href="/admin/post/management" class="post flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-white">
+                  <span class="link_post">P</span>
+                  <span class="link_post">o</span>
+                  <span class="link_post">s</span>
+                  <span class="link_post">t</span>
+                </a></li>
+              <li><a href="/admin/result/management" class="result flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-black hover:text-[#e9f1ef]">
+                  <span class="link_result">R</span>
+                  <span class="link_result">e</span>
+                  <span class="link_result">s</span>
+                  <span class="link_result">u</span>
+                  <span class="link_result">l</span>
+                  <span class="link_result">t</span>
+                </a></li>
+              <li><a href="/admin/fees/management" class="fee flex justify-center text-[30px] font-Aclonica text-black border-b border-gray-400 py-5 transition-all hover:bg-transparent bg-black hover:text-zinc-900 text-white">
+                  <span class="link_fee">F</span>
+                  <span class="link_fee">e</span>
+                  <span class="link_fee">e</span>
+                </a></li>
+            </ul>
+          </div>
+        </header>
+      </nav>
+
+      <section class="font-cy w-full mt-28 md:mt-56 p-4">
+        <p class="text-sm text-blue-700 text-center p-4 rounded-lg shadow-sm">Manage your payment management, select a specific class and click here to view your payment update.</p>
+        <!-- Dropdown -->
+        <div class="relative w-full mx-auto">
+          <div class="tab-bar-dropdown-button w-full bg-blue-600 text-white font-medium py-3 px-4 rounded flex justify-between items-center cursor-pointer">
+            <span>View Payment Update for Specific Class</span>
+            <i class="tab-bar-dropdown-icon bx bx-chevron-down text-xl transition-transform duration-300"></i>
+          </div>
+
+          <div class="tab-bar-dropdown-menu max-h-0 overflow-hidden transition-[max-height] duration-500 ease-in-out mt-2 shadow-lg rounded">
+            <button class="tab-bar-dropdown-tab-button block w-full text-left px-4 py-2 border-b hover:bg-blue-50" data-target="class-6">Class 6</button>
+            <button class="tab-bar-dropdown-tab-button block w-full text-left px-4 py-2 border-b hover:bg-blue-50" data-target="class-7">Class 7</button>
+            <button class="tab-bar-dropdown-tab-button block w-full text-left px-4 py-2 border-b hover:bg-blue-50" data-target="class-8">Class 8</button>
+            <button class="tab-bar-dropdown-tab-button block w-full text-left px-4 py-2 border-b hover:bg-blue-50" data-target="class-9">Class 9</button>
+            <button class="tab-bar-dropdown-tab-button block w-full text-left px-4 py-2 hover:bg-blue-50" data-target="class-10">Class 10</button>
+          </div>
+        </div>
+
+        <!-- Tab Content Wrapper -->
+        <div class="tab-bar-tab-content-wrapper mt-6">
+          <!-- Template for Class Tabs -->
+          <div class="tab-bar-tab-content hidden p-4 rounded shadow" data-content="class-6">
+            <div class="tab-bar-sub-tab-border-b border-b flex">
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 6 Status: </span><span class="text-yellow-600">Pending</span></h6>
+              <!-- Class 6 - Pending Status -->
+              <div id="class6" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-4 mt-4 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student A</h2>
+                  <p class="text-gray-600">Class: 6</p>
+                  <p class="text-gray-600">Paid: ৳5000</p>
+                  <p class="text-gray-600">Due: ৳2000</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student B</h2>
+                  <p class="text-gray-600">Class: 6</p>
+                  <p class="text-gray-600">Paid: ৳4500</p>
+                  <p class="text-gray-600">Due: ৳2500</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student A</h2>
+                  <p class="text-gray-600">Class: 6</p>
+                  <p class="text-gray-600">Paid: ৳5000</p>
+                  <p class="text-gray-600">Due: ৳2000</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student B</h2>
+                  <p class="text-gray-600">Class: 6</p>
+                  <p class="text-gray-600">Paid: ৳4500</p>
+                  <p class="text-gray-600">Due: ৳2500</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4 hidden">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 6 Status: </span><span class="text-green-600">Approved</span></h6>
+              <!-- Class 6 - Approved Status -->
+              <div id="class6" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student C</h2>
+                  <p class="text-gray-600">Class: 6</p>
+                  <p class="text-gray-600">Paid: ৳6000</p>
+                  <p class="text-gray-600">Due: ৳3000</p>
+                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <!-- Class 6 - Approved Status (2nd) -->
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student D</h2>
+                  <p class="text-gray-600">Class: 6</p>
+                  <p class="text-gray-600">Paid: ৳7000</p>
+                  <p class="text-gray-600">Due: ৳500</p>
+                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-bar-sub-tab-content mt-4 hidden">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 6 Status: </span><span class="text-red-600">Rejected</span></h6>
+
+              <!-- Class 6 - Rejected Status -->
+              <div id="class6" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student E</h2>
+                  <p class="text-gray-600">Class: 6</p>
+                  <p class="text-gray-600">Paid: ৳3000</p>
+                  <p class="text-gray-600">Due: ৳1000</p>
+                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <!-- Class 6 - Rejected Status (2nd) -->
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student F</h2>
+                  <p class="text-gray-600">Class: 6</p>
+                  <p class="text-gray-600">Paid: ৳5500</p>
+                  <p class="text-gray-600">Due: ৳1500</p>
+                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-bar-tab-content hidden p-4 rounded shadow" data-content="class-7">
+            <div class="tab-bar-sub-tab-border-b border-b flex">
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 7 Status: </span><span class="text-yellow-600">Pending</span></h6>
+
+              <!-- Class 7 - Pending Status -->
+              <div id="class7" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student A</h2>
+                  <p class="text-gray-600">Class: 7</p>
+                  <p class="text-gray-600">Paid: ৳5000</p>
+                  <p class="text-gray-600">Due: ৳2000</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student B</h2>
+                  <p class="text-gray-600">Class: 7</p>
+                  <p class="text-gray-600">Paid: ৳4500</p>
+                  <p class="text-gray-600">Due: ৳2500</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4 hidden">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 7 Status: </span><span class="text-green-600">Approved</span></h6>
+
+              <!-- Class 7 - Approved Status -->
+              <div id="class7" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student C</h2>
+                  <p class="text-gray-600">Class: 7</p>
+                  <p class="text-gray-600">Paid: ৳6000</p>
+                  <p class="text-gray-600">Due: ৳3000</p>
+                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student D</h2>
+                  <p class="text-gray-600">Class: 7</p>
+                  <p class="text-gray-600">Paid: ৳7000</p>
+                  <p class="text-gray-600">Due: ৳500</p>
+                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4 hidden">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 7 Status: </span><span class="text-red-600">Rejected</span></h6>
+
+              <!-- Class 7 - Rejected Status -->
+              <div id="class7" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student E</h2>
+                  <p class="text-gray-600">Class: 7</p>
+                  <p class="text-gray-600">Paid: ৳3000</p>
+                  <p class="text-gray-600">Due: ৳1000</p>
+                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student F</h2>
+                  <p class="text-gray-600">Class: 7</p>
+                  <p class="text-gray-600">Paid: ৳5500</p>
+                  <p class="text-gray-600">Due: ৳1500</p>
+                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-bar-tab-content hidden p-4 rounded shadow" data-content="class-8">
+            <div class="tab-bar-sub-tab-border-b border-b flex">
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 8 Status: </span><span class="text-yellow-600">Pending</span></h6>
+
+              <!-- Class 8 - Pending Status -->
+              <div id="class8" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student G</h2>
+                  <p class="text-gray-600">Class: 8</p>
+                  <p class="text-gray-600">Paid: ৳5000</p>
+                  <p class="text-gray-600">Due: ৳2000</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student H</h2>
+                  <p class="text-gray-600">Class: 8</p>
+                  <p class="text-gray-600">Paid: ৳4500</p>
+                  <p class="text-gray-600">Due: ৳2500</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4 hidden">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 8 Status: </span><span class="text-green-600">Approved</span></h6>
+              <!-- Class 8 - Approved Status -->
+              <div id="class8" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student I</h2>
+                  <p class="text-gray-600">Class: 8</p>
+                  <p class="text-gray-600">Paid: ৳6000</p>
+                  <p class="text-gray-600">Due: ৳3000</p>
+                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student J</h2>
+                  <p class="text-gray-600">Class: 8</p>
+                  <p class="text-gray-600">Paid: ৳7000</p>
+                  <p class="text-gray-600">Due: ৳500</p>
+                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4 hidden">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 8 Status: </span><span class="text-red-600">Rejected</span></h6>
+              <!-- Class 8 - Rejected Status -->
+              <div id="class8" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student K</h2>
+                  <p class="text-gray-600">Class: 8</p>
+                  <p class="text-gray-600">Paid: ৳3000</p>
+                  <p class="text-gray-600">Due: ৳1000</p>
+                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student L</h2>
+                  <p class="text-gray-600">Class: 8</p>
+                  <p class="text-gray-600">Paid: ৳5500</p>
+                  <p class="text-gray-600">Due: ৳1500</p>
+                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-bar-tab-content hidden p-4 rounded shadow" data-content="class-9">
+            <div class="tab-bar-sub-tab-border-b border-b flex">
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 9 Status: </span><span class="text-yellow-600">Pending</span></h6>
+              <!-- Class 9 - Pending Status -->
+              <div id="class9" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student M</h2>
+                  <p class="text-gray-600">Class: 9</p>
+                  <p class="text-gray-600">Paid: ৳5000</p>
+                  <p class="text-gray-600">Due: ৳2000</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student N</h2>
+                  <p class="text-gray-600">Class: 9</p>
+                  <p class="text-gray-600">Paid: ৳4500</p>
+                  <p class="text-gray-600">Due: ৳2500</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4 hidden">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 9 Status: </span><span class="text-green-600">Approved</span></h6>
+              <!-- Class 9 - Approved Status -->
+              <div id="class9" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student O</h2>
+                  <p class="text-gray-600">Class: 9</p>
+                  <p class="text-gray-600">Paid: ৳6000</p>
+                  <p class="text-gray-600">Due: ৳3000</p>
+                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student P</h2>
+                  <p class="text-gray-600">Class: 9</p>
+                  <p class="text-gray-600">Paid: ৳7000</p>
+                  <p class="text-gray-600">Due: ৳500</p>
+                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4 hidden">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 9 Status: </span><span class="text-red-600">Rejected</span></h6>
+              <!-- Class 9 - Rejected Status -->
+              <div id="class9" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student Q</h2>
+                  <p class="text-gray-600">Class: 9</p>
+                  <p class="text-gray-600">Paid: ৳3000</p>
+                  <p class="text-gray-600">Due: ৳1000</p>
+                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student R</h2>
+                  <p class="text-gray-600">Class: 9</p>
+                  <p class="text-gray-600">Paid: ৳5500</p>
+                  <p class="text-gray-600">Due: ৳1500</p>
+                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-bar-tab-content hidden p-4 rounded shadow" data-content="class-10">
+            <div class="tab-bar-sub-tab-border-b border-b flex">
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
+              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 10 Status: </span><span class="text-yellow-600">Pending</span></h6>
+              <!-- Class 10 - Pending Status -->
+              <div id="class10" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student S</h2>
+                  <p class="text-gray-600">Class: 10</p>
+                  <p class="text-gray-600">Paid: ৳5000</p>
+                  <p class="text-gray-600">Due: ৳2000</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student T</h2>
+                  <p class="text-gray-600">Class: 10</p>
+                  <p class="text-gray-600">Paid: ৳4500</p>
+                  <p class="text-gray-600">Due: ৳2500</p>
+                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4 hidden">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 10 Status: </span><span class="text-green-600">Approved</span></h6>
+              <!-- Class 10 - Approved Status -->
+              <div id="class10" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student U</h2>
+                  <p class="text-gray-600">Class: 10</p>
+                  <p class="text-gray-600">Paid: ৳6000</p>
+                  <p class="text-gray-600">Due: ৳3000</p>
+                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student V</h2>
+                  <p class="text-gray-600">Class: 10</p>
+                  <p class="text-gray-600">Paid: ৳7000</p>
+                  <p class="text-gray-600">Due: ৳500</p>
+                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                      <i class="fas fa-times mr-2"></i>Reject
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar-sub-tab-content mt-4 hidden">
+              <h6 class="text-[12px]"><span class="text-zinc-500">Class 10 Status: </span><span class="text-red-600">Rejected</span></h6>
+
+              <!-- Class 10 - Rejected Status -->
+              <div id="class10" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student W</h2>
+                  <p class="text-gray-600">Class: 10</p>
+                  <p class="text-gray-600">Paid: ৳3000</p>
+                  <p class="text-gray-600">Due: ৳1000</p>
+                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+                <div class="shadow-lg rounded-lg p-6 mb-6">
+                  <h2 class="text-xl font-bold text-gray-800">Name: Student X</h2>
+                  <p class="text-gray-600">Class: 10</p>
+                  <p class="text-gray-600">Paid: ৳5500</p>
+                  <p class="text-gray-600">Due: ৳1500</p>
+                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
+                  <div class="buttons flex space-x-4 mt-4">
+                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                      <i class="fas fa-check mr-2"></i>Approve
+                    </button>
+                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
+                      <i class="fas fa-eye mr-2"></i>View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </section>
+  </main>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="/javascripts/paymentSystem.js"></script>
+  <script src="/javascripts/adminNavberAnimation.js"></script>
+</body>
+
+</html>
