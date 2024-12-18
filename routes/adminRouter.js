@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
+const fs = require('fs');
+
 //const nodemailer = require("nodemailer");
 const bcrypt = require('bcryptjs');
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 const dbgr = require('debug')('app: app');
 
@@ -160,9 +163,29 @@ router.get('/post/view/:id', adminIsLoggedIn, async (req, res) => {
 router.get('/post/delete/:id', adminIsLoggedIn, async (req, res) => {
   try {
     const postDetails = await postModel.findOneAndDelete({ _id: req.params.id });
+
+    if (!postDetails || !postDetails.post_image) {
+      req.flash('error', 'Post not found or no image associated.');
+      return res.redirect('/admin/post/management');
+    }
+
+    const filePath = path.join(__dirname, '../public', postDetails.post_image);
+    fs.exists(filePath, (exists) => {
+      if (exists) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            req.flash('error', 'Error deleting file.');
+          }
+        });
+      } else {
+        dbgr("File does not exist:", filePath);
+      }
+    });
+
     req.flash('success', `Post with ID: ${req.params.id} has been deleted successfully.`);
-    res.redirect('/admin/post/management')
+    res.redirect('/admin/post/management');
   } catch (error) {
+    dbgr('Error during post deletion:', error);
     req.flash('error', 'Something went wrong!');
     res.redirect('/admin/post/management');
   }

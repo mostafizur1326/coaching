@@ -194,9 +194,10 @@
       
       <section id="tab1" class="Notice font-cy tab-content p-4">
           <div id="learn_more" class="py-12 font-cy">
+            <% if (posts.length > 0){ %>
             <div class="max-w-7xl mx-auto px-6">
-              <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">All Posts ★</h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-24">
+              <h2 class="text-3xl font-bold text-gray-700 mb-10">All Latest Posts</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <% posts.reverse().forEach(post => { %>
                 <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <div class="flex items-center justify-center h-48 bg-cover bg-center">
@@ -213,6 +214,9 @@
               <% }) %>
               </div>
             </div>
+            <% } else {%>
+              <p class="text-sm ml-4 text-zinc-300">Post is not available</p>
+            <% } %>
           </div>
         </section>
     </section>
