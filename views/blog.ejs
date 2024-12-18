@@ -190,172 +190,27 @@
         </div>
       </section>
       
-      <!--===== POST_TAPBER_SECTION =====-->
-      
-       <section id="learn_more" class="flex font-cy justify-center border-b border-gray-200">
-            <button 
-                class="tab-button px-4 py-2 text-gray-600 border-b-2 border-transparent hover:text-blue-500 focus:outline-none"
-                onclick="openTab('tab1')"
-                id="defaultTab"
-            >
-                Notice
-            </button>
-            <button 
-                class="tab-button px-4 py-2 text-gray-600 border-b-2 border-transparent hover:text-blue-500 focus:outline-none"
-                onclick="openTab('tab2')"
-            >
-                Events
-            </button>
-            <button 
-                class="tab-button px-4 py-2 text-gray-600 border-b-2 border-transparent hover:text-blue-500 focus:outline-none"
-                onclick="openTab('tab3')"
-            >
-                Blog
-            </button>
-        </section>
-        
         <!--===== NOTICE_SECTION =====-->
-    
-        <section id="tab1" class="Notice font-cy tab-content p-4">
+      
+      <section id="tab1" class="Notice font-cy tab-content p-4">
           <div id="learn_more" class="py-12 font-cy">
             <div class="max-w-7xl mx-auto px-6">
-              <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Latest Notices</h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
+              <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">All Posts ★</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-24">
+              <% posts.reverse().forEach(post => { %>
                 <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-                  <div class="h-48 bg-cover bg-center">
-                   <!-- image -->
+                  <div class="flex items-center justify-center h-48 bg-cover bg-center">
+                    <img class="h-full object-cover" src="<%= post.post_image %>" />
                   </div>
                   <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Exciting Post Title</h3>
-                    <p class="text-gray-600 mb-4">A captivating description of the post that draws the reader in...</p>
-                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                    <h3 class="h-8 text-xl font-bold text-gray-800 mb-2 overflow-hidden"><%= post.post_title %></h3>
+                    <p class="h-6 overflow-hidden text-gray-600 mb-4"><%= post.post_description %></p>
+                    <a href="/blog/view/<%= post._id %>" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
                       View More
                     </a>
                   </div>
                 </div>
-        
-                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-                  <div class="h-48 bg-cover bg-center">
-                    <!-- image -->
-                  </div>
-                  <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Another Interesting Post</h3>
-                    <p class="text-gray-600 mb-4">Explore the details of this fascinating post and engage further...</p>
-                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-                      View More
-                    </a>
-                  </div>
-                </div>
-                
-                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-                  <div class="h-48 bg-cover bg-center"></div>
-                  <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Yet Another Amazing Post</h3>
-                    <p class="text-gray-600 mb-4">Dive into this post to learn more and be inspired...</p>
-                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-500 transition">
-                      View More
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        <!--===== EVENT_SECTION =====-->
-        
-        <section id="tab2" class="Events font-cy tab-content p-4 hidden">
-          <div class="py-12 font-cy">
-            <div class="max-w-7xl mx-auto px-6">
-              <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Latest Events</h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-                  <div class="h-48 bg-cover bg-center">
-                   <!-- image -->
-                  </div>
-                  <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Exciting Post Title</h3>
-                    <p class="text-gray-600 mb-4">A captivating description of the post that draws the reader in...</p>
-                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-                      View More
-                    </a>
-                  </div>
-                </div>
-        
-                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-                  <div class="h-48 bg-cover bg-center">
-                    <!-- image -->
-                  </div>
-                  <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Another Interesting Post</h3>
-                    <p class="text-gray-600 mb-4">Explore the details of this fascinating post and engage further...</p>
-                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-                      View More
-                    </a>
-                  </div>
-                </div>
-                
-                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-                  <div class="h-48 bg-cover bg-center"></div>
-                  <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Yet Another Amazing Post</h3>
-                    <p class="text-gray-600 mb-4">Dive into this post to learn more and be inspired...</p>
-                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-500 transition">
-                      View More
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        <!--===== BLOG_SECTION =====-->
-        
-         <section id="tab3" class="Blog font-cy tab-content p-4 hidden">
-          <div class="py-12 font-cy">
-            <div class="max-w-7xl mx-auto px-6">
-              <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Latest Blogs</h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-                  <div class="h-48 bg-cover bg-center">
-                   <!-- image -->
-                  </div>
-                  <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Exciting Post Title</h3>
-                    <p class="text-gray-600 mb-4">A captivating description of the post that draws the reader in...</p>
-                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-                      View More
-                    </a>
-                  </div>
-                </div>
-        
-                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-                  <div class="h-48 bg-cover bg-center">
-                    <!-- image -->
-                  </div>
-                  <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Another Interesting Post</h3>
-                    <p class="text-gray-600 mb-4">Explore the details of this fascinating post and engage further...</p>
-                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-                      View More
-                    </a>
-                  </div>
-                </div>
-                
-                <div class="bg-[#F5FAFF] shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-                  <div class="h-48 bg-cover bg-center"></div>
-                  <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Yet Another Amazing Post</h3>
-                    <p class="text-gray-600 mb-4">Dive into this post to learn more and be inspired...</p>
-                    <a href="/blog/view" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-500 transition">
-                      View More
-                    </a>
-                  </div>
-                </div>
+              <% }) %>
               </div>
             </div>
           </div>
@@ -387,7 +242,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <script src="/javascripts/notice.js"></script>
   <script src="/javascripts/navberAnimation.js"></script>
 </body>
 

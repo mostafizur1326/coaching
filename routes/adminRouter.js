@@ -7,11 +7,13 @@ const jwt = require("jsonwebtoken");
 const dbgr = require('debug')('app: app');
 
 const adminModel = require('../models/admin-model');
+const postModel = require('../models/post-model');
 
 //const { verificationEmail, OTP } = require('../controllers/email-welcome');
 
 const { adminIsLoggedIn } = require("../middlewares/isLoggedIn");
 
+const upload = require("../utils/upload");
 
 router.get('/registration', (req, res) => {
   res.render('adminRegistration');
@@ -92,10 +94,79 @@ router.get('/all/teachers', adminIsLoggedIn, (req, res) => {
   res.render('allTeachers', { isLoggedIn });
 })
 
-router.get('/post/management', adminIsLoggedIn, (req, res) => {
+router.get('/post/management', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('postManagement', { isLoggedIn });
+  const posts = await postModel.getAllPosts();
+  res.render('postManagement', { isLoggedIn, posts });
 })
+
+router.post('/post/management/create', adminIsLoggedIn, (req, res) => {
+  const isLoggedIn = req.cookies.token;
+
+  upload.single('post_image')(req, res, async (err) => {
+    if (err) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        req.flash('error', 'File size should not exceed 5MB.');
+      } else {
+        req.flash('error', 'File upload failed. Please try again.');
+      }
+      return res.redirect('/admin/post/management');
+    }
+
+    try {
+      const { post_title, post_description } = req.body;
+
+      if (!req.file || !post_title || !post_description) {
+        req.flash('error', 'All fields are required!');
+        return res.redirect('/admin/post/management');
+      }
+
+      const newPost = await postModel.create({
+        post_image: `/temp/post/${req.file.filename}`,
+        post_title,
+        post_description,
+      });
+
+      req.flash('success', 'Post created successfully!');
+      res.redirect('/admin/post/management');
+    } catch (error) {
+      req.flash('error', 'Post creation failed!');
+      res.redirect('/admin/post/management');
+    }
+  });
+});
+
+router.get('/post/view/:id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  try {
+    const postDetails = await postModel.findOne({ _id: req.params.id });
+    const admin = await adminModel.findOne();
+    const adminName = admin.fullname;
+
+    const dateTimestamp = postDetails.createdAt;
+    const timestamp = new Date(dateTimestamp);
+    const month = timestamp.toLocaleString('en-US', { month: 'long' });
+    const day = String(timestamp.getDate()).padStart(2, '0');
+    const year = timestamp.getFullYear();
+    const customFormattedDate = `${month} ${day}, ${year}`;
+
+    res.render('adminPostView', { isLoggedIn, postDetails, customFormattedDate, adminName });
+  } catch (error) {
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/post/management');
+  }
+});
+
+router.get('/post/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const postDetails = await postModel.findOneAndDelete({ _id: req.params.id });
+    req.flash('success', `Post with ID: ${req.params.id} has been deleted successfully.`);
+    res.redirect('/admin/post/management')
+  } catch (error) {
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/post/management');
+  }
+});
 
 router.get('/result/management', adminIsLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;

@@ -3,6 +3,9 @@ const router = express.Router();
 
 const { isLoggedIn } = require("../middlewares/isLoggedIn");
 
+const adminModel = require('../models/admin-model');
+const postModel = require('../models/post-model');
+
 
 router.get('/', (req, res) => {
   const isLoggedIn = req.cookies.token;
@@ -54,15 +57,33 @@ router.get('/payment/class/ten', isLoggedIn, (req, res) => {
   res.render('fees', { isLoggedIn });
 })
 
-router.get('/blog', (req, res) => {
+router.get('/blog', isLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('blog', { isLoggedIn });
+  const posts = await postModel.getAllPosts();
+  res.render('blog', { isLoggedIn, posts });
 })
 
-router.get('/blog/view', isLoggedIn, (req, res) => {
+router.get('/blog/view/:id', isLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('blogView', { isLoggedIn });
-})
+  try {
+    const postDetails = await postModel.findOne({ _id: req.params.id });
+    const admin = await adminModel.findOne();
+    const adminName = admin.fullname;
+    console.log(adminName)
+
+    const dateTimestamp = postDetails.createdAt;
+    const timestamp = new Date(dateTimestamp);
+    const month = timestamp.toLocaleString('en-US', { month: 'long' });
+    const day = String(timestamp.getDate()).padStart(2, '0');
+    const year = timestamp.getFullYear();
+    const customFormattedDate = `${month} ${day}, ${year}`;
+
+    res.render('blogView', { isLoggedIn, postDetails, customFormattedDate, adminName });
+  } catch (error) {
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/post/management');
+  }
+});
 
 router.get('/exams', (req, res) => {
   const isLoggedIn = req.cookies.token;

@@ -8,6 +8,10 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 font-sans">
+  
+            <div class="w-full h-80 bg-cover bg-center flex items-center justify-center">
+            <img src="<%= postDetails.post_image  %>" class="w-80 h-full object-cover" />
+          </div>
 
   <section class="w-full mt-28 md:mt-56 p-4">
     <!-- Dropdown -->
@@ -116,6 +120,15 @@
         }
       });
     });
+    
+const timestamp = '2024-12-18T03:45:33.486Z';
+
+const date = new Date(timestamp);
+
+const normalDateString = date.toLocaleDateString();
+
+const options = { year: 'numeric', month: 'long', day: '2-digit' };
+const customDateString = date.toLocaleDateString('en-GB', options);
   </script>
 </body>
 </html>

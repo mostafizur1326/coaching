@@ -168,38 +168,30 @@
       
       <!--===== NOTICE/EVENT/BLOGS_VIEW_SECT=====-->
       
-       <section class="py-16 font-cy mt-8">
+      
+       <section class="py-16 font-cy mt-8 md:mt-36">
         <div class="max-w-5xl mx-auto overflow-hidden">
     
-          <div class="h-80 bg-cover bg-center" style="background-image: url('https://via.placeholder.com/800x400');"></div>
+          <div class="w-full h-80 bg-cover bg-center flex items-center justify-center rounded-lg overflow-hidden">
+            <img src="<%= postDetails.post_image  %>" class="w-80 h-full object-cover" />
+          </div>
     
           <div class="p-8 md:p-12 lg:p-16">
     
             <div class="mb-8 border-b border-gray-200 pb-4">
-              <h1 class="text-4xl font-bold text-gray-800 leading-tight mb-4">Professional Post Title</h1>
+              <h1 class="text-4xl font-bold text-gray-800 leading-tight mb-4"><%= postDetails.post_title %></h1>
               <p class="text-gray-500 text-sm">
-                Published on November 17, 2024 | By <span class="font-semibold text-gray-700">Author Name</span>
+                Published on <%= customFormattedDate %> | By <span class="font-semibold text-gray-700"><%= adminName %></span>
               </p>
             </div>
     
             <div class="space-y-6 text-gray-700 leading-relaxed text-lg">
-              <p>This is where the main content of the post will be displayed. You can use this space to provide an in-depth view of the topic, allowing readers to get all the details they need.</p>
-              <p>Make the information engaging by organizing it into clear paragraphs, using subheadings, and emphasizing key points. It should be easy for readers to scan, understand, and enjoy.</p>
-              <p>Feel free to add more text, images, or even embed links and videos if needed to enhance the content.</p>
-            </div>
-    
-            <div class="mt-10 pt-6 border-t border-gray-200">
-              <h2 class="text-2xl font-semibold text-gray-800 mb-4">Additional Information</h2>
-              <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                <li>Key point or summary of the information.</li>
-                <li>Additional resources or related links.</li>
-                <li>FAQ or answers to common questions.</li>
-              </ul>
+              <p><%= postDetails.post_description %></p>
             </div>
     
             <div class="mt-10">
               <a href="/blog#learn_more" class="inline-block text-center w-full md:w-auto px-8 py-3 text-white font-semibold bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition duration-200">
-                Back to Blog
+                Back to Post
               </a>
             </div>
           </div>
