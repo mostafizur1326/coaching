@@ -69,7 +69,6 @@ router.get('/blog/view/:id', isLoggedIn, async (req, res) => {
     const postDetails = await postModel.findOne({ _id: req.params.id });
     const admin = await adminModel.findOne();
     const adminName = admin.fullname;
-    console.log(adminName)
 
     const dateTimestamp = postDetails.createdAt;
     const timestamp = new Date(dateTimestamp);
