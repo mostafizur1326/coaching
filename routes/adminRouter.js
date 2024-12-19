@@ -3,20 +3,20 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 
-//const nodemailer = require("nodemailer");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const dbgr = require('debug')('app: app');
-
-const adminModel = require('../models/admin-model');
-const postModel = require('../models/post-model');
-
-//const { verificationEmail, OTP } = require('../controllers/email-welcome');
+const post_image_upload = require("../utils/post-image-upload");
+const teacher_photo_upload = require("../utils/teacher-photo-upload");
 
 const { adminIsLoggedIn } = require("../middlewares/isLoggedIn");
 
-const upload = require("../utils/upload");
+const adminModel = require('../models/admin-model');
+const postModel = require('../models/post-model');
+const teacherModel = require('../models/teacher-model');
+
+const dbgr = require('debug')('app: app');
+
 
 router.get('/registration', (req, res) => {
   res.render('adminRegistration');
@@ -92,9 +92,81 @@ router.get('/all/students', adminIsLoggedIn, (req, res) => {
   res.render('allStudents', { isLoggedIn });
 })
 
-router.get('/all/teachers', adminIsLoggedIn, (req, res) => {
+router.get('/all/teachers', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('allTeachers', { isLoggedIn });
+  const teachers = await teacherModel.getAllTeachers();
+  res.render('allTeachers', { isLoggedIn, teachers });
+})
+
+router.post('/add/teacher', adminIsLoggedIn, (req, res) => {
+  teacher_photo_upload.single('teacher_photo')(req, res, async (err) => {
+    if (err) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        req.flash('error', 'File size should not exceed 5MB.');
+      } else if (err.message === 'Only .jpeg, .jpg, or .png files are allowed!') {
+        req.flash('error', 'Invalid file type. Only .jpeg, .jpg, or .png files are allowed.');
+      } else {
+        req.flash('error', 'Something went wrong. Please try again.');
+      }
+      return res.redirect('/admin/all/teachers');
+    }
+
+    try {
+      const { teacher_name, teacher_subject, teacher_contact } = req.body;
+
+      if (!req.file) {
+        req.flash('error', 'Teacher photo is required!');
+        return res.redirect('/admin/all/teachers');
+      }
+      if (!teacher_name || !teacher_subject || !teacher_contact) {
+        req.flash('error', 'All fields are required!');
+        return res.redirect('/admin/all/teachers');
+      }
+
+      const newTeacher = await teacherModel.create({
+        teacher_photo: `/temp/teachers-photo/${req.file.filename}`,
+        teacher_name,
+        teacher_subject,
+        teacher_contact,
+      });
+
+      req.flash('success', 'Teacher added successfully!');
+      return res.redirect('/admin/all/teachers');
+    } catch (error) {
+      req.flash('error', 'Teacher addition failed. Please try again.');
+      dbgr('Unexpected error: ' + error);
+      return res.redirect('/admin/all/teachers');
+    }
+  });
+});
+
+router.get('/teacher/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const teacher = await teacherModel.findById(req.params.id);
+
+    if (!teacher) {
+      req.flash('error', 'Teacher not found!');
+      return res.redirect('/admin/all/teachers');
+    }
+
+    const teacherPhotoPath = path.join(__dirname, '..', 'public', teacher.teacher_photo);
+
+    await fs.promises.unlink(teacherPhotoPath);
+
+    await teacherModel.findByIdAndDelete(req.params.id);
+
+    req.flash('success', `${teacher.teacher_name} has been deleted.`);
+    return res.redirect('/admin/all/teachers');
+  } catch (error) {
+    req.flash('error', 'Something went wrong. Please try again.');
+    return res.redirect('/admin/all/teachers');
+  }
+});
+
+router.get('/teacher/details/:id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  const teacher = await teacherModel.findOne({ _id: req.params.id });
+  res.render('teacherDetails', { isLoggedIn, teacher });
 })
 
 router.get('/post/management', adminIsLoggedIn, async (req, res) => {
@@ -104,9 +176,8 @@ router.get('/post/management', adminIsLoggedIn, async (req, res) => {
 })
 
 router.post('/post/management/create', adminIsLoggedIn, (req, res) => {
-  const isLoggedIn = req.cookies.token;
 
-  upload.single('post_image')(req, res, async (err) => {
+  post_image_upload.single('post_image')(req, res, async (err) => {
     if (err) {
       if (err.code === 'LIMIT_FILE_SIZE') {
         req.flash('error', 'File size should not exceed 5MB.');

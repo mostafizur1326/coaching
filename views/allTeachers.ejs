@@ -40,6 +40,19 @@
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
       
+      <div class="z-[9999] font-cy fixed top-0 left-1/2 transform -translate-x-1/2 w-[350px] bg-green-100 text-green-700 rounded-bl-lg rounded-br-lg shadow-md">
+        <% if (messages.success) { %>
+        <p class="p-4 text-center"><%= messages.success %></p>
+        <% } %>
+      </div>
+      
+      <div class="z-[9999] font-cy fixed top-0 left-1/2 transform -translate-x-1/2 w-[350px] bg-red-100 text-red-700 rounded-bl-lg rounded-br-lg shadow-md">
+        <% if (messages.error) { %>
+        <p class="p-4 text-center"><%= messages.error %></p>
+        <% } %>
+      </div>
+      
+      
       <section class="font-cy max-w-4xl mx-auto px-4 py-6 mt-56">
         
         <div class="absolute top-28 left-4 md:ml-20 z-[999]">
@@ -65,43 +78,54 @@
         
         <!-- Tab Content -->
         <div class="p-4 rounded-lg shadow mt-6">
-          <!-- All Teachers -->
-          <div id="all-teachers" class="teacher-tab-content">
-            <h2 class="text-lg font-bold text-gray-700 mb-4">All Teachers</h2>
-            <div class="space-y-2">
-              <p class="flex justify-between items-center px-2 py-2 transition hover:bg-zinc-200">
-                <span>Teacher 1 - Subject: Math</span>
-                <a href="#"><i class="bx bx-show text-gray-700 text-xl"></i></a>
-              </p>
-              <p class="flex justify-between items-center px-2 py-2 transition hover:bg-zinc-200">
-                <span>Teacher 2 - Subject: Science</span>
-                <a href="#"><i class="bx bx-show text-gray-700 text-xl"></i></a>
-              </p>
-              <p class="flex justify-between items-center px-2 py-2 transition hover:bg-zinc-200">
-                <span>Teacher 3 - Subject: English</span>
-                <a href="#"><i class="bx bx-show text-gray-700 text-xl"></i></a>
-              </p>
+            <!-- All Teachers -->
+            <div id="all-teachers" class="teacher-tab-content">
+              <% if (teachers.length > 0){ %>
+              <h2 class="text-lg font-bold text-gray-700 mb-4">All Teachers</h2>
+              <% teachers.forEach((teacher) => { %>
+                <div class="space-y-2">
+                  <p class="flex justify-between items-center px-2 py-2 transition hover:bg-blue-100 rounded-sm">
+                    <span><%= teacher.teacher_name %></span>
+                    <span class="flex gap-4">
+                    <a href="/admin/teacher/details/<%= teacher._id %>" class="text-blue-700 bg-blue-100 px-4 rounded-lg hover:bg-blue-200 text-xl">
+                     <i class="bx bx-show"></i>
+                     </a>
+                    </span>
+                  </p>
+                </div>
+              <% }) %>
+              <% } else {%>
+              <p class="text-sm ml-4 text-zinc-300">Teacher is not available</p>
+            <% } %>
             </div>
-          </div>
-        
           <!-- Add Teacher -->
           <div id="add-teacher" class="teacher-tab-content">
             <h2 class="text-lg text-center font-bold text-gray-700 mb-4">Add a New Teacher</h2>
-            <form class="space-y-4 p-4">
+            <form action="/admin/add/teacher" method="POST" class="space-y-4 p-4" enctype="multipart/form-data">
+              <div>
+                <label for="teacher-photo" class="block text-gray-700">Teacher Photo</label>
+                <input type="file" id="teacher-photo" name="teacher_photo" accept="image/png, image/jpg, image/jpeg" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300" required>
+              </div>
+              
               <div>
                 <label for="teacher-name" class="block text-gray-700">Teacher Name</label>
-                <input type="text" id="teacher-name" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter name">
+                <input type="text" id="teacher-name" name="teacher_name" class="w-full px-3 py-2 border rounded bg-transparent focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter name" required>
               </div>
+              
               <div>
                 <label for="teacher-subject" class="block text-gray-700">Subject</label>
-                <input type="text" id="teacher-subject" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter subject">
+                <input type="text" id="teacher-subject" name="teacher_subject" class="w-full px-3 py-2 border rounded bg-transparent focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter subject" required>
+              </div>
+              
+              <div>
+              <label for="teacher-contact" class="block text-gray-700">Teacher Contact</label>
+                <input type="text" id="teacher-contact" name="teacher_contact" class="w-full px-3 py-2 border rounded bg-transparent  focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter contact" required>
               </div>
               <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Teacher</button>
             </form>
           </div>
         </div>
       </section>
-
     </section>
   </main>
 

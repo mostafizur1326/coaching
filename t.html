@@ -1,0 +1,33 @@
+router.post('/add/teacher', adminIsLoggedIn, async (req, res) => {
+  teacher_photo_upload.single('teacher_photo')(req, res, async (err) => {
+    if (err) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        req.flash('error', 'File size should not exceed 5MB.');
+      } else {
+        req.flash('error', 'Something went wrong. Please try again.');
+      }
+      return res.redirect('/admin/all/teachers');
+    }
+
+    try {
+      const { teacher_name, teacher_subject, teacher_contact } = req.body;
+      if (!req.file || !teacher_name || !teacher_subject || !teacher_contact) {
+        req.flash('error', 'All fields are required!');
+        return res.redirect('/admin/all/teachers');
+      }
+      
+      const newTeacher = await teacherModel.create({
+        teacher_photo: `/temp/teachers-photo/${req.file.filename}`,
+        teacher_name,
+        teacher_subject,
+        teacher_contact
+      });
+
+      req.flash('success', 'Teacher added successfully!');
+      res.redirect('/admin/all/teachers');
+    } catch (error) {
+      req.flash('error', 'Teacher addition has failed!');
+      res.redirect('/admin/all/teachers');
+    }
+  });
+});

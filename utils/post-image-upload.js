@@ -2,6 +2,8 @@ const multer = require("multer");
 const path = require("path");
 const crypto = require("crypto");
 
+//POST_IMAGE_UPLOAD
+
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './public/temp/post'); 

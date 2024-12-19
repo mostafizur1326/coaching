@@ -3,7 +3,7 @@ const dbgr = require('debug')('app: app');
 
 const connectDB = async () => {
   if (!process.env.MONGODB_URI) {
-    throw new Error("MONGODB_URI environment variable is not defined.");
+    dbgr("MONGODB_URI environment variable is not defined.");
   }
 
   try {

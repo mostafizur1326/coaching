@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!--===== FAVICON =====-->
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!--===== STYLESHEET =====-->
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  
+  <!--===== ICON_URL =====-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
+  
+  <title>ADMIM | Teachers Details</title>
+</head>
+
+<body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
+
+  <main class="flex flex-col min-h-screen">
+    <section class="font-cy p-8 w-full flex justify-center items-center min-h-screen text-center">
+      <div class="relative rounded-lg shadow-lg p-6 w-96 h-auto flex flex-col items-center">
+        <a href="/admin/teacher/delete/<%= teacher._id %>" class="absolute right-2 top-0 text-red-700 hover:bg-red-50 text-xl px-2 py-2 rounded-lg">
+          <i class="bx bx-trash"></i>
+        </a>
+        <img src="<%= teacher.teacher_photo %>" alt="Teacher's Photo" class="w-32 h-32 rounded-full mb-4 object-cover">
+        <h1 class="text-2xl font-bold text-gray-800 mb-2"><%= teacher.teacher_name %></h1>
+        <p class="text-lg text-gray-600 mb-4">Subject: <%=  teacher.teacher_subject %></p>
+        <p class="text-sm text-gray-500 mb-6">Contact: <%= teacher.teacher_contact %></p>
+        <a href="/admin/all/teachers" class="inline-flex items-center text-blue-600 bg-blue-100 px-4 py-2 pr-6 hover:bg-blue-200 rounded-lg">
+          <i class="bx bx-left-arrow-alt text-xl mr-2"></i> Back
+        </a>
+      </div>
+    </section>
+  </main>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>
