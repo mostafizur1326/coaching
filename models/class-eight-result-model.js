@@ -102,6 +102,24 @@ const classEightResultSchema = new mongoose.Schema({
       default: 0
     }
   },
+  science: {
+    cq: {
+      type: Number,
+      default: 0
+    },
+    mcq: {
+      type: Number,
+      default: 0
+    },
+    total: {
+      type: Number,
+      default: 0
+    },
+    gpa: {
+      type: Number,
+      default: 0
+    }
+  },
   ict: {
     cq: {
       type: Number,

@@ -216,17 +216,124 @@
       
               <!-- Class 8 -->
               <div id="class-8" class="tab-content hidden">
-                  <h2 class="text-lg font-bold text-center text-gray-700">Upload Result for Class 8</h2>
-                  <form action="/admin/class/eight/result/published" method="POST" enctype="multipart/form-data" class="mt-6 flex justify-center">
+                <h2 class="text-lg font-bold text-center text-gray-700">Upload Result for Class 8</h2>
+                <form action="/admin/class/eight/result/published" method="POST" enctype="multipart/form-data" class="mt-6 mb-12 flex justify-center">
                       <div class="w-full">
                           <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg h-48 cursor-pointer">
                               <i class="fas fa-cloud-upload-alt text-gray-400 text-6xl mb-3"></i>
                               <p class="text-gray-600">Drop your .xlsx file here or click to upload</p>
-                              <input type="file" accept=".xlsx" class="fileInput" name="class_eight_result" required>
+                              <input type="file" accept=".xlsx" class="fileInput " name="class_eight_result" required>
                           </div>
                           <button class="uploadBTN mt-4 w-full bg-blue-600 text-white py-2 rounded">Upload File</button>
                       </div>
                   </form>
+                  
+                <% if (classEightResults.length > 0){ %>
+                  <div class="container mx-auto p-4 mt-4">
+                    <h1 class="text-2xl font-bold text-gray-800">All Class 8 Results</h1>
+                    <a href="/admin/class/eight/result/delete/all/<%= classEightCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >All Delete</a>
+                    <% classEightResults.forEach((result) => { %>
+                      <div class="shadow-md rounded-md overflow-hidden">
+                        <div class="p-4 border-b border-gray-200">
+                          <p class="text-sm text-gray-500">Roll: <span class="font-medium"><%= result.roll %></span></p>
+                          <p class="text-sm text-gray-500">Name: <span class="font-medium"><%= result.name %></span></p>
+                        </div>
+                        <table class="table-auto w-full text-left">
+                            <thead>
+                              <tr class="bg-gray-100 border-b border-gray-200">
+                                <th class="px-4 py-2 text-gray-600">Subject</th>
+                                <th class="px-4 py-2 text-gray-600">CQ</th>
+                                <th class="px-4 py-2 text-gray-600">MCQ</th>
+                                <th class="px-4 py-2 text-gray-600">Total</th>
+                                <th class="px-4 py-2 text-gray-600">GPA</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!-- Compulsory Subjects -->
+                            <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">Bangla 1st Paper</td>
+                                <td class="px-4 py-2"><%= result.banglaFirstPaper.cq %></td>
+                                <td class="px-4 py-2"><%= result.banglaFirstPaper.mcq %></td>
+                                <td class="px-4 py-2"><%= result.banglaFirstPaper.cq + result.banglaFirstPaper.mcq %></td>
+                                <td class="px-4 py-2"><%= result.banglaFirstPaper.gpa %></td>
+                              </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">Bangla 2nd Paper</td>
+                                <td class="px-4 py-2"><%= result.banglaSecondPaper.cq %></td>
+                                <td class="px-4 py-2"><%= result.banglaSecondPaper.mcq %></td>
+                                <td class="px-4 py-2"><%= result.banglaSecondPaper.cq + result.banglaSecondPaper.mcq %></td>
+                                <td class="px-4 py-2"><%= result.banglaSecondPaper.gpa %></td>
+                              </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">English 1sr Paper</td>
+                                <td class="px-4 py-2"><%= result.englishFirstPaper.cq %></td>
+                                <td class="px-4 py-2"><%= result.englishFirstPaper.mcq %></td>
+                                <td class="px-4 py-2"><%= result.englishFirstPaper.cq + result.englishFirstPaper.mcq %></td>
+                                <td class="px-4 py-2"><%= result.englishFirstPaper.gpa %></td>
+                              </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">English 2nd Paper</td>
+                                <td class="px-4 py-2"><%= result.englishSecondPaper.cq %></td>
+                                <td class="px-4 py-2"><%= result.englishSecondPaper.mcq %></td>
+                                <td class="px-4 py-2"><%= result.englishSecondPaper.cq + result.englishSecondPaper.mcq %></td>
+                                <td class="px-4 py-2"><%= result.englishSecondPaper.gpa %></td>
+                              </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">Math</td>
+                                <td class="px-4 py-2"><%= result.math.cq %></td>
+                                <td class="px-4 py-2"><%= result.math.mcq %></td>
+                                <td class="px-4 py-2"><%= result.math.cq + result.math.mcq %></td>
+                                <td class="px-4 py-2"><%= result.math.gpa %></td>
+                              </tr>
+                             <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">Science</td>
+                              <td class="px-4 py-2"><%= result.science.cq %></td>
+                                <td class="px-4 py-2"><%= result.science.mcq %></td>
+                                <td class="px-4 py-2"><%= result.science.cq + result.science.mcq %></td>
+                                <td class="px-4 py-2"><%= result.science.gpa %></td>
+                              </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">BGS</td>
+                                <td class="px-4 py-2"><%= result.bgs.cq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.mcq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.cq + result.bgs.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.gpa %></td>
+                             </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">ICT</td>
+                                <td class="px-4 py-2"><%= result.ict.cq %></td>
+                                <td class="px-4 py-2"><%= result.ict.mcq %></td>
+                                <td class="px-4 py-2"><%= result.ict.cq + result.ict.mcq %></td>
+                                <td class="px-4 py-2"><%= result.ict.gpa %></td>
+                              </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">Religion</td>
+                                <td class="px-4 py-2"><%= result.religion.cq %></td>
+                                <td class="px-4 py-2"><%= result.religion.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.cq + result.religion.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.gpa %></td>
+                              </tr>
+                                <tr class="border-b border-gray-200">
+                                  <td class="px-4 py-2">Agriculture</td>
+                                  <td class="px-4 py-2"><%= result.agriculture.cq %></td>
+                                  <td class="px-4 py-2"><%= result.agriculture.mcq %></td>
+                                  <td class="px-4 py-2"><%= result.agriculture.cq + result.agriculture.mcq %></td>
+                                  <td class="px-4 py-2"><%= result.agriculture.gpa %></td>
+                                </tr>
+                            </tbody>
+                          </table>
+                        <div class="p-4 flex justify-between items-center">
+                          <p class="text-gray-800 font-bold">Final GPA: <span class="text-green-500"><%= result.finalGPA %></span></p>
+                          <a href="/admin/class/eight/restlt/delete/<%= result.roll %>/<%= result._id %>" class="flex items-center bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+                            <i class="bx bx-trash text-lg mr-2"></i>Delete
+                          </a>
+                        </div>
+                      </div>
+                    <% }) %>
+                  </div>
+                <% } else {%>
+                  <p class="text-sm ml-4 text-zinc-300">Result is not available</p>
+                <% } %>
               </div>
               
               <!-- Class 9 -->
@@ -338,6 +445,20 @@
                                 <td class="px-4 py-2"><%= result.ict.cq + result.ict.mcq %></td>
                                 <td class="px-4 py-2"><%= result.ict.gpa %></td>
                               </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">BGS</td>
+                                <td class="px-4 py-2"><%= result.bgs.cq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.mcq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.cq + result.bgs.mcq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.gpa %></td>
+                             </tr>
+                             <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">Religion</td>
+                                <td class="px-4 py-2"><%= result.religion.cq %></td>
+                                <td class="px-4 py-2"><%= result.religion.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.cq + result.religion.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.gpa %></td>
+                              </tr>
                             </tbody>
                           </table>
                         <% } %>
@@ -424,7 +545,21 @@
                                   <td class="px-4 py-2"><%= result.agriculture.mcq %></td>
                                   <td class="px-4 py-2"><%= result.agriculture.cq + result.agriculture.mcq %></td>
                                   <td class="px-4 py-2"><%= result.agriculture.gpa %></td>
-                                </tr>
+                              </tr
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">BGS</td>
+                                <td class="px-4 py-2"><%= result.bgs.cq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.mcq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.cq + result.bgs.mcq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.gpa %></td>
+                             </tr>>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">Religion</td>
+                                <td class="px-4 py-2"><%= result.religion.cq %></td>
+                                <td class="px-4 py-2"><%= result.religion.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.cq + result.religion.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.gpa %></td>
+                              </tr>
                             </tbody>
                           </table>
                         <% } %>
@@ -551,6 +686,20 @@
                                 <td class="px-4 py-2"><%= result.ict.cq + result.ict.mcq %></td>
                                 <td class="px-4 py-2"><%= result.ict.gpa %></td>
                               </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">BGS</td>
+                                <td class="px-4 py-2"><%= result.bgs.cq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.mcq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.cq + result.bgs.mcq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.gpa %></td>
+                             </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">Religion</td>
+                                <td class="px-4 py-2"><%= result.religion.cq %></td>
+                                <td class="px-4 py-2"><%= result.religion.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.cq + result.religion.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.gpa %></td>
+                              </tr>
                             </tbody>
                           </table>
                         <% } %>
@@ -637,7 +786,21 @@
                                   <td class="px-4 py-2"><%= result.agriculture.mcq %></td>
                                   <td class="px-4 py-2"><%= result.agriculture.cq + result.agriculture.mcq %></td>
                                   <td class="px-4 py-2"><%= result.agriculture.gpa %></td>
-                                </tr>
+                              </tr
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">BGS</td>
+                                <td class="px-4 py-2"><%= result.bgs.cq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.mcq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.cq + result.bgs.mcq %></td>
+                                <td class="px-4 py-2"><%= result.bgs.gpa %></td>
+                             </tr>
+                              <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">Religion</td>
+                                <td class="px-4 py-2"><%= result.religion.cq %></td>
+                                <td class="px-4 py-2"><%= result.religion.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.cq + result.religion.mcq %></td>
+                                <td class="px-4 py-2"><%= result.religion.gpa %></td>
+                              </tr>
                             </tbody>
                           </table>
                         <% } %>
