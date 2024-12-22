@@ -10,6 +10,8 @@ const post_image_upload = require("../utils/post-image-upload");
 const teacher_photo_upload = require("../utils/teacher-photo-upload");
 const student_photo_upload = require("../utils/student-photo-upload");
 
+const class_six_result_upload = require("../utils/class-six-result-upload");
+const class_seven_result_upload = require("../utils/class-seven-result-upload");
 const class_eight_result_upload = require("../utils/class-eight-result-upload");
 const class_nine_result_upload = require("../utils/class-nine-result-upload");
 const class_ten_result_upload = require("../utils/class-ten-result-upload");
@@ -22,6 +24,8 @@ const postModel = require('../models/post-model');
 const teacherModel = require('../models/teacher-model');
 const studentModel = require('../models/student-model');
 
+const classSixResultModel = require('../models/class-six-result-model');
+const classSevenResultModel = require('../models/class-seven-result-model');
 const classEightResultModel = require('../models/class-eight-result-model');
 const classNineResultModel = require('../models/class-nine-result-model');
 const classTenResultModel = require('../models/class-ten-result-model');
@@ -93,9 +97,11 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.get('/dashboard', adminIsLoggedIn, (req, res) => {
+router.get('/dashboard', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('dashboard', { isLoggedIn });
+  const students = await studentModel.getAllStudents();
+  const teachers = await teacherModel.getAllTeachers();
+  res.render('dashboard', { isLoggedIn, students, teachers });
 })
 
 router.get('/all/students', adminIsLoggedIn, async (req, res) => {
@@ -366,12 +372,14 @@ router.get('/post/delete/:id', adminIsLoggedIn, async (req, res) => {
 router.get('/result/management', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
   
-  
+  const classSixResults = await classSixResultModel.getAllclassSixResults();
+  const classSevenResults = await classSevenResultModel.getAllclassSevenResults();
   const classEightResults = await classEightResultModel.getAllclassEightResults();
   const classNineResults = await classNineResultModel.getAllclassNineResults();
   const classTenResults = await classTenResultModel.getAllclassTenResults();
-
-
+  
+  const classSixCollectionName = classSixResultModel.collection.name;
+  const classSevenCollectionName = classSevenResultModel.collection.name;
   const classEightCollectionName = classEightResultModel.collection.name;
   const classNineCollectionName = classNineResultModel.collection.name;
   const classTenCollectionName = classTenResultModel.collection.name;
@@ -379,24 +387,159 @@ router.get('/result/management', adminIsLoggedIn, async (req, res) => {
   res.render('resultManagement', {
     isLoggedIn,
     
-    
+    classSixResults,
+    classSevenResults,
     classEightResults,
     classNineResults,
     classTenResults,
     
-    
+    classSixCollectionName,
+    classSevenCollectionName,
     classEightCollectionName,
     classNineCollectionName,
     classTenCollectionName
   });
 })
 
+router.post('/class/six/result/published', adminIsLoggedIn, (req, res) => {
+  class_six_result_upload(req, res);
+});
 
+router.get('/class/six/restlt/delete/:roll/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classSixResult = await classSixResultModel.findOneAndDelete({ _id: req.params.id });
 
+    if (!classSixResult || !classSixResult.class_six_result) {
+      req.flash('error', 'Result not found!');
+      return res.redirect('/admin/result/management');
+    }
 
+    const filePath = path.join(__dirname, '../public', classSixResult.class_six_result);
+    fs.exists(filePath, (exists) => {
+      if (exists) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            req.flash('error', 'Error deleting file.');
+          }
+        });
+      } else {
+        dbgr("File does not exist:", filePath);
+      }
+    });
 
+    req.flash('success', `The result for ${classSixResult.name} has been completely deleted.`);
+    res.redirect('/admin/result/management');
+  } catch (error) {
+    dbgr('Error during result deletion:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/result/management');
+  }
+});
 
+router.get('/class/six/result/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
 
+    const result = await model.findOne();
+    const filePath = path.join(__dirname, '../public', result.class_six_result);
+    fs.exists(filePath, (exists) => {
+      if (exists) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            req.flash('error', 'Error deleting file.');
+            dbgr('File deletion error:', err);
+          }
+        });
+      } else {
+        dbgr("File does not exist:", filePath);
+      }
+    });
+
+    await model.deleteMany({});
+    req.flash('success', 'All results for Class 6 have been successfully deleted!');
+    res.status(200).redirect('/admin/result/management');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/result/management');
+  }
+});
+
+router.post('/class/seven/result/published', adminIsLoggedIn, (req, res) => {
+  class_seven_result_upload(req, res);
+});
+
+router.get('/class/seven/restlt/delete/:roll/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classSevenResult = await classSevenResultModel.findOneAndDelete({ _id: req.params.id });
+
+    if (!classSevenResult || !classSevenResult.class_seven_result) {
+      req.flash('error', 'Result not found!');
+      return res.redirect('/admin/result/management');
+    }
+
+    const filePath = path.join(__dirname, '../public', classSevenResult.class_seven_result);
+    fs.exists(filePath, (exists) => {
+      if (exists) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            req.flash('error', 'Error deleting file.');
+          }
+        });
+      } else {
+        dbgr("File does not exist:", filePath);
+      }
+    });
+
+    req.flash('success', `The result for ${classSevenResult.name} has been completely deleted.`);
+    res.redirect('/admin/result/management');
+  } catch (error) {
+    dbgr('Error during result deletion:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/result/management');
+  }
+});
+
+router.get('/class/seven/result/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    const result = await model.findOne();
+    const filePath = path.join(__dirname, '../public', result.class_seven_result);
+    fs.exists(filePath, (exists) => {
+      if (exists) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            req.flash('error', 'Error deleting file.');
+            dbgr('File deletion error:', err);
+          }
+        });
+      } else {
+        dbgr("File does not exist:", filePath);
+      }
+    });
+
+    await model.deleteMany({});
+    req.flash('success', 'All results for Class 7 have been successfully deleted!');
+    res.status(200).redirect('/admin/result/management');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/result/management');
+  }
+});
 
 router.post('/class/eight/result/published', adminIsLoggedIn, (req, res) => {
   class_eight_result_upload(req, res);
@@ -467,22 +610,6 @@ router.get('/class/eight/result/delete/all/:collectionName', async (req, res) =>
     res.redirect('/admin/result/management');
   }
 });
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
 
 router.post('/class/nine/result/published', adminIsLoggedIn, (req, res) => {
   class_nine_result_upload(req, res);
