@@ -2,18 +2,25 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const fs = require('fs');
-
+const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const post_image_upload = require("../utils/post-image-upload");
 const teacher_photo_upload = require("../utils/teacher-photo-upload");
+const student_photo_upload = require("../utils/student-photo-upload");
+const class_ten_result_upload = require("../utils/class-ten-result-upload");
+const class_nine_result_upload = require("../utils/class-nine-result-upload");
+
 
 const { adminIsLoggedIn } = require("../middlewares/isLoggedIn");
 
 const adminModel = require('../models/admin-model');
 const postModel = require('../models/post-model');
 const teacherModel = require('../models/teacher-model');
+const studentModel = require('../models/student-model');
+const classTenResultModel = require('../models/class-ten-result-model');
+const classNineResultModel = require('../models/class-nine-result-model');
 
 const dbgr = require('debug')('app: app');
 
@@ -87,10 +94,100 @@ router.get('/dashboard', adminIsLoggedIn, (req, res) => {
   res.render('dashboard', { isLoggedIn });
 })
 
-router.get('/all/students', adminIsLoggedIn, (req, res) => {
+router.get('/all/students', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('allStudents', { isLoggedIn });
+  const students = await studentModel.getAllStudents();
+
+  let classSixStudents = students.filter(student => student.student_class === '6');
+  let classSevenStudents = students.filter(student => student.student_class === '7');
+  let classEightStudents = students.filter(student => student.student_class === '8');
+  let classNineStudents = students.filter(student => student.student_class === '9');
+  let classTenStudents = students.filter(student => student.student_class === '10');
+
+  res.render('allStudents', {
+    isLoggedIn,
+    students,
+    classSixStudents,
+    classSevenStudents,
+    classEightStudents,
+    classNineStudents,
+    classTenStudents
+  });
 })
+
+router.post('/add/student', adminIsLoggedIn, (req, res) => {
+  student_photo_upload.single('student_photo')(req, res, async (err) => {
+    if (err) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        req.flash('error', 'File size should not exceed 5MB.');
+      } else if (err.message === 'Only .jpeg, .jpg, or .png files are allowed!') {
+        req.flash('error', 'Invalid file type. Only .jpeg, .jpg, or .png files are allowed.');
+      } else {
+        req.flash('error', 'Something went wrong. Please try again.');
+      }
+      return res.redirect('/admin/all/students');
+    }
+
+    try {
+      const { student_name, student_roll, student_class, student_fee, student_contact } = req.body;
+
+      if (!req.file) {
+        req.flash('error', 'Student photo is required!');
+        return res.redirect('/admin/all/students');
+      }
+      if (!student_name || !student_roll || !student_class || !student_fee || !student_contact) {
+        req.flash('error', 'All fields are required!');
+        return res.redirect('/admin/all/students');
+      }
+
+      console.log(student_name + ' | ' + student_roll + ' | ' + student_class + ' | ' + student_fee + ' | ' + student_contact + ' | ' + req.file)
+      const newStudent = await studentModel.create({
+        student_photo: `/temp/students-photo/${req.file.filename}`,
+        student_name,
+        student_roll,
+        student_class,
+        student_fee,
+        student_contact,
+      });
+
+      req.flash('success', 'Student added successfully!');
+      return res.redirect('/admin/all/students');
+    } catch (error) {
+      req.flash('error', 'Student addition failed. Please try again.');
+      dbgr('Unexpected error: ' + error);
+      return res.redirect('/admin/all/students');
+    }
+  });
+});
+
+router.get('/student/details/:id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  const student = await studentModel.findOne({ _id: req.params.id });
+  res.render('studentDetails', { isLoggedIn, student });
+})
+
+router.get('/student/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const student = await studentModel.findById(req.params.id);
+
+    if (!student) {
+      req.flash('error', 'Student not found!');
+      return res.redirect('/admin/all/students');
+    }
+
+    const studentPhotoPath = path.join(__dirname, '..', 'public', student.student_photo);
+
+    await fs.promises.unlink(studentPhotoPath);
+
+    await studentModel.findByIdAndDelete(req.params.id);
+
+    req.flash('success', `${student.student_name} has been deleted.`);
+    return res.redirect('/admin/all/students');
+  } catch (error) {
+    req.flash('error', 'Something went wrong. Please try again.');
+    return res.redirect('/admin/all/students');
+  }
+});
 
 router.get('/all/teachers', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
@@ -262,15 +359,166 @@ router.get('/post/delete/:id', adminIsLoggedIn, async (req, res) => {
   }
 });
 
-router.get('/result/management', adminIsLoggedIn, (req, res) => {
+router.get('/result/management', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('resultManagement', { isLoggedIn });
+
+  const classTenResults = await classTenResultModel.getAllclassTenResults();
+  const classNineResults = await classNineResultModel.getAllclassNineResults();
+
+  const classNineCollectionName = classNineResultModel.collection.name;
+  const classTenCollectionName = classTenResultModel.collection.name;
+
+  res.render('resultManagement', {
+    isLoggedIn,
+
+    classNineResults,
+    classTenResults,
+
+    classNineCollectionName,
+    classTenCollectionName
+  });
 })
 
-router.get('/fees/management', adminIsLoggedIn, (req, res) => {
-  const isLoggedIn = req.cookies.token;
-  res.render('feesManagement', { isLoggedIn });
-})
+router.post('/class/nine/result/published', adminIsLoggedIn, (req, res) => {
+  class_nine_result_upload(req, res);
+});
+
+router.get('/class/nine/restlt/delete/:roll/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classNineResul = await classNineResultModel.findOneAndDelete({ _id: req.params.id });
+
+    if (!classNineResul || !classNineResul.class_nine_result) {
+      req.flash('error', 'Result not found!');
+      return res.redirect('/admin/result/management');
+    }
+
+    const filePath = path.join(__dirname, '../public', classNineResul.class_nine_result);
+    fs.exists(filePath, (exists) => {
+      if (exists) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            req.flash('error', 'Error deleting file.');
+          }
+        });
+      } else {
+        dbgr("File does not exist:", filePath);
+      }
+    });
+
+    req.flash('success', `The result for ${classNineResul.name} has been completely deleted.`);
+    res.redirect('/admin/result/management');
+  } catch (error) {
+    dbgr('Error during result deletion:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/result/management');
+  }
+});
+
+router.get('/class/nine/result/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    const result = await model.findOne();
+    console.log(result.class_nine_result)
+    const filePath = path.join(__dirname, '../public', result.class_nine_result);
+    fs.exists(filePath, (exists) => {
+      if (exists) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            req.flash('error', 'Error deleting file.');
+            dbgr('File deletion error:', err);
+          }
+        });
+      } else {
+        dbgr("File does not exist:", filePath);
+      }
+    });
+
+    await model.deleteMany({});
+    req.flash('success', 'All results for Class 9 have been successfully deleted!');
+    res.status(200).redirect('/admin/result/management');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/result/management');
+  }
+});
+
+router.post('/class/ten/result/published', adminIsLoggedIn, (req, res) => {
+  class_ten_result_upload(req, res);
+});
+
+router.get('/class/ten/restlt/delete/:roll/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classTenResul = await classTenResultModel.findOneAndDelete({ _id: req.params.id });
+
+    if (!classTenResul || !classTenResul.class_ten_result) {
+      req.flash('error', 'Result not found!');
+      return res.redirect('/admin/result/management');
+    }
+
+    const filePath = path.join(__dirname, '../public', classTenResul.class_ten_result);
+    fs.exists(filePath, (exists) => {
+      if (exists) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            req.flash('error', 'Error deleting file.');
+          }
+        });
+      } else {
+        dbgr("File does not exist:", filePath);
+      }
+    });
+
+    req.flash('success', `The result for ${classTenResul.name} has been completely deleted.`);
+    res.redirect('/admin/result/management');
+  } catch (error) {
+    dbgr('Error during result deletion:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/result/management');
+  }
+});
+
+router.get('/class/ten/result/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    const result = await model.findOne();
+    const filePath = path.join(__dirname, '../public', result.class_ten_result);
+    fs.exists(filePath, (exists) => {
+      if (exists) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            req.flash('error', 'Error deleting file.');
+            dbgr('File deletion error:', err);
+          }
+        });
+      } else {
+        dbgr("File does not exist:", filePath);
+      }
+    });
+
+    await model.deleteMany({});
+    req.flash('success', 'All results for Class 10 have been successfully deleted!');
+    res.status(200).redirect('/admin/result/management');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/result/management');
+  }
+});
 
 router.get('/logout', (req, res) => {
   res.cookie('token', '');
