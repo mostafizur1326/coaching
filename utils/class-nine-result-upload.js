@@ -151,7 +151,7 @@ const handleFileUpload = (req, res) => {
       req.flash("success", "Class nine result successfully published.");
       res.redirect("/admin/result/management");
     } catch (err) {
-      req.flash("error", "Cannot process the file: " + err.message);
+      req.flash("error", "To upload your result, please delete the entire result list and try again.");
       return res.redirect("/admin/result/management");
     }
   });

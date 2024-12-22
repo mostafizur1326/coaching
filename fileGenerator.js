@@ -1,4 +1,4 @@
-const XLSX = require('xlsx');
+/*const XLSX = require('xlsx');
 const fs = require('fs');
 
 async function generateExcelFile(data) {
@@ -102,9 +102,9 @@ async function generateExcelFile(data) {
 
   const ws = XLSX.utils.aoa_to_sheet(result);
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Class 10 Results');
+  XLSX.utils.book_append_sheet(wb, ws, 'Class 8 Results');
 
-  XLSX.writeFile(wb, 'Class_10_Results(1).xlsx');
+  XLSX.writeFile(wb, 'Class_8_Results.xlsx');
 }
 
 const data = [
@@ -294,11 +294,11 @@ const data = [
 },
 ];
 
-generateExcelFile(data);
+generateExcelFile(data);*/
 
 // Class 9-10
 
-/*
+
 const XLSX = require('xlsx');
 const fs = require('fs');
 
@@ -380,9 +380,9 @@ async function generateExcelFile(data) {
 
   const ws = XLSX.utils.aoa_to_sheet(result);
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Class 10 Results');
+  XLSX.utils.book_append_sheet(wb, ws, 'Class 9 Results');
 
-  XLSX.writeFile(wb, 'Class_10_Results.xlsx');
+  XLSX.writeFile(wb, 'Class_9_Results.xlsx');
 }
 
 const data = [
@@ -604,4 +604,4 @@ const data = [
   },
 ];
 
-generateExcelFile(data);*/
+generateExcelFile(data);
