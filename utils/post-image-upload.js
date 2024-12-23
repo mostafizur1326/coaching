@@ -6,7 +6,7 @@ const crypto = require("crypto");
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, './public/temp/post'); 
+    cb(null, './public/temp/post-images'); 
   },
   filename: function(req, file, cb) {
     const originalName = file.originalname.split(" ").join("");
