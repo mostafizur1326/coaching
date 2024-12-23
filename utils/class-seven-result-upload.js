@@ -64,7 +64,7 @@ const handleFileUpload = (req, res) => {
         await classSevenResultModel.create({
           name: row["Name"],
           roll: row["Roll"],
-          class_name: row["Class"],
+          className: row["Class"],
           banglaFirstPaper: {
             cq: row["Bangla 1st Paper (CQ)"],
             mcq: row["Bangla 1st Paper (MCQ)"],

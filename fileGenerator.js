@@ -1,4 +1,4 @@
-/*const XLSX = require('xlsx');
+const XLSX = require('xlsx');
 const fs = require('fs');
 
 async function generateExcelFile(data) {
@@ -102,16 +102,16 @@ async function generateExcelFile(data) {
 
   const ws = XLSX.utils.aoa_to_sheet(result);
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Class 8 Results');
+  XLSX.utils.book_append_sheet(wb, ws, 'Class 7 Results');
 
-  XLSX.writeFile(wb, 'Class_8_Results.xlsx');
+  XLSX.writeFile(wb, 'Class_7_Results.xlsx');
 }
 
 const data = [
   {
-    "Roll": "2024001",
+    "Roll": "1",
     "Name": "Student 1",
-    "Class": "10",
+    "Class": "7",
     "Bangla 1st Paper (CQ)": 45,
     "Bangla 1st Paper (MCQ)": 15,
     "Bangla 1st Paper (Total)": 60,
@@ -155,9 +155,9 @@ const data = [
     "Final GPA": 3.7
   },
   {
-    "Roll": "2024002",
+    "Roll": "2",
     "Name": "Student 2",
-    "Class": "10",
+    "Class": "7",
     "Bangla 1st Paper (CQ)": 45,
     "Bangla 1st Paper (MCQ)": 15,
     "Bangla 1st Paper (Total)": 60,
@@ -201,9 +201,9 @@ const data = [
     "Final GPA": 3.7
   },
   {
-    "Roll": "2024003",
+    "Roll": "3",
     "Name": "Student 3",
-    "Class": "10",
+    "Class": "7",
     "Bangla 1st Paper (CQ)": 45,
     "Bangla 1st Paper (MCQ)": 15,
     "Bangla 1st Paper (Total)": 60,
@@ -247,9 +247,9 @@ const data = [
     "Final GPA": 3.7
 },
   {
-    "Roll": "2024004",
+    "Roll": "4",
     "Name": "Student 4",
-    "Class": "10",
+    "Class": "7",
     "Bangla 1st Paper (CQ)": 45,
     "Bangla 1st Paper (MCQ)": 15,
     "Bangla 1st Paper (Total)": 60,
@@ -294,12 +294,12 @@ const data = [
 },
 ];
 
-generateExcelFile(data);*/
+generateExcelFile(data);
 
 // Class 9-10
 
 
-const XLSX = require('xlsx');
+/*const XLSX = require('xlsx');
 const fs = require('fs');
 
 async function generateExcelFile(data) {
@@ -380,14 +380,14 @@ async function generateExcelFile(data) {
 
   const ws = XLSX.utils.aoa_to_sheet(result);
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Class 9 Results');
+  XLSX.utils.book_append_sheet(wb, ws, 'Class 10 Results');
 
-  XLSX.writeFile(wb, 'Class_9_Results.xlsx');
+  XLSX.writeFile(wb, 'Class_10_Results.xlsx');
 }
 
 const data = [
   {
-    "Roll": "2024001",
+    "Roll": "1",
     "Name": "Student 1",
     "Class": "10",
     "Bangla 1st Paper (CQ)": 45,
@@ -441,7 +441,7 @@ const data = [
     "Final GPA": 3.7
   },
   {
-    "Roll": "2024002",
+    "Roll": "2",
     "Name": "Student 2",
     "Class": "10",
     "Bangla 1st Paper (CQ)": 45,
@@ -495,7 +495,7 @@ const data = [
     "Final GPA": 3.7
   },
     {
-    "Roll": "2024003",
+    "Roll": "3",
     "Name": "Student 3",
     "Class": "10",
     "Bangla 1st Paper (CQ)": 45,
@@ -549,7 +549,7 @@ const data = [
     "Final GPA": 3.7
   },
   {
-    "Roll": "2024004",
+    "Roll": "4",
     "Name": "Student 4",
     "Class": "10",
     "Bangla 1st Paper (CQ)": 45,
@@ -604,4 +604,4 @@ const data = [
   },
 ];
 
-generateExcelFile(data);
+generateExcelFile(data);*/
