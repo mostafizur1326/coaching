@@ -170,93 +170,39 @@
       <!--===== STUDENTS_RESULT_FOEM =====-->
       
       <section class="font-cy w-full min-h-screen flex flex-col items-center justify-center p-8">
-        
-        <div class="absolute top-28 left-4 md:ml-20 z-[999]">
-            <button class="text-gray-600 hover:text-gray-800">
-                <a href="/student/class" class="ml-2 font-medium text-sm">Back</a>
-            </button>
-        </div>
-
-        
-        <div class="w-full flex flex-col items-center justify-center mt-36">
+        <div class="w-full flex flex-col items-center justify-center mt-28">
           <h2 class="text-center text-3xl font-bold mb-8 text-gray-700 flex items-center gap-2 justify-center">
             <i class='bx bxs-face'></i> Result Form
           </h2>
           
           <div class="space-y-4 w-full md:w-1/2">
-            <form action="" method="POST">
-              <div class="relative">
-                <input type="text" name="username" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Username" required>
-                <i class="fa fa-user-tag input-icon"></i>
-              </div>
-            
+            <form action="/student/class/six/result" method="POST">
               <div class="relative flex">
-                <input type="email" name="email" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Email" required>
+                <input type="name" name="name" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Name" required>
                 <i class="fas fa-envelope input-icon"></i>
               </div>
             
               <div class="relative">
-                <input type="number" name="Roll" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="roll" required>
-                <i class="bi bi-123 input-icon"></i>
+                <input type="number" name="roll" class="w-full py-2 pl-4 pr-10 mt-4 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="roll" required>
+                <i class="bi bi-123 mt-2 input-icon"></i>
               </div>
               
-              <button type="submit" class="w-full py-2 mt-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+              <button type="submit" class="w-full py-2 mt-12 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
                 Submit
               </button>
             </form>
           </div>
-        
         </div>
-        
-        <div class="w-full mt-28">
-          <h2 class="w-56 text-4xl font-bold border-b-2 border-blue-800 rounded-md">Result Sheet</h2>
-          <div class="mt-20 space-y-4">
-            <div class="flex justify-between">
-              <p class="text-gray-600">Name: <span class="font-bold">John Doe</span></p>
-              <p class="text-gray-600">Class: <span class="font-bold">10th Grade</span></p>
-            </div>
-            <div class="flex justify-between">
-              <p class="text-gray-600">Roll: <span class="font-bold">01</span></p>
-              <p class="text-gray-600">GPA: <span class="font-bold">A+</span></p>
-            </div>
-          </div>
-          
-          <div class="mt-8">
-            <table class="w-full text-left border-collapse">
-              <thead>
-                <tr>
-                  <th class="py-2 px-4 border-b-2 border-gray-300">Subject</th>
-                  <th class="py-2 px-4 border-b-2 border-gray-300">Marks Obtained</th>
-                  <th class="py-2 px-4 border-b-2 border-gray-300">GPA</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="py-2 px-4 border-b border-gray-300">Mathematics</td>
-                  <td class="py-2 px-4 border-b border-gray-300">85</td>
-                  <td class="py-2 px-4 border-b border-gray-300">A+</td>
-                </tr>
-                <tr>
-                  <td class="py-2 px-4 border-b border-gray-300">English</td>
-                  <td class="py-2 px-4 border-b border-gray-300">90</td>
-                  <td class="py-2 px-4 border-b border-gray-300">A+</td>
-                </tr>
-                <tr>
-                  <td class="py-2 px-4 border-b border-gray-300">Science</td>
-                  <td class="py-2 px-4 border-b border-gray-300">88</td>
-                  <td class="py-2 px-4 border-b border-gray-300"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <button class="w-full py-2 mt-8 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-            Download PDF
-          </button>
+      
+        <!-- Back Button -->
+        <div class="mt-8">
+          <a href="/student/class" class="inline-flex items-center text-blue-600 bg-blue-100 px-4 py-2 pr-6 hover:bg-blue-200 rounded-lg">
+            <i class="bx bx-left-arrow-alt text-xl mr-2 mt-1"></i> Back
+          </a>
         </div>
       </section>
-
     </section>
-    
+     
     <!--====== FOOTER =====-->
     
     <footer class="relative font-cy w-full bg-blue-700 text-white py-8">
@@ -271,7 +217,7 @@
         
         <div class="text-center text-sm mb-6 px-4 sm:px-6 lg:px-8">
           <p>STEC - Excellence in Coaching</p>
-          <p>Email: <a href="mailto:swapnotoryeducare@gmail.com" class="hover:text-gray-300">swapnotoryeducare@gmail.com</a> | Phone: <a href="tel:+8801896434842" class="hover:text-gray-300">+8801896434842</a></p>
+          <p>name: <a href="mailto:swapnotoryeducare@gmail.com" class="hover:text-gray-300">swapnotoryeducare@gmail.com</a> | Phone: <a href="tel:+8801896434842" class="hover:text-gray-300">+8801896434842</a></p>
           <p class="w-full relative top-12">© 2025 STEC. All rights reserved.</p>
         </div>
       </div>

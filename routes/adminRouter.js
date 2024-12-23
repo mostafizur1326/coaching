@@ -23,7 +23,6 @@ const adminModel = require('../models/admin-model');
 const postModel = require('../models/post-model');
 const teacherModel = require('../models/teacher-model');
 const studentModel = require('../models/student-model');
-
 const classSixResultModel = require('../models/class-six-result-model');
 const classSevenResultModel = require('../models/class-seven-result-model');
 const classEightResultModel = require('../models/class-eight-result-model');
@@ -274,6 +273,11 @@ router.get('/teacher/details/:id', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
   const teacher = await teacherModel.findOne({ _id: req.params.id });
   res.render('teacherDetails', { isLoggedIn, teacher });
+})
+
+router.get('/fees/management', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  res.render('feesManagement', { isLoggedIn });
 })
 
 router.get('/post/management', adminIsLoggedIn, async (req, res) => {
