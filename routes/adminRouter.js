@@ -158,39 +158,83 @@ router.post('/add/student', adminIsLoggedIn, (req, res) => {
         req.flash('error', 'All fields are required!');
         return res.redirect('/admin/all/students');
       }
-
-      const existingStudent = await sixTHStudentModel.findOne({ student_roll });
-      if (existingStudent) {
-        req.flash('error', 'This roll already exists!');
-        return res.redirect('/admin/all/students');
-      }
-
+      
       const student_photo = req.file ? `/temp/students-photo/${req.file.filename}` : null;
 
-      let StudentModel = null;
       if (student_class === '6') {
-        StudentModel = sixTHStudentModel;
+        const classSixExistingStudent = await sixTHStudentModel.findOne({ student_roll });
+        if (classSixExistingStudent) {
+          req.flash('error', 'This roll already exists!');
+          return res.redirect('/admin/all/students');
+        }
+        const newStudent = await sixTHStudentModel.create({
+          student_photo,
+          student_name,
+          student_roll,
+          student_class,
+          student_fee,
+          student_contact,
+        });
       } else if (student_class === '7') {
-        StudentModel = sevenTHStudentModel;
+        const classSevenExistingStudent = await sevenTHStudentModel.findOne({ student_roll });
+        if (classSevenExistingStudent) {
+          req.flash('error', 'This roll already exists!');
+          return res.redirect('/admin/all/students');
+        }
+        const newStudent = await sevenTHStudentModel.create({
+          student_photo,
+          student_name,
+          student_roll,
+          student_class,
+          student_fee,
+          student_contact,
+        });
       } else if (student_class === '8') {
-        StudentModel = eightTHStudentModel;
+        const classEightExistingStudent = await eightTHStudentModel.findOne({ student_roll });
+        if (classEightExistingStudent) {
+          req.flash('error', 'This roll already exists!');
+          return res.redirect('/admin/all/students');
+        }
+        const newStudent = await eightTHStudentModel.create({
+          student_photo,
+          student_name,
+          student_roll,
+          student_class,
+          student_fee,
+          student_contact,
+        });
       } else if (student_class === '9') {
-        StudentModel = nineTHStudentModel;
+        const classNineExistingStudent = await nineTHStudentModel.findOne({ student_roll });
+        if (classNineExistingStudent) {
+          req.flash('error', 'This roll already exists!');
+          return res.redirect('/admin/all/students');
+        }
+        const newStudent = await nineTHStudentModel.create({
+          student_photo,
+          student_name,
+          student_roll,
+          student_class,
+          student_fee,
+          student_contact,
+        });
       } else if (student_class === '10') {
-        StudentModel = tenTHStudentModel;
+        const classTenExistingStudent = await tenTHStudentModel.findOne({ student_roll });
+        if (classTenExistingStudent) {
+          req.flash('error', 'This roll already exists!');
+          return res.redirect('/admin/all/students');
+        }
+        const newStudent = await tenTHStudentModel.create({
+          student_photo,
+          student_name,
+          student_roll,
+          student_class,
+          student_fee,
+          student_contact,
+        });
       } else {
-        req.flash('error', 'Invalid class!');
+        req.flash('error', 'Something wwnt wrong! Please try again.');
         return res.redirect('/admin/all/students');
       }
-
-      const newStudent = await StudentModel.create({
-        student_photo,
-        student_name,
-        student_roll,
-        student_class,
-        student_fee,
-        student_contact,
-      });
 
       req.flash('success', 'Student added successfully!');
       return res.redirect('/admin/all/students');
@@ -237,6 +281,151 @@ router.get('/class/six/student/delete/:id', adminIsLoggedIn, async (req, res) =>
     return res.redirect('/admin/all/students');
   }
 });
+
+router.get('/class/seven/student/details/:id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  const classSevenStudent = await sevenTHStudentModel.findOne({ _id: req.params.id });
+  res.render('classSevenStudentDetails', { isLoggedIn, classSevenStudent });
+})
+
+router.get('/class/seven/student/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classSevenStudent = await sevenTHStudentModel.findById(req.params.id);
+
+    if (!classSevenStudent) {
+      req.flash('error', 'Student not found!');
+      return res.redirect('/admin/all/students');
+    }
+
+    if (classSevenStudent.student_photo) {
+      const studentPhotoPath = path.join(__dirname, '..', 'public', classSevenStudent.student_photo);
+
+      try {
+        await fs.promises.unlink(studentPhotoPath);
+      } catch (fileError) {
+        dbgr(`Failed to delete student photo: ${fileError.message}`);
+      }
+    }
+
+    await sevenTHStudentModel.findByIdAndDelete(req.params.id);
+
+    req.flash('success', `${classSevenStudent.student_name} has been deleted.`);
+    return res.redirect('/admin/all/students');
+  } catch (error) {
+    dbgr(`Error deleting student: ${error.message}`);
+    req.flash('error', 'Something went wrong. Please try again.');
+    return res.redirect('/admin/all/students');
+  }
+});
+
+router.get('/class/eight/student/details/:id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  const classEightStudent = await eightTHStudentModel.findOne({ _id: req.params.id });
+  res.render('classEightStudentDetails', { isLoggedIn, classEightStudent });
+})
+
+router.get('/class/eight/student/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classEightStudent = await eightTHStudentModel.findById(req.params.id);
+
+    if (!classEightStudent) {
+      req.flash('error', 'Student not found!');
+      return res.redirect('/admin/all/students');
+    }
+
+    if (classEightStudent.student_photo) {
+      const studentPhotoPath = path.join(__dirname, '..', 'public', classEightStudent.student_photo);
+
+      try {
+        await fs.promises.unlink(studentPhotoPath);
+      } catch (fileError) {
+        dbgr(`Failed to delete student photo: ${fileError.message}`);
+      }
+    }
+
+    await eightTHStudentModel.findByIdAndDelete(req.params.id);
+
+    req.flash('success', `${classEightStudent.student_name} has been deleted.`);
+    return res.redirect('/admin/all/students');
+  } catch (error) {
+    dbgr(`Error deleting student: ${error.message}`);
+    req.flash('error', 'Something went wrong. Please try again.');
+    return res.redirect('/admin/all/students');
+  }
+});
+
+router.get('/class/nine/student/details/:id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  const classNineStudent = await nineTHStudentModel.findOne({ _id: req.params.id });
+  res.render('classNineStudentDetails', { isLoggedIn, classNineStudent });
+})
+
+router.get('/class/nine/student/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classNineStudent = await nineTHStudentModel.findById(req.params.id);
+
+    if (!classNineStudent) {
+      req.flash('error', 'Student not found!');
+      return res.redirect('/admin/all/students');
+    }
+
+    if (classNineStudent.student_photo) {
+      const studentPhotoPath = path.join(__dirname, '..', 'public', classNineStudent.student_photo);
+
+      try {
+        await fs.promises.unlink(studentPhotoPath);
+      } catch (fileError) {
+        dbgr(`Failed to delete student photo: ${fileError.message}`);
+      }
+    }
+
+    await nineTHStudentModel.findByIdAndDelete(req.params.id);
+
+    req.flash('success', `${classNineStudent.student_name} has been deleted.`);
+    return res.redirect('/admin/all/students');
+  } catch (error) {
+    dbgr(`Error deleting student: ${error.message}`);
+    req.flash('error', 'Something went wrong. Please try again.');
+    return res.redirect('/admin/all/students');
+  }
+});
+
+router.get('/class/ten/student/details/:id', adminIsLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  const classTenStudent = await tenTHStudentModel.findOne({ _id: req.params.id });
+  res.render('classTenStudentDetails', { isLoggedIn, classTenStudent });
+})
+
+router.get('/class/ten/student/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classTenStudent = await tenTHStudentModel.findById(req.params.id);
+
+    if (!classTenStudent) {
+      req.flash('error', 'Student not found!');
+      return res.redirect('/admin/all/students');
+    }
+
+    if (classTenStudent.student_photo) {
+      const studentPhotoPath = path.join(__dirname, '..', 'public', classTenStudent.student_photo);
+
+      try {
+        await fs.promises.unlink(studentPhotoPath);
+      } catch (fileError) {
+        dbgr(`Failed to delete student photo: ${fileError.message}`);
+      }
+    }
+
+    await tenTHStudentModel.findByIdAndDelete(req.params.id);
+
+    req.flash('success', `${classTenStudent.student_name} has been deleted.`);
+    return res.redirect('/admin/all/students');
+  } catch (error) {
+    dbgr(`Error deleting student: ${error.message}`);
+    req.flash('error', 'Something went wrong. Please try again.');
+    return res.redirect('/admin/all/students');
+  }
+});
+
 router.get('/all/teachers', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
   const teachers = await teacherModel.getAllTeachers();
