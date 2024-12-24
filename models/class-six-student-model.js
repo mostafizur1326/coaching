@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const addStudentSchema = new mongoose.Schema({
+const sixTHStudentSchema = new mongoose.Schema({
   student_photo: {
     type: String
   },
@@ -22,7 +22,7 @@ const addStudentSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-addStudentSchema.statics.getAllStudents = function() {
+sixTHStudentSchema.statics.getAllSixTHStudents = function() {
   return this.find();
 };
-module.exports = mongoose.model("AddStudent", addStudentSchema);
+module.exports = mongoose.model("sixTHStudent", sixTHStudentSchema);

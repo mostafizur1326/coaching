@@ -22,7 +22,11 @@ const { adminIsLoggedIn } = require("../middlewares/isLoggedIn");
 const adminModel = require('../models/admin-model');
 const postModel = require('../models/post-model');
 const teacherModel = require('../models/teacher-model');
-const studentModel = require('../models/student-model');
+const sixTHStudentModel = require('../models/class-six-student-model');
+const sevenTHStudentModel = require('../models/class-seven-student-model');
+const eightTHStudentModel = require('../models/class-eight-student-model');
+const nineTHStudentModel = require('../models/class-nine-student-model');
+const tenTHStudentModel = require('../models/class-ten-student-model');
 const classSixResultModel = require('../models/class-six-result-model');
 const classSevenResultModel = require('../models/class-seven-result-model');
 const classEightResultModel = require('../models/class-eight-result-model');
@@ -98,24 +102,34 @@ router.post('/login', async (req, res) => {
 
 router.get('/dashboard', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  const students = await studentModel.getAllStudents();
+  const classSixStudents = await sixTHStudentModel.getAllSixTHStudents();
+  const classSevenStudents = await sevenTHStudentModel.getAllSevenTHStudents();
+  const classEightStudents = await eightTHStudentModel.getAllEightTHStudents();
+  const classNineStudents = await nineTHStudentModel.getAllNineTHStudents();
+  const classTenStudents = await tenTHStudentModel.getAllTenTHStudents();
+  
+  let totalStudents = classSixStudents.length + 
+                      classSevenStudents.length +
+                      classEightStudents.length +
+                      classNineStudents.length +
+                      classTenStudents.length
+  
   const teachers = await teacherModel.getAllTeachers();
-  res.render('dashboard', { isLoggedIn, students, teachers });
+  res.render('dashboard', { isLoggedIn, totalStudents, teachers });
 })
 
 router.get('/all/students', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  const students = await studentModel.getAllStudents();
-
-  let classSixStudents = students.filter(student => student.student_class === '6');
-  let classSevenStudents = students.filter(student => student.student_class === '7');
-  let classEightStudents = students.filter(student => student.student_class === '8');
-  let classNineStudents = students.filter(student => student.student_class === '9');
-  let classTenStudents = students.filter(student => student.student_class === '10');
+  
+  const classSixStudents = await sixTHStudentModel.getAllSixTHStudents();
+  const classSevenStudents = await sevenTHStudentModel.getAllSevenTHStudents();
+  const classEightStudents = await eightTHStudentModel.getAllEightTHStudents();
+  const classNineStudents = await nineTHStudentModel.getAllNineTHStudents();
+  const classTenStudents = await tenTHStudentModel.getAllTenTHStudents();
+  
 
   res.render('allStudents', {
     isLoggedIn,
-    students,
     classSixStudents,
     classSevenStudents,
     classEightStudents,
@@ -145,7 +159,7 @@ router.post('/add/student', adminIsLoggedIn, (req, res) => {
         return res.redirect('/admin/all/students');
       }
 
-      const existingStudent = await studentModel.findOne({ student_roll });
+      const existingStudent = await sixTHStudentModel.findOne({ student_roll });
       if (existingStudent) {
         req.flash('error', 'This roll already exists!');
         return res.redirect('/admin/all/students');
@@ -153,7 +167,23 @@ router.post('/add/student', adminIsLoggedIn, (req, res) => {
 
       const student_photo = req.file ? `/temp/students-photo/${req.file.filename}` : null;
 
-      const newStudent = await studentModel.create({
+      let StudentModel = null;
+      if (student_class === '6') {
+        StudentModel = sixTHStudentModel;
+      } else if (student_class === '7') {
+        StudentModel = sevenTHStudentModel;
+      } else if (student_class === '8') {
+        StudentModel = eightTHStudentModel;
+      } else if (student_class === '9') {
+        StudentModel = nineTHStudentModel;
+      } else if (student_class === '10') {
+        StudentModel = tenTHStudentModel;
+      } else {
+        req.flash('error', 'Invalid class!');
+        return res.redirect('/admin/all/students');
+      }
+
+      const newStudent = await StudentModel.create({
         student_photo,
         student_name,
         student_roll,
@@ -172,23 +202,23 @@ router.post('/add/student', adminIsLoggedIn, (req, res) => {
   });
 });
 
-router.get('/student/details/:id', adminIsLoggedIn, async (req, res) => {
+router.get('/class/six/student/details/:id', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  const student = await studentModel.findOne({ _id: req.params.id });
-  res.render('studentDetails', { isLoggedIn, student });
+  const classSixStudent = await sixTHStudentModel.findOne({ _id: req.params.id });
+  res.render('classSixstudentDetails', { isLoggedIn, classSixStudent });
 })
 
-router.get('/student/delete/:id', adminIsLoggedIn, async (req, res) => {
+router.get('/class/six/student/delete/:id', adminIsLoggedIn, async (req, res) => {
   try {
-    const student = await studentModel.findById(req.params.id);
+    const classSixStudent = await sixTHStudentModel.findById(req.params.id);
 
-    if (!student) {
+    if (!classSixStudent) {
       req.flash('error', 'Student not found!');
       return res.redirect('/admin/all/students');
     }
 
-    if (student.student_photo) {
-      const studentPhotoPath = path.join(__dirname, '..', 'public', student.student_photo);
+    if (classSixStudent.student_photo) {
+      const studentPhotoPath = path.join(__dirname, '..', 'public', classSixStudent.student_photo);
 
       try {
         await fs.promises.unlink(studentPhotoPath);
@@ -197,9 +227,9 @@ router.get('/student/delete/:id', adminIsLoggedIn, async (req, res) => {
       }
     }
 
-    await studentModel.findByIdAndDelete(req.params.id);
+    await sixTHStudentModel.findByIdAndDelete(req.params.id);
 
-    req.flash('success', `${student.student_name} has been deleted.`);
+    req.flash('success', `${classSixStudent.student_name} has been deleted.`);
     return res.redirect('/admin/all/students');
   } catch (error) {
     dbgr(`Error deleting student: ${error.message}`);
@@ -207,7 +237,6 @@ router.get('/student/delete/:id', adminIsLoggedIn, async (req, res) => {
     return res.redirect('/admin/all/students');
   }
 });
-
 router.get('/all/teachers', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
   const teachers = await teacherModel.getAllTeachers();

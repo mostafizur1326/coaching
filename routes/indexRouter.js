@@ -5,9 +5,9 @@ const { isLoggedIn } = require("../middlewares/isLoggedIn");
 
 const adminModel = require('../models/admin-model');
 const postModel = require('../models/post-model');
-const studentModel = require('../models/student-model');
+const sixTHStudentSchema = require('../models/class-six-student-model');
 
-
+const dbgr = require('debug')('app: app');
 
 
 router.get('/', (req, res) => {
@@ -25,7 +25,7 @@ router.get('/payment/class', isLoggedIn, (req, res) => {
   res.render('selectClassFees', { isLoggedIn });
 })
 
-router.get('/payment/class/six', isLoggedIn, async (req, res) => {
+/*router.get('/payment/class/six', isLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
   return res.render('classSixFindFee', { isLoggedIn });
 })
@@ -42,7 +42,6 @@ router.post('/payment/class/six/find/fee', isLoggedIn, async (req, res) => {
       req.flash('error', 'Student not found!');
       return res.redirect('/payment/class/six');
     }
-    console.log(findStudent)
     return res.render('classSixFee', { findStudent });
   } catch (error) {
     req.flash('error', 'Something went wrong!');
@@ -51,10 +50,39 @@ router.post('/payment/class/six/find/fee', isLoggedIn, async (req, res) => {
   }
 });
 
-router.get('/payment/class/seven', isLoggedIn, (req, res) => {
-  const isLoggedIn = req.cookies.token;
-  res.render('fees', { isLoggedIn });
+router.get('/payment/class/six/find/fee/pay', isLoggedIn, async (req, res) => {
+  res.render('classSixPaymentFees')
 })
+
+router.get('/payment/class/seven', isLoggedIn, async (req, res) => {
+  const isLoggedIn = req.cookies.token;
+  return res.render('classSevenFindFee', { isLoggedIn });
+})
+
+router.post('/payment/class/seven/find/fee', isLoggedIn, async (req, res) => {
+  try {
+    const { name, roll } = req.body;
+    const students = await studentModel.getAllStudents();
+
+    let classSevenStudents = students.filter(student => student.student_class === '7');
+    let findStudent = classSevenStudents.find(student => student.student_roll === roll && student.student_name === name);
+
+    if (!findStudent) {
+      req.flash('error', 'Student not found!');
+      return res.redirect('/payment/class/seven');
+    }
+    return res.render('classSevenFee', { findStudent });
+  } catch (error) {
+    req.flash('error', 'Something went wrong!');
+    dbgr('Class seven find fee error:', error.message);
+    return res.redirect('/payment/class/seven');
+  }
+});
+
+router.get('/payment/class/seven/find/fee/pay', isLoggedIn, async (req, res) => {
+  res.render('classSevenPaymentFees')
+})
+*/
 
 router.get('/payment/class/eight', isLoggedIn, (req, res) => {
   const isLoggedIn = req.cookies.token;
