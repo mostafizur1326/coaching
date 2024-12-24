@@ -19,7 +19,7 @@
   <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css' rel='stylesheet'>
   <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-  <title>STEC | Result</title>
+  <title>STEC | Find Fee</title>
 </head>
 
 <body class="w-full h-full bg-[#F5FAFF] tracking-tighter">
@@ -40,40 +40,42 @@
       
       <!-- Back Button -->
         <div class="absolute top-24 left-4 md:ml-20 z-[999]">
-          <a href="/student/class" class="inline-flex items-center text-blue-600 bg-blue-100 px-4 py-1 pr-6 hover:bg-blue-200 rounded-lg">
+          <a href="/payment/class" class="inline-flex items-center text-blue-600 bg-blue-100 px-4 py-1 pr-6 hover:bg-blue-200 rounded-lg">
             <i class="bx bx-left-arrow-alt text-xl mr-2 mt-1"></i> Back
           </a>
         </div>
       
-      <!--===== STUDENTS_RESULT_FOEM =====-->
+      <!--===== STUDENTS_SCHOOL_FEES_PAYMENT_FOEM =====-->
       
       <section class="font-cy w-full min-h-screen flex flex-col items-center justify-center p-8">
-        <div class="w-full flex flex-col items-center justify-center mt-28">
+        
+        <form action="/payment/class/six/find/fee" method="POST"  class="w-full flex flex-col items-center justify-center mt-36">
           <h2 class="text-center text-3xl font-bold mb-8 text-gray-700 flex items-center gap-2 justify-center">
-            <i class='bx bxs-face'></i> Result Form
+            Find Your School Fees <i class="fas fa-coins"></i>
           </h2>
-          
-          <div class="space-y-4 w-full md:w-1/2">
-            <form action="/student/class/ten/result" method="POST">
-              <div class="relative flex">
-                <input type="name" name="name" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Name" required>
-                <i class="fas fa-envelope input-icon"></i>
-              </div>
-            
+            <div class="space-y-4 w-full md:w-1/2">
               <div class="relative">
-                <input type="number" name="roll" class="w-full py-2 pl-4 pr-10 mt-4 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="roll" required>
-                <i class="bi bi-123 mt-2 input-icon"></i>
+                <input type="text" name="name" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="Name" required>
+                <i class="fa fa-user input-icon"></i>
               </div>
-              
-              <button type="submit" class="w-full py-2 mt-12 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
+  
+              <div class="relative">
+                <input type="number" name="roll" class="w-full py-2 pl-4 pr-10 border-b-2 border-zinc-500 rounded-md focus:outline-none bg-transparent input-field" placeholder="roll" required>
+                <i class="bi bi-123 input-icon"></i>
+              </div>
+            </div>
+          
+            <button type="submit" class="w-full md:w-1/2 py-2 mt-8 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">Submit</button>
+        </form>
+        
+          <a href="/payment/class/six/fee/send">
+           <button class="w-full py-2 mt-8 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+            Pay Fees
+           </button>
+          </a>
       </section>
     </section>
-     
+    
     <!--====== FOOTER =====-->
     
     <footer class="relative font-cy w-full bg-blue-700 text-white py-8">
@@ -88,7 +90,7 @@
         
         <div class="text-center text-sm mb-6 px-4 sm:px-6 lg:px-8">
           <p>STEC - Excellence in Coaching</p>
-          <p>name: <a href="mailto:swapnotoryeducare@gmail.com" class="hover:text-gray-300">swapnotoryeducare@gmail.com</a> | Phone: <a href="tel:+8801896434842" class="hover:text-gray-300">+8801896434842</a></p>
+          <p>Email: <a href="mailto:swapnotoryeducare@gmail.com" class="hover:text-gray-300">swapnotoryeducare@gmail.com</a> | Phone: <a href="tel:+8801896434842" class="hover:text-gray-300">+8801896434842</a></p>
           <p class="w-full relative top-12">© 2025 STEC. All rights reserved.</p>
         </div>
       </div>

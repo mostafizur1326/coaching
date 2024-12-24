@@ -47,6 +47,7 @@ router.get('/class/six/result/download-pdf/:id', async (req, res) => {
     const result = await classSixResultModel.findById(resultId);
     if (!result) {
       return req.flash('error', 'Result not found!');
+      return res.redirect('/student/class/six');
     }
 
     const doc = new PDFDocument();
@@ -150,6 +151,7 @@ router.get('/class/seven/result/download-pdf/:id', async (req, res) => {
     const result = await classSevenResultModel.findById(resultId);
     if (!result) {
       return req.flash('error', 'Result not found!');
+      return res.redirect('/student/class/seven');
     }
 
     const doc = new PDFDocument();
@@ -253,6 +255,7 @@ router.get('/class/eight/result/download-pdf/:id', async (req, res) => {
     const result = await classEightResultModel.findById(resultId);
     if (!result) {
       return req.flash('error', 'Result not found!');
+      return res.redirect('/student/class/eight');
     }
 
     const doc = new PDFDocument();

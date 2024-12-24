@@ -29,7 +29,11 @@
         <a href="/admin/student/delete/<%= student._id %>" class="absolute right-2 top-0 text-red-700 hover:bg-red-50 text-xl px-2 py-2 rounded-lg">
           <i class="bx bx-trash"></i>
         </a>
-        <img src="<%= student.student_photo  %>" alt="Student's Photo" class="w-32 h-32 rounded-full mb-4 object-cover m-auto">
+        <% if (!student.student_photo) {%>
+          <img src="/images/default.jpeg" alt="Not found" class="w-32 h-32 rounded-full mb-4 object-cover m-auto">
+        <% } else {%>
+          <img src="<%= student.student_photo  %>" alt="Not found" class="w-32 h-32 rounded-full mb-4 object-cover m-auto">
+        <% } %>
         <h1 class="text-2xl font-bold text-gray-800 mb-2"><%= student.student_name %></h1>
         <p class="text-lg text-gray-600 mb-2">Roll: <%= student.student_roll %></p>
         <p class="text-lg text-gray-600 mb-2">Class: <%= student.student_class %></p>

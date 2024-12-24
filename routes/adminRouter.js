@@ -140,18 +140,21 @@ router.post('/add/student', adminIsLoggedIn, (req, res) => {
     try {
       const { student_name, student_roll, student_class, student_fee, student_contact } = req.body;
 
-      if (!req.file) {
-        req.flash('error', 'Student photo is required!');
-        return res.redirect('/admin/all/students');
-      }
       if (!student_name || !student_roll || !student_class || !student_fee || !student_contact) {
         req.flash('error', 'All fields are required!');
         return res.redirect('/admin/all/students');
       }
 
-      console.log(student_name + ' | ' + student_roll + ' | ' + student_class + ' | ' + student_fee + ' | ' + student_contact + ' | ' + req.file)
+      const existingStudent = await studentModel.findOne({ student_roll });
+      if (existingStudent) {
+        req.flash('error', 'This roll already exists!');
+        return res.redirect('/admin/all/students');
+      }
+
+      const student_photo = req.file ? `/temp/students-photo/${req.file.filename}` : null;
+
       const newStudent = await studentModel.create({
-        student_photo: `/temp/students-photo/${req.file.filename}`,
+        student_photo,
         student_name,
         student_roll,
         student_class,
@@ -184,15 +187,22 @@ router.get('/student/delete/:id', adminIsLoggedIn, async (req, res) => {
       return res.redirect('/admin/all/students');
     }
 
-    const studentPhotoPath = path.join(__dirname, '..', 'public', student.student_photo);
+    if (student.student_photo) {
+      const studentPhotoPath = path.join(__dirname, '..', 'public', student.student_photo);
 
-    await fs.promises.unlink(studentPhotoPath);
+      try {
+        await fs.promises.unlink(studentPhotoPath);
+      } catch (fileError) {
+        dbgr(`Failed to delete student photo: ${fileError.message}`);
+      }
+    }
 
     await studentModel.findByIdAndDelete(req.params.id);
 
     req.flash('success', `${student.student_name} has been deleted.`);
     return res.redirect('/admin/all/students');
   } catch (error) {
+    dbgr(`Error deleting student: ${error.message}`);
     req.flash('error', 'Something went wrong. Please try again.');
     return res.redirect('/admin/all/students');
   }

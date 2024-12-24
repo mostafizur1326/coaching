@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const addStudentSchema = new mongoose.Schema({
   student_photo: {
-    type: String,
+    type: String
   },
   student_name: {
     type: String,
@@ -12,6 +12,7 @@ const addStudentSchema = new mongoose.Schema({
   },
   student_roll: {
     type: String,
+    unique: true
   },
   student_fee: {
     type: String,
