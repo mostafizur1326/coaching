@@ -23,6 +23,9 @@ const eightTHPaymentSchema = new mongoose.Schema({
   sending_number: {
     type: Number
   },
+  sending_Amount: {
+  type: Number
+},
   transection_id: {
     type: String,
     unique: true

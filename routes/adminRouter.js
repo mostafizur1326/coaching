@@ -22,16 +22,24 @@ const { adminIsLoggedIn } = require("../middlewares/isLoggedIn");
 const adminModel = require('../models/admin-model');
 const postModel = require('../models/post-model');
 const teacherModel = require('../models/teacher-model');
+
 const sixTHStudentModel = require('../models/class-six-student-model');
 const sevenTHStudentModel = require('../models/class-seven-student-model');
 const eightTHStudentModel = require('../models/class-eight-student-model');
 const nineTHStudentModel = require('../models/class-nine-student-model');
 const tenTHStudentModel = require('../models/class-ten-student-model');
+
 const classSixResultModel = require('../models/class-six-result-model');
 const classSevenResultModel = require('../models/class-seven-result-model');
 const classEightResultModel = require('../models/class-eight-result-model');
 const classNineResultModel = require('../models/class-nine-result-model');
 const classTenResultModel = require('../models/class-ten-result-model');
+
+const sixTHPaymentModel = require('../models/class-six-payment-model');
+const sevenTHPaymentModel = require('../models/class-seven-payment-model');
+const eightTHPaymentModel = require('../models/class-eight-payment-model');
+const nineTHPaymentModel = require('../models/class-nine-payment-model');
+const tenTHPaymentModel = require('../models/class-ten-payment-model');
 
 const dbgr = require('debug')('app: app');
 
@@ -107,26 +115,26 @@ router.get('/dashboard', adminIsLoggedIn, async (req, res) => {
   const classEightStudents = await eightTHStudentModel.getAllEightTHStudents();
   const classNineStudents = await nineTHStudentModel.getAllNineTHStudents();
   const classTenStudents = await tenTHStudentModel.getAllTenTHStudents();
-  
-  let totalStudents = classSixStudents.length + 
-                      classSevenStudents.length +
-                      classEightStudents.length +
-                      classNineStudents.length +
-                      classTenStudents.length
-  
+
+  let totalStudents = classSixStudents.length +
+    classSevenStudents.length +
+    classEightStudents.length +
+    classNineStudents.length +
+    classTenStudents.length
+
   const teachers = await teacherModel.getAllTeachers();
   res.render('dashboard', { isLoggedIn, totalStudents, teachers });
 })
 
 router.get('/all/students', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  
+
   const classSixStudents = await sixTHStudentModel.getAllSixTHStudents();
   const classSevenStudents = await sevenTHStudentModel.getAllSevenTHStudents();
   const classEightStudents = await eightTHStudentModel.getAllEightTHStudents();
   const classNineStudents = await nineTHStudentModel.getAllNineTHStudents();
   const classTenStudents = await tenTHStudentModel.getAllTenTHStudents();
-  
+
 
   res.render('allStudents', {
     isLoggedIn,
@@ -158,7 +166,7 @@ router.post('/add/student', adminIsLoggedIn, (req, res) => {
         req.flash('error', 'All fields are required!');
         return res.redirect('/admin/all/students');
       }
-      
+
       const student_photo = req.file ? `/temp/students-photo/${req.file.filename}` : null;
 
       if (student_class === '6') {
@@ -505,8 +513,105 @@ router.get('/teacher/details/:id', adminIsLoggedIn, async (req, res) => {
 
 router.get('/fees/management', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('feesManagement', { isLoggedIn });
+
+  const classSixPayments = await sixTHPaymentModel.getAllSixTHPayments();
+  const classSevenPayments = await sevenTHPaymentModel.getAllSevenTHPayments();
+  const classEightPayments = await eightTHPaymentModel.getAllEightTHPayments();
+  const classNinePayments = await nineTHPaymentModel.getAllNineTHPayments();
+  const classTenPayments = await tenTHPaymentModel.getAllTenTHPayments();
+
+
+  let classSixPendingPayments = classSixPayments.filter(pendingPayments => pendingPayments.status === 'pending');
+  let classSixApprovedPayments = classSixPayments.filter(approvedPayments => approvedPayments.status === 'approved');
+  let classSixRejectedPayments = classSixPayments.filter(rejectedPayments => rejectedPayments.status === 'rejected');
+
+  let classSevenPendingPayments = classSevenPayments.filter(pendingPayments => pendingPayments.status === 'pending');
+  let classSevenApprovedPayments = classSevenPayments.filter(approvedPayments => approvedPayments.status === 'approved');
+  let classSevenRejectedPayments = classSevenPayments.filter(rejectedPayments => rejectedPayments.status === 'rejected');
+
+  let classEightPendingPayments = classEightPayments.filter(pendingPayments => pendingPayments.status === 'pending');
+  let classEightApprovedPayments = classEightPayments.filter(approvedPayments => approvedPayments.status === 'approved');
+  let classEightRejectedPayments = classEightPayments.filter(rejectedPayments => rejectedPayments.status === 'rejected');
+
+  let classNinePendingPayments = classNinePayments.filter(pendingPayments => pendingPayments.status === 'pending');
+  let classNineApprovedPayments = classNinePayments.filter(approvedPayments => approvedPayments.status === 'approved');
+  let classNineRejectedPayments = classNinePayments.filter(rejectedPayments => rejectedPayments.status === 'rejected');
+
+  let classTenPendingPayments = classTenPayments.filter(pendingPayments => pendingPayments.status === 'pending');
+  let classTenApprovedPayments = classTenPayments.filter(approvedPayments => approvedPayments.status === 'approved');
+  let classTenRejectedPayments = classTenPayments.filter(rejectedPayments => rejectedPayments.status === 'rejected');
+
+  const classSixPaymentsCollectionName = sixTHPaymentModel.collection.name;
+  const classSevenPaymentsCollectionName = sevenTHPaymentModel.collection.name;
+  const classEightPaymentsCollectionName = eightTHPaymentModel.collection.name;
+  const classNinePaymentsCollectionName = nineTHPaymentModel.collection.name;
+  const classTenPaymentsCollectionName = tenTHPaymentModel.collection.name;
+
+  res.render('feesManagement', {
+    isLoggedIn,
+    classSixPendingPayments,
+    classSixApprovedPayments,
+    classSixRejectedPayments,
+    classSevenPendingPayments,
+    classSevenApprovedPayments,
+    classSevenRejectedPayments,
+    classEightPendingPayments,
+    classEightApprovedPayments,
+    classEightRejectedPayments,
+    classNinePendingPayments,
+    classNineApprovedPayments,
+    classNineRejectedPayments,
+    classTenPendingPayments,
+    classTenApprovedPayments,
+    classTenRejectedPayments,
+    classSixPaymentsCollectionName,
+    classSevenPaymentsCollectionName,
+    classEightPaymentsCollectionName,
+    classNinePaymentsCollectionName,
+    classTenPaymentsCollectionName
+  });
 })
+
+router.get('/class/six/fee/details/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classSixPaymentDetails = await sixTHPaymentModel.findOneAndDelete({ _id: req.params.id });
+
+    if (!classSixPaymentDetails) {
+      req.flash('error', 'Payment details not found!');
+      return res.redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `The payment details for ${classSixPaymentDetails.student_name} has been completely deleted.`);
+    res.redirect('/admin/fees/management');
+  } catch (error) {
+    dbgr('Error during payment details deletion:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/six/fees/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+     let model;
+     if (mongoose.models[collectionName]) {
+       model = mongoose.models[collectionName];
+     } else {
+       model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+     }
+
+     await model.deleteMany({});
+
+    console.log(collectionName)
+
+    req.flash('success', 'All payments for Class 6 have been successfully deleted!');
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/fees/management');
+  }
+});
 
 router.get('/post/management', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
@@ -603,13 +708,13 @@ router.get('/post/delete/:id', adminIsLoggedIn, async (req, res) => {
 
 router.get('/result/management', adminIsLoggedIn, async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  
+
   const classSixResults = await classSixResultModel.getAllclassSixResults();
   const classSevenResults = await classSevenResultModel.getAllclassSevenResults();
   const classEightResults = await classEightResultModel.getAllclassEightResults();
   const classNineResults = await classNineResultModel.getAllclassNineResults();
   const classTenResults = await classTenResultModel.getAllclassTenResults();
-  
+
   const classSixCollectionName = classSixResultModel.collection.name;
   const classSevenCollectionName = classSevenResultModel.collection.name;
   const classEightCollectionName = classEightResultModel.collection.name;
@@ -618,13 +723,11 @@ router.get('/result/management', adminIsLoggedIn, async (req, res) => {
 
   res.render('resultManagement', {
     isLoggedIn,
-    
     classSixResults,
     classSevenResults,
     classEightResults,
     classNineResults,
     classTenResults,
-    
     classSixCollectionName,
     classSevenCollectionName,
     classEightCollectionName,

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 const { isLoggedIn } = require("../middlewares/isLoggedIn");
 
@@ -72,6 +73,7 @@ router.post('/payment/class/six/find/fee/pay/send', isLoggedIn, async (req, res)
       password,
       condition,
       payment_method,
+      sending_amount,
       sending_number,
       transection_id,
       condition2,
@@ -83,6 +85,7 @@ router.post('/payment/class/six/find/fee/pay/send', isLoggedIn, async (req, res)
       !password ||
       !condition ||
       !payment_method ||
+      !sending_amount ||
       !sending_number ||
       !transection_id ||
       !condition2
@@ -90,7 +93,7 @@ router.post('/payment/class/six/find/fee/pay/send', isLoggedIn, async (req, res)
       req.flash('error', 'All fields are required.');
       return res.status(201).redirect('/payment/class/six/find/fee/pay');
     }
-    
+
     const existingTransaction = await sixTHPaymentModel.findOne({ transection_id });
 
     if (existingTransaction) {
@@ -98,19 +101,22 @@ router.post('/payment/class/six/find/fee/pay/send', isLoggedIn, async (req, res)
       return res.status(201).redirect('/payment/class/six/find/fee/pay');
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newPayment = await sixTHPaymentModel.create({
       student_class: '6',
       student_name,
       email,
-      password,
+      password: hashedPassword,
       condition,
       payment_method,
+      sending_amount,
       sending_number,
       transection_id,
       condition2,
       status: 'pending',
     });
-    
+
     req.flash('success', 'Payment details submitted successfully.');
     return res.status(201).redirect('/payment/class/six');
   } catch (error) {
@@ -157,6 +163,7 @@ router.post('/payment/class/seven/find/fee/pay/send', isLoggedIn, async (req, re
       password,
       condition,
       payment_method,
+      sending_amount,
       sending_number,
       transection_id,
       condition2,
@@ -168,6 +175,7 @@ router.post('/payment/class/seven/find/fee/pay/send', isLoggedIn, async (req, re
       !password ||
       !condition ||
       !payment_method ||
+      !sending_amount ||
       !sending_number ||
       !transection_id ||
       !condition2
@@ -183,13 +191,16 @@ router.post('/payment/class/seven/find/fee/pay/send', isLoggedIn, async (req, re
       return res.status(201).redirect('/payment/class/seven/find/fee/pay');
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newPayment = await sevenTHPaymentModel.create({
       student_class: '7',
       student_name,
       email,
-      password,
+      password: hashedPassword,
       condition,
       payment_method,
+      sending_amount,
       sending_number,
       transection_id,
       condition2,
@@ -242,6 +253,7 @@ router.post('/payment/class/eight/find/fee/pay/send', isLoggedIn, async (req, re
       password,
       condition,
       payment_method,
+      sending_amount,
       sending_number,
       transection_id,
       condition2,
@@ -253,6 +265,7 @@ router.post('/payment/class/eight/find/fee/pay/send', isLoggedIn, async (req, re
       !password ||
       !condition ||
       !payment_method ||
+      !sending_amount ||
       !sending_number ||
       !transection_id ||
       !condition2
@@ -268,13 +281,16 @@ router.post('/payment/class/eight/find/fee/pay/send', isLoggedIn, async (req, re
       return res.status(201).redirect('/payment/class/eight/find/fee/pay');
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newPayment = await eightTHPaymentModel.create({
       student_class: '8',
       student_name,
       email,
-      password,
+      password: hashedPassword,
       condition,
       payment_method,
+      sending_amount,
       sending_number,
       transection_id,
       condition2,
@@ -327,6 +343,7 @@ router.post('/payment/class/nine/find/fee/pay/send', isLoggedIn, async (req, res
       password,
       condition,
       payment_method,
+      sending_amount,
       sending_number,
       transection_id,
       condition2,
@@ -338,6 +355,7 @@ router.post('/payment/class/nine/find/fee/pay/send', isLoggedIn, async (req, res
       !password ||
       !condition ||
       !payment_method ||
+      !sending_amount ||
       !sending_number ||
       !transection_id ||
       !condition2
@@ -353,13 +371,16 @@ router.post('/payment/class/nine/find/fee/pay/send', isLoggedIn, async (req, res
       return res.status(201).redirect('/payment/class/nine/find/fee/pay');
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newPayment = await nineTHPaymentModel.create({
       student_class: '9',
       student_name,
       email,
-      password,
+      password: hashedPassword,
       condition,
       payment_method,
+      sending_amount,
       sending_number,
       transection_id,
       condition2,
@@ -412,6 +433,7 @@ router.post('/payment/class/ten/find/fee/pay/send', isLoggedIn, async (req, res)
       password,
       condition,
       payment_method,
+      sending_amount,
       sending_number,
       transection_id,
       condition2,
@@ -423,6 +445,7 @@ router.post('/payment/class/ten/find/fee/pay/send', isLoggedIn, async (req, res)
       !password ||
       !condition ||
       !payment_method ||
+      !sending_amount ||
       !sending_number ||
       !transection_id ||
       !condition2
@@ -438,13 +461,16 @@ router.post('/payment/class/ten/find/fee/pay/send', isLoggedIn, async (req, res)
       return res.status(201).redirect('/payment/class/ten/find/fee/pay');
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newPayment = await tenTHPaymentModel.create({
       student_class: '10',
       student_name,
       email,
-      password,
+      password: hashedPassword,
       condition,
       payment_method,
+      sending_amount,
       sending_number,
       transection_id,
       condition2,

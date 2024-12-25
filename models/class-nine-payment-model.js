@@ -23,6 +23,9 @@ const nineTHPaymentSchema = new mongoose.Schema({
   sending_number: {
     type: Number
   },
+  sending_amount: {
+    type: Number
+  },
   transection_id: {
     type: String,
     unique: true
