@@ -26,6 +26,19 @@
   <main class="flex flex-col min-h-screen">
     <section class="flex-grow">
       
+      <div class="z-[9999] font-cy fixed top-0 left-1/2 transform -translate-x-1/2 w-[350px] bg-green-100 text-green-700 rounded-bl-lg rounded-br-lg shadow-md">
+        <% if (messages.success) { %>
+        <p class="p-4 text-center"><%= messages.success %></p>
+        <% } %>
+      </div>
+      
+      <div class="z-[9999] font-cy fixed top-0 left-1/2 transform -translate-x-1/2 w-[350px] bg-red-100 text-red-700 rounded-bl-lg rounded-br-lg shadow-md">
+        <% if (messages.error) { %>
+        <p class="p-4 text-center"><%= messages.error %></p>
+        <% } %>
+      </div>
+      
+      
       <!--===== PAYMENT_FOEM =====-->
   
       <section class="w-full font-cy max-w-4xl p-8 flex flex-col items-center justify-center min-h-screen mx-auto">
@@ -92,9 +105,9 @@
                 <label for="payment_method" class="block text-sm font-medium text-zinc-700">Payment Method</label>
                 <select id="payment_method" name="payment_method" class="mt-1 p-3 w-full opacity-50 border border-zinc-500 rounded-md appearance-none bg-transparent" required>
                   <option>Payment Method</option>
-                  <option value="male">BKash</option>
-                  <option value="female">Nagad</option>
-                  <option value="other">Upay</option>
+                  <option value="BKash">BKash</option>
+                  <option value="Nagad">Nagad</option>
+                  <option value="Upay">Upay</option>
                 </select>
                 <i class="bx bx-credit-card absolute top-12 right-3 transform -translate-y-1/2 text-zinc-500"></i>
               </div>
