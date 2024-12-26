@@ -25,10 +25,9 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     const extension = path.extname(file.originalname).toLowerCase();
     if (extension !== ".xlsx") {
-      cb(new Error("Invalid file type. Only .xlsx files are allowed."));
-    } else {
-      cb(null, true);
+      return cb(new Error("Invalid file type. Only .xlsx files are allowed."), false);
     }
+    cb(null, true);
   },
 }).single("class_six_result");
 
@@ -61,6 +60,16 @@ const handleFileUpload = (req, res) => {
       }
 
       for (let row of data) {
+        // Check if the roll already exists in the database
+        const existingRecord = await classSixResultModel.findOne({ roll: row["Roll"] });
+        if (existingRecord) {
+          // If roll already exists, delete the uploaded file and show error message
+          fs.unlinkSync(file.path);
+          req.flash("error", `Roll ${row["Roll"]} already exists. Please update the record instead of uploading again.`);
+          return res.redirect("/admin/result/management"); // Stop the file upload if roll exists
+        }
+
+        // If roll does not exist, create the new record
         await classSixResultModel.create({
           name: row["Name"],
           roll: row["Roll"],

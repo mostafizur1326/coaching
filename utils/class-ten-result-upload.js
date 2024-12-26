@@ -61,6 +61,16 @@ const handleFileUpload = (req, res) => {
       }
 
       for (let row of data) {
+        // Check if the roll already exists
+        const existingRecord = await classTenResultModel.findOne({ roll: row["Roll"] });
+        if (existingRecord) {
+          // Delete the file if the roll already exists
+          fs.unlinkSync(file.path);
+
+          req.flash("error", `Roll ${row["Roll"]} already exists. Please update the record instead of uploading again.`);
+          return res.redirect("/admin/result/management");
+        }
+
         await classTenResultModel.create({
           name: row["Name"],
           roll: row["Roll"],

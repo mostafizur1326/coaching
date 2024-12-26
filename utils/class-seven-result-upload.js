@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const extension = path.extname(file.originalname).toLowerCase();
     if (extension !== ".xlsx") {
@@ -61,6 +61,13 @@ const handleFileUpload = (req, res) => {
       }
 
       for (let row of data) {
+        const existingRecord = await classSevenResultModel.findOne({ roll: row["Roll"] });
+        if (existingRecord) {
+          req.flash("error", `Roll ${row["Roll"]} already exists.`);
+          fs.unlinkSync(file.path);
+          return res.redirect("/admin/result/management");
+        }
+
         await classSevenResultModel.create({
           name: row["Name"],
           roll: row["Roll"],

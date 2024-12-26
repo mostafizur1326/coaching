@@ -189,9 +189,6 @@
               Access important updates about upcoming exams, schedules, and results. Stay informed and prepared for success.
             </p>
             <div class="flex space-x-4">
-              <a href="#schedule" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition">
-                View Exam Schedule
-              </a>
               <a href="/student/class" class="bg-blue-100 hover:bg-blue-200 border border-blue-600 text-blue-600 font-semibold py-3 px-6 rounded-lg transition">
                 Check Results
               </a>
@@ -206,7 +203,7 @@
         <h1 class="text-3xl font-semibold mb-4 flex items-center justify-center">
           <div class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" id="profileButton">
                 <i class="bx bx-user-circle text-4xl text-black absolute flex items-center justify-center overflow-hidden">
-                  <img src="" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">
+                  <img src="/images/coach.jpg" class="w-full h-full object-cover absolute flex items-center justify-cente rounded-full">
                 </i>
           </div>
            Coaching Director
@@ -215,188 +212,6 @@
           Dear students,  
           Exams are not just tests of knowledge but also tests of patience, discipline, and hard work. Prepare well, keep faith in yourself, and success will follow. We are here to support and guide you at every step.
         </p>
-      </section>
-      
-      <!--===== EXAM_SCHEDULE_TAPBER_SECTION =====-->
-      
-      <section id="schedule" class="font-cy max-w-7xl mx-auto px-4 mt-8">
-        <div class="flex justify-center mt-28 mb-20 space-x-8">
-            <button id="tab1" class="tab-btn text-md text-blue-800 font-semibold">Exam Schedule</button>
-            <button id="tab2" class="tab-btn text-md text-blue-800 font-semibold">Exam Guidelines</button>
-            <button id="tab3" class="tab-btn text-md text-blue-800 font-semibold">Exam Subjects</button>
-        </div>
-       </section>
-       
-       <!--===== EXAM_SCHEDULE_SECTION =====-->
-
-       <section class="font-cy max-w-7xl mx-auto px-4 mt-8">
-        <!-- Exam Schedule -->
-         <div id="content1" class="tab-content">
-          <h2 class="text-2xl font-semibold text-center text-blue-800 mb-6">Exam Schedule</h2>
-          <table class="min-w-full table-auto bg-blue- shadow-lg rounded-lg text-sm">
-            <thead>
-              <tr class="bg-blue-200">
-                <th class="px-6 py-4 text-left">Date</th>
-                <th class="px-6 py-4 text-left">Time</th>
-                <th class="px-6 py-4 text-left">Subject</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-t">
-                <td class="px-6 py-4">November 20, 2024</td>
-                <td class="px-6 py-4">10:00 AM - 12:00 PM</td>
-                <td class="px-6 py-4">Bangla</td>
-                </tr>
-                <tr class="border-t">
-                  <td class="px-6 py-4">November 21, 2024</td>
-                  <td class="px-6 py-4">10:00 AM - 12:00 PM</td>
-                 <td class="px-6 py-4">Mathematics</td>
-               </tr>
-               <tr class="border-t">
-                 <td class="px-6 py-4">November 22, 2024</td>
-                 <td class="px-6 py-4">10:00 AM - 12:00 PM</td>
-                 <td class="px-6 py-4">English</td>
-               </tr>
-             </tbody>
-          </table>
-          <div class="flex items-center justify-center">
-            <a href="#" class="px-4 py-2 bg-blue-600 rounded-md hover:bg-blue-700 text-white mt-4">Download PDF</a>
-          </div>
-        </div>
-
-        <!-- Exam Guidelines -->
-          <div id="content2" class="tab-content p-10">
-            <h2 class="text-2xl font-semibold text-center text-blue-800 mb-6">Exam Guidelines</h2>
-            <ul class="list-decimal list-inside space-y-2 text-lg">
-                <li>Be present on time before the exam starts.</li>
-                <li>Bringing mobile phones inside the exam hall is prohibited.</li>
-                <li>Check all papers and documents before the exam begins.</li>
-            </ul>
-        </div>
-
-        <!-- Exam Subjects -->
-          <div id="content3" class="tab-content p-10">
-            <h2 class="text-2xl font-semibold text-center text-blue-800 mb-6">Exam Subjects</h2>
-            <ul class="list-decimal list-inside space-y-2 text-lg">
-                <li>Bangla</li>
-                <li>Mathematics</li>
-                <li>English</li>
-                <li>Science</li>
-                <li>Social Science</li>
-            </ul>
-        </div>
-       </section>
-      
-      <!--===== STUDENTS_DAILY_TIMETABLE_SECTION =====-->
-      
-      <section class="font-cy mt-20 mb-10 max-w-5xl mx-auto mt-12 px-6">
-        <h2 class="text-2xl font-semibold mb-6 text-center">Daily Timetable</h2>
-        <div class="space-y-4" id="class-container">
-          <!-- Class Six -->
-          <div class="bg-red-100 rounded-lg shadow-md p-6 border border-gray-200 transition-all duration-300">
-            <div class="flex justify-between items-center">
-              <p class="text-md font-medium">Class Six</p>
-              <button class="toggle-btn p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300" data-target="six-info">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-            </div>
-            <div id="six-info" class="hidden-content overflow-hidden max-h-0 transition-all duration-500">
-              <div class="mt-4 bg-red-200 p-4 rounded-md">
-                <p>1. Make a habit of studying regularly and focus on understanding key concepts from your textbooks.</p>
-                <p>2. Practice math problems daily and work on basic scientific concepts for better understanding.</p>
-                <p>3. Revise grammar rules in Bengali and English, and practice writing regularly.</p>
-                <p>4. Review important facts in Social Studies and Science, and make short notes for revision.</p>
-                <p>5. Take breaks and ensure you're eating healthy for better concentration.</p>
-              </div>
-            </div>
-          </div>
-      
-          <!-- Class Seven -->
-          <div class="bg-blue-100 rounded-lg shadow-md p-6 border border-gray-200 transition-all duration-300">
-            <div class="flex justify-between items-center">
-              <p class="text-md font-medium">Class Seven</p>
-              <button class="toggle-btn p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300" data-target="seven-info">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-            </div>
-            <div id="seven-info" class="hidden-content overflow-hidden max-h-0 transition-all duration-500">
-              <div class="mt-4 bg-blue-200 p-4 rounded-md">
-                <p>1. Create a study schedule and allocate time for each subject.</p>
-                <p>2. Practice math problems consistently and focus on understanding key scientific principles.</p>
-                <p>3. Read important stories and poems from English and Bengali literature.</p>
-                <p>4. Revisit maps and key data in Social Studies and Science to strengthen your memory.</p>
-                <p>5. Practice old question papers to understand exam patterns and improve time management.</p>
-              </div>
-            </div>
-          </div>
-      
-          <!-- Class Eight -->
-          <div class="bg-orange-100 rounded-lg shadow-md p-6 border border-gray-200 transition-all duration-300">
-            <div class="flex justify-between items-center">
-              <p class="text-md font-medium">Class Eight</p>
-              <button class="toggle-btn p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300" data-target="eight-info">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-            </div>
-            <div id="eight-info" class="hidden-content overflow-hidden max-h-0 transition-all duration-500">
-              <div class="mt-4 bg-orange-200 p-4 rounded-md">
-                <p>1. Dedicate extra time to practice math and science problems every day.</p>
-                <p>2. Focus on studying maps and important events in History and Geography.</p>
-                <p>3. Regularly practice writing compositions in both Bengali and English.</p>
-                <p>4. Identify areas where you're weak and spend more time improving them.</p>
-                <p>5. Organize revision sessions before exams and review important concepts.</p>
-              </div>
-            </div>
-          </div>
-      
-          <!-- Class Nine -->
-          <div class="bg-yellow-100 rounded-lg shadow-md p-6 border border-gray-200 transition-all duration-300">
-            <div class="flex justify-between items-center">
-              <p class="text-md font-medium">Class Nine</p>
-              <button class="toggle-btn p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300" data-target="nine-info">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-            </div>
-            <div id="nine-info" class="hidden-content overflow-hidden max-h-0 transition-all duration-500">
-              <div class="mt-4 bg-yellow-200 p-4 rounded-md">
-                <p>1. Understand your entire syllabus before starting to study and create a study plan.</p>
-                <p>2. Revise key formulas, rules, and concepts in science subjects regularly.</p>
-                <p>3. Focus on solving math problems faster and more accurately with practice.</p>
-                <p>4. Review dates, events, and important topics in History, Geography, and Literature.</p>
-                <p>5. Take mock tests and solve previous year’s question papers for better preparation.</p>
-              </div>
-            </div>
-          </div>
-      
-          <!-- Class Ten -->
-          <div class="bg-blue-200 rounded-lg shadow-md p-6 border border-gray-200 transition-all duration-300">
-            <div class="flex justify-between items-center">
-              <p class="text-md font-medium">Class Ten</p>
-              <button class="toggle-btn p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300" data-target="ten-info">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-            </div>
-            <div id="ten-info" class="hidden-content overflow-hidden max-h-0 transition-all duration-500">
-              <div class="mt-4 bg-blue-300 p-4 rounded-md">
-                <p>1. Identify important topics from your syllabus and prioritize them during your study sessions.</p>
-                <p>2. Memorize and practice key formulas and equations in Math, Physics, and Chemistry.</p>
-                <p>3. Practice writing essays and compositions in English and Bengali regularly.</p>
-                <p>4. Keep your confidence high and ensure proper diet and rest for peak performance.</p>
-                <p>5. Focus on revision using previous question papers and practice tests before the exam.</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
     
       <!--===== STUDENTS_MOTIVATIONAL_TEXT_SECTION =====-->
@@ -440,7 +255,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
-  <script src="/javascripts/exam.js"></script>
   <script src="/javascripts/navberAnimation.js"></script>
 </body>
 

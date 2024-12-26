@@ -61,6 +61,13 @@ const handleFileUpload = (req, res) => {
       }
 
       for (let row of data) {
+        const existingRecord = await classEightResultModel.findOne({ roll: row["Roll"] });
+        if (existingRecord) {
+          req.flash("error", `Roll ${row["Roll"]} already exists.`);
+          fs.unlinkSync(file.path);
+          return res.redirect("/admin/result/management");
+        }
+
         await classEightResultModel.create({
           name: row["Name"],
           roll: row["Roll"],

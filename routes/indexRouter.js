@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const { isLoggedIn } = require("../middlewares/isLoggedIn");
 
 const adminModel = require('../models/admin-model');
+const teacherModel = require('../models/teacher-model');
 const postModel = require('../models/post-model');
 
 const sixTHStudentModel = require('../models/class-six-student-model');
@@ -27,9 +28,10 @@ router.get('/', (req, res) => {
   res.render('index', { isLoggedIn });
 });
 
-router.get('/about', (req, res) => {
+router.get('/about', async (req, res) => {
   const isLoggedIn = req.cookies.token;
-  res.render('about', { isLoggedIn });
+  const teachers = await teacherModel.getAllTeachers();
+  res.render('about', { isLoggedIn, teachers });
 });
 
 router.get('/payment/class', isLoggedIn, (req, res) => {

@@ -197,14 +197,13 @@
               <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
             </div>
             
-              <div class="tab-bar-sub-tab-content mt-4">
+            <div class="tab-bar-sub-tab-content mt-4">
+                <% if (classSixPendingPayments.length > 0){ %>
+                <h6 class="mt-4 text-[12px]">
+                  <span class="text-zinc-500">Class 6 Status: </span><span class="text-yellow-600">Pending</span>
+                </h6>
                 <!-- Class 6 - Pending Status -->
                 <div id="class6" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <% if (classSixPendingPayments.length > 0){ %>
-                    <a href="/admin/class/six/fees/delete/all/<%= classSixPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >All Delete</a>
-                    <h6 class="text-[12px]">
-                      <span class="text-zinc-500">Class 6 Status: </span><span class="text-yellow-600">Pending</span>
-                    </h6>
                     <% classSixPendingPayments.forEach(details => { %>
                       <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
                         <a href="/admin/class/six/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200"><i class="bx bx-trash text-lg"></i ></a>
@@ -216,95 +215,84 @@
                         <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
                         <p class="status text-black">Status: <span class="text-yellow-500"><%= details.status %></span></p>
                         <div class="buttons flex space-x-4 mt-4">
-                          <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                          <a href="/admin/class/six/fee/status/approved/<%= details._id %>" class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
                             <i class="fas fa-check mr-2"></i>Approve
-                          </button>
-                          <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                          </a>
+                          <a href="/admin/class/six/fee/status/rejected/<%= details._id %>" class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
                             <i class="fas fa-times mr-2"></i>Reject
-                          </button>
+                          </a>
                         </div>
                       </div>
                   <% }) %>
-                  <% } else {%>
+                </div>
+                <a href="/admin/class/six/fees/delete/all/<%= classSixPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >Delete all payment data for class six.</a>
+                <% } else {%>
                     <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
                   <% } %>
-                </div>
               </div>
+              
             <div class="tab-bar-sub-tab-content mt-4 hidden">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 6 Status: </span><span class="text-green-600">Approved</span></h6>
-              <!-- Class 6 - Approved Status -->
-              <div id="class6" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student C</h2>
-                  <p class="text-gray-600">Class: 6</p>
-                  <p class="text-gray-600">Paid: ৳6000</p>
-                  <p class="text-gray-600">Due: ৳3000</p>
-                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
+              <% if (classSixApprovedPayments.length > 0){ %>
+                <h6 class="mt-4 text-[12px]"><span class="text-zinc-500">Class 6 Status: </span><span class="text-green-600">Approved</span></h6>
+                <!-- Class 6 - Approved Status -->
+                <div id="class6" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <% classSixApprovedPayments.forEach(details => { %>
+                        <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                          <a href="/admin/class/six/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200"><i class="bx bx-trash text-lg"></i ></a>
+                          <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                          <p class="text-gray-600">Class: <%= details.student_class %></p>
+                          <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                          <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                          <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                          <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                          <p class="status text-black">Status: <span class="text-green-500"><%= details.status %></span></p>
+                          <div class="buttons flex space-x-4 mt-4">
+                            <a href="/admin/class/six/fee/status/rejected/<%= details._id %>" class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                              <i class="fas fa-times mr-2"></i>Reject
+                            </a>
+                          </div>
+                        </div>
+                    <% }) %>
                 </div>
-                <!-- Class 6 - Approved Status (2nd) -->
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student D</h2>
-                  <p class="text-gray-600">Class: 6</p>
-                  <p class="text-gray-600">Paid: ৳7000</p>
-                  <p class="text-gray-600">Due: ৳500</p>
-                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-              </div>
+                
+                <a href="/admin/class/six/fees/delete/all/<%= classSixPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >Delete all payment data for class six.</a>
+                
+                <% } else {%>
+                  <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                <% } %>
             </div>
 
             <div class="tab-bar-sub-tab-content mt-4 hidden">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 6 Status: </span><span class="text-red-600">Rejected</span></h6>
+              <% if (classSixRejectedPayments.length > 0){ %>
+                <h6 class="mt-4 text-[12px]"><span class="text-zinc-500">Class 6 Status: </span><span class="text-red-600">Rejected</span></h6>
 
-              <!-- Class 6 - Rejected Status -->
-              <div id="class6" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student E</h2>
-                  <p class="text-gray-600">Class: 6</p>
-                  <p class="text-gray-600">Paid: ৳3000</p>
-                  <p class="text-gray-600">Due: ৳1000</p>
-                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
+                <!-- Class 6 - Rejected Status -->
+                <div id="class6" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                  
+                   <% classSixRejectedPayments.forEach(details => { %>
+                        <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                          <a href="/admin/class/six/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200"><i class="bx bx-trash text-lg"></i ></a>
+                          <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                          <p class="text-gray-600">Class: <%= details.student_class %></p>
+                          <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                          <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                          <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                          <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                          <p class="status text-black">Status: <span class="text-red-500"><%= details.status %></span></p>
+                          <div class="buttons flex space-x-4 mt-4">
+                            <a href="/admin/class/six/fee/status/approved/<%= details._id %>" class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                              <i class="fas fa-check mr-2"></i>Approve
+                            </a>
+                          </div>
+                        </div>
+                    <% }) %>
                 </div>
-                <!-- Class 6 - Rejected Status (2nd) -->
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student F</h2>
-                  <p class="text-gray-600">Class: 6</p>
-                  <p class="text-gray-600">Paid: ৳5500</p>
-                  <p class="text-gray-600">Due: ৳1500</p>
-                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-              </div>
+                
+                <a href="/admin/class/six/fees/delete/all/<%= classSixPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >Delete all payment data for class six.</a>
+
+              <% } else {%>
+              <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+              <% } %>
             </div>
           </div>
 
@@ -314,496 +302,439 @@
               <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
               <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
             </div>
+            
             <div class="tab-bar-sub-tab-content mt-4">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 7 Status: </span><span class="text-yellow-600">Pending</span></h6>
-
-              <!-- Class 7 - Pending Status -->
-              <div id="class7" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student A</h2>
-                  <p class="text-gray-600">Class: 7</p>
-                  <p class="text-gray-600">Paid: ৳5000</p>
-                  <p class="text-gray-600">Due: ৳2000</p>
-                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
+                <% if (classSevenPendingPayments.length > 0){ %>
+                <h6 class="mt-4 text-[12px]">
+                  <span class="text-zinc-500">Class 7 Status: </span><span class="text-yellow-600">Pending</span>
+                </h6>
+                <!-- Class 7 - Pending Status -->
+                <div id="class7" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <% classSevenPendingPayments.forEach(details => { %>
+                      <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                        <a href="/admin/class/seven/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200"><i class="bx bx-trash text-lg"></i ></a>
+                        <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                        <p class="text-gray-600">Class: <%= details.student_class %></p>
+                        <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                        <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                        <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                        <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                        <p class="status text-black">Status: <span class="text-yellow-500"><%= details.status %></span></p>
+                        <div class="buttons flex space-x-4 mt-4">
+                          <a href="/admin/class/seven/fee/status/approved/<%= details._id %>" class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                            <i class="fas fa-check mr-2"></i>Approve
+                          </a>
+                          <a href="/admin/class/seven/fee/status/rejected/<%= details._id %>" class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                            <i class="fas fa-times mr-2"></i>Reject
+                          </a>
+                        </div>
+                      </div>
+                  <% }) %>
                 </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student B</h2>
-                  <p class="text-gray-600">Class: 7</p>
-                  <p class="text-gray-600">Paid: ৳4500</p>
-                  <p class="text-gray-600">Due: ৳2500</p>
-                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
+                <a href="/admin/class/seven/fees/delete/all/<%= classSevenPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >Delete all payment data for class seven.</a>
+                <% } else {%>
+                    <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                  <% } %>
               </div>
-            </div>
+              
             <div class="tab-bar-sub-tab-content mt-4 hidden">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 7 Status: </span><span class="text-green-600">Approved</span></h6>
-
-              <!-- Class 7 - Approved Status -->
-              <div id="class7" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student C</h2>
-                  <p class="text-gray-600">Class: 7</p>
-                  <p class="text-gray-600">Paid: ৳6000</p>
-                  <p class="text-gray-600">Due: ৳3000</p>
-                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
+              <% if (classSevenApprovedPayments.length > 0){ %>
+                <h6 class="mt-4 text-[12px]"><span class="text-zinc-500">Class 7 Status: </span><span class="text-green-600">Approved</span></h6>
+                <!-- Class 7 - Approved Status -->
+                <div id="class7" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <% classSevenApprovedPayments.forEach(details => { %>
+                        <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                          <a href="/admin/class/seven/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200"><i class="bx bx-trash text-lg"></i ></a>
+                          <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                          <p class="text-gray-600">Class: <%= details.student_class %></p>
+                          <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                          <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                          <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                          <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                          <p class="status text-black">Status: <span class="text-green-500"><%= details.status %></span></p>
+                          <div class="buttons flex space-x-4 mt-4">
+                            <a href="/admin/class/seven/fee/status/rejected/<%= details._id %>" class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                              <i class="fas fa-times mr-2"></i>Reject
+                            </a>
+                          </div>
+                        </div>
+                    <% }) %>
                 </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student D</h2>
-                  <p class="text-gray-600">Class: 7</p>
-                  <p class="text-gray-600">Paid: ৳7000</p>
-                  <p class="text-gray-600">Due: ৳500</p>
-                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-              </div>
+                
+                <a href="/admin/class/seven/fees/delete/all/<%= classSevenPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >Delete all payment data for class seven.</a>
+                
+                <% } else {%>
+                  <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                <% } %>
             </div>
+          
             <div class="tab-bar-sub-tab-content mt-4 hidden">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 7 Status: </span><span class="text-red-600">Rejected</span></h6>
-
-              <!-- Class 7 - Rejected Status -->
-              <div id="class7" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student E</h2>
-                  <p class="text-gray-600">Class: 7</p>
-                  <p class="text-gray-600">Paid: ৳3000</p>
-                  <p class="text-gray-600">Due: ৳1000</p>
-                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
+              <% if (classSevenRejectedPayments.length > 0){ %>
+                <h6 class="mt-4 text-[12px]"><span class="text-zinc-500">Class 7 Status: </span><span class="text-red-600">Rejected</span></h6>
+          
+                <!-- Class 7 - Rejected Status -->
+                <div id="class7" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                  
+                   <% classSevenRejectedPayments.forEach(details => { %>
+                        <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                          <a href="/admin/class/seven/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200"><i class="bx bx-trash text-lg"></i ></a>
+                          <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                          <p class="text-gray-600">Class: <%= details.student_class %></p>
+                          <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                          <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                          <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                          <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                          <p class="status text-black">Status: <span class="text-red-500"><%= details.status %></span></p>
+                          <div class="buttons flex space-x-4 mt-4">
+                            <a href="/admin/class/seven/fee/status/approved/<%= details._id %>" class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                              <i class="fas fa-check mr-2"></i>Approve
+                            </a>
+                          </div>
+                        </div>
+                    <% }) %>
                 </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student F</h2>
-                  <p class="text-gray-600">Class: 7</p>
-                  <p class="text-gray-600">Paid: ৳5500</p>
-                  <p class="text-gray-600">Due: ৳1500</p>
-                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-              </div>
+                
+                <a href="/admin/class/seven/fees/delete/all/<%= classSevenPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >Delete all payment data for class seven.</a>
+          
+              <% } else {%>
+              <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+              <% } %>
             </div>
           </div>
-
+          
           <div class="tab-bar-tab-content hidden p-4 rounded shadow" data-content="class-8">
-            <div class="tab-bar-sub-tab-border-b border-b flex">
-              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
-              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
-              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
-            </div>
-            <div class="tab-bar-sub-tab-content mt-4">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 8 Status: </span><span class="text-yellow-600">Pending</span></h6>
-
-              <!-- Class 8 - Pending Status -->
-              <div id="class8" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student G</h2>
-                  <p class="text-gray-600">Class: 8</p>
-                  <p class="text-gray-600">Paid: ৳5000</p>
-                  <p class="text-gray-600">Due: ৳2000</p>
-                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student H</h2>
-                  <p class="text-gray-600">Class: 8</p>
-                  <p class="text-gray-600">Paid: ৳4500</p>
-                  <p class="text-gray-600">Due: ৳2500</p>
-                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
+              <div class="tab-bar-sub-tab-border-b border-b flex">
+                  <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
+                  <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
+                  <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
               </div>
-            </div>
-            <div class="tab-bar-sub-tab-content mt-4 hidden">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 8 Status: </span><span class="text-green-600">Approved</span></h6>
-              <!-- Class 8 - Approved Status -->
-              <div id="class8" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student I</h2>
-                  <p class="text-gray-600">Class: 8</p>
-                  <p class="text-gray-600">Paid: ৳6000</p>
-                  <p class="text-gray-600">Due: ৳3000</p>
-                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
+          
+              <div class="tab-bar-sub-tab-content mt-4">
+                  <% if (classEightPendingPayments.length > 0){ %>
+                  <h6 class="mt-4 text-[12px]">
+                      <span class="text-zinc-500">Class 8 Status: </span><span class="text-yellow-600">Pending</span>
+                  </h6>
+                  <!-- Class 8 - Pending Status -->
+                  <div id="class8" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <% classEightPendingPayments.forEach(details => { %>
+                      <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                          <a href="/admin/class/eight/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200">
+                              <i class="bx bx-trash text-lg"></i>
+                          </a>
+                          <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                          <p class="text-gray-600">Class: <%= details.student_class %></p>
+                          <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                          <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                          <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                          <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                          <p class="status text-black">Status: <span class="text-yellow-500"><%= details.status %></span></p>
+                          <div class="buttons flex space-x-4 mt-4">
+                              <a href="/admin/class/eight/fee/status/approved/<%= details._id %>" class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                                  <i class="fas fa-check mr-2"></i>Approve
+                              </a>
+                              <a href="/admin/class/eight/fee/status/rejected/<%= details._id %>" class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                                  <i class="fas fa-times mr-2"></i>Reject
+                              </a>
+                          </div>
+                      </div>
+                      <% }) %>
                   </div>
-                </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student J</h2>
-                  <p class="text-gray-600">Class: 8</p>
-                  <p class="text-gray-600">Paid: ৳7000</p>
-                  <p class="text-gray-600">Due: ৳500</p>
-                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
+                  <a href="/admin/class/eight/fees/delete/all/<%= classEightPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600">
+                      <i class="bx bx-trash text-lg mr-2"></i>Delete all payment data for class eight.
+                  </a>
+                  <% } else {%>
+                  <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                  <% } %>
               </div>
-            </div>
-            <div class="tab-bar-sub-tab-content mt-4 hidden">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 8 Status: </span><span class="text-red-600">Rejected</span></h6>
-              <!-- Class 8 - Rejected Status -->
-              <div id="class8" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student K</h2>
-                  <p class="text-gray-600">Class: 8</p>
-                  <p class="text-gray-600">Paid: ৳3000</p>
-                  <p class="text-gray-600">Due: ৳1000</p>
-                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
+          
+              <div class="tab-bar-sub-tab-content mt-4 hidden">
+                  <% if (classEightApprovedPayments.length > 0){ %>
+                  <h6 class="mt-4 text-[12px]"><span class="text-zinc-500">Class 8 Status: </span><span class="text-green-600">Approved</span></h6>
+                  <!-- Class 8 - Approved Status -->
+                  <div id="class8" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <% classEightApprovedPayments.forEach(details => { %>
+                      <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                          <a href="/admin/class/eight/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200">
+                              <i class="bx bx-trash text-lg"></i>
+                          </a>
+                          <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                          <p class="text-gray-600">Class: <%= details.student_class %></p>
+                          <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                          <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                          <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                          <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                          <p class="status text-black">Status: <span class="text-green-500"><%= details.status %></span></p>
+                          <div class="buttons flex space-x-4 mt-4">
+                              <a href="/admin/class/eight/fee/status/rejected/<%= details._id %>" class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                                  <i class="fas fa-times mr-2"></i>Reject
+                              </a>
+                          </div>
+                      </div>
+                      <% }) %>
                   </div>
-                </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student L</h2>
-                  <p class="text-gray-600">Class: 8</p>
-                  <p class="text-gray-600">Paid: ৳5500</p>
-                  <p class="text-gray-600">Due: ৳1500</p>
-                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
+                  <a href="/admin/class/eight/fees/delete/all/<%= classEightPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600">
+                      <i class="bx bx-trash text-lg mr-2"></i>Delete all payment data for class eight.
+                  </a>
+                  <% } else {%>
+                  <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                  <% } %>
               </div>
-            </div>
+          
+              <div class="tab-bar-sub-tab-content mt-4 hidden">
+                  <% if (classEightRejectedPayments.length > 0){ %>
+                  <h6 class="mt-4 text-[12px]"><span class="text-zinc-500">Class 8 Status: </span><span class="text-red-600">Rejected</span></h6>
+          
+                  <!-- Class 8 - Rejected Status -->
+                  <div id="class8" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <% classEightRejectedPayments.forEach(details => { %>
+                      <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                          <a href="/admin/class/eight/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200">
+                              <i class="bx bx-trash text-lg"></i>
+                          </a>
+                          <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                          <p class="text-gray-600">Class: <%= details.student_class %></p>
+                          <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                          <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                          <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                          <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                          <p class="status text-black">Status: <span class="text-red-500"><%= details.status %></span></p>
+                          <div class="buttons flex space-x-4 mt-4">
+                              <a href="/admin/class/eight/fee/status/approved/<%= details._id %>" class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                                  <i class="fas fa-check mr-2"></i>Approve
+                              </a>
+                          </div>
+                      </div>
+                      <% }) %>
+                  </div>
+                  <a href="/admin/class/eight/fees/delete/all/<%= classEightPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600">
+                      <i class="bx bx-trash text-lg mr-2"></i>Delete all payment data for class eight.
+                  </a>
+                  <% } else {%>
+                  <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                  <% } %>
+              </div>
           </div>
-
+                    
           <div class="tab-bar-tab-content hidden p-4 rounded shadow" data-content="class-9">
-            <div class="tab-bar-sub-tab-border-b border-b flex">
-              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
-              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
-              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
-            </div>
-            <div class="tab-bar-sub-tab-content mt-4">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 9 Status: </span><span class="text-yellow-600">Pending</span></h6>
-              <!-- Class 9 - Pending Status -->
-              <div id="class9" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student M</h2>
-                  <p class="text-gray-600">Class: 9</p>
-                  <p class="text-gray-600">Paid: ৳5000</p>
-                  <p class="text-gray-600">Due: ৳2000</p>
-                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student N</h2>
-                  <p class="text-gray-600">Class: 9</p>
-                  <p class="text-gray-600">Paid: ৳4500</p>
-                  <p class="text-gray-600">Due: ৳2500</p>
-                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tab-bar-sub-tab-content mt-4 hidden">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 9 Status: </span><span class="text-green-600">Approved</span></h6>
-              <!-- Class 9 - Approved Status -->
-              <div id="class9" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student O</h2>
-                  <p class="text-gray-600">Class: 9</p>
-                  <p class="text-gray-600">Paid: ৳6000</p>
-                  <p class="text-gray-600">Due: ৳3000</p>
-                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student P</h2>
-                  <p class="text-gray-600">Class: 9</p>
-                  <p class="text-gray-600">Paid: ৳7000</p>
-                  <p class="text-gray-600">Due: ৳500</p>
-                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tab-bar-sub-tab-content mt-4 hidden">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 9 Status: </span><span class="text-red-600">Rejected</span></h6>
-              <!-- Class 9 - Rejected Status -->
-              <div id="class9" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student Q</h2>
-                  <p class="text-gray-600">Class: 9</p>
-                  <p class="text-gray-600">Paid: ৳3000</p>
-                  <p class="text-gray-600">Due: ৳1000</p>
-                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student R</h2>
-                  <p class="text-gray-600">Class: 9</p>
-                  <p class="text-gray-600">Paid: ৳5500</p>
-                  <p class="text-gray-600">Due: ৳1500</p>
-                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                      <div class="tab-bar-sub-tab-border-b border-b flex">
+                        <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
+                        <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
+                        <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
+                      </div>
+                      
+                      <div class="tab-bar-sub-tab-content mt-4">
+                          <% if (classNinePendingPayments.length > 0){ %>
+                          <h6 class="mt-4 text-[12px]">
+                            <span class="text-zinc-500">Class 9 Status: </span><span class="text-yellow-600">Pending</span>
+                          </h6>
+                          <!-- Class 9 - Pending Status -->
+                          <div id="class9" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
+                              <% classNinePendingPayments.forEach(details => { %>
+                                <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                                  <a href="/admin/class/nine/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200"><i class="bx bx-trash text-lg"></i ></a>
+                                  <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                                  <p class="text-gray-600">Class: <%= details.student_class %></p>
+                                  <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                                  <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                                  <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                                  <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                                  <p class="status text-black">Status: <span class="text-yellow-500"><%= details.status %></span></p>
+                                  <div class="buttons flex space-x-4 mt-4">
+                                    <a href="/admin/class/nine/fee/status/approved/<%= details._id %>" class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                                      <i class="fas fa-check mr-2"></i>Approve
+                                    </a>
+                                    <a href="/admin/class/nine/fee/status/rejected/<%= details._id %>" class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                                      <i class="fas fa-times mr-2"></i>Reject
+                                    </a>
+                                  </div>
+                                </div>
+                            <% }) %>
+                          </div>
+                          <a href="/admin/class/nine/fees/delete/all/<%= classNinePaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >Delete all payment data for class nine.</a>
+                          <% } else {%>
+                              <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                            <% } %>
+                        </div>
+                        
+                      <div class="tab-bar-sub-tab-content mt-4 hidden">
+                        <% if (classNineApprovedPayments.length > 0){ %>
+                          <h6 class="mt-4 text-[12px]"><span class="text-zinc-500">Class 9 Status: </span><span class="text-green-600">Approved</span></h6>
+                          <!-- Class 9 - Approved Status -->
+                          <div id="class9" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <% classNineApprovedPayments.forEach(details => { %>
+                                  <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                                    <a href="/admin/class/nine/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200"><i class="bx bx-trash text-lg"></i ></a>
+                                    <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                                    <p class="text-gray-600">Class: <%= details.student_class %></p>
+                                    <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                                    <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                                    <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                                    <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                                    <p class="status text-black">Status: <span class="text-green-500"><%= details.status %></span></p>
+                                    <div class="buttons flex space-x-4 mt-4">
+                                      <a href="/admin/class/nine/fee/status/rejected/<%= details._id %>" class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                                        <i class="fas fa-times mr-2"></i>Reject
+                                      </a>
+                                    </div>
+                                  </div>
+                              <% }) %>
+                          </div>
+                          
+                          <a href="/admin/class/nine/fees/delete/all/<%= classNinePaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >Delete all payment data for class nine.</a>
+                          
+                          <% } else {%>
+                            <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                          <% } %>
+                      </div>
+          
+                      <div class="tab-bar-sub-tab-content mt-4 hidden">
+                        <% if (classNineRejectedPayments.length > 0){ %>
+                          <h6 class="mt-4 text-[12px]"><span class="text-zinc-500">Class 9 Status: </span><span class="text-red-600">Rejected</span></h6>
+          
+                          <!-- Class 9 - Rejected Status -->
+                          <div id="class9" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                            
+                             <% classNineRejectedPayments.forEach(details => { %>
+                                  <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                                    <a href="/admin/class/nine/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200"><i class="bx bx-trash text-lg"></i ></a>
+                                    <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                                    <p class="text-gray-600">Class: <%= details.student_class %></p>
+                                    <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                                    <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                                    <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                                    <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                                    <p class="status text-black">Status: <span class="text-red-500"><%= details.status %></span></p>
+                                    <div class="buttons flex space-x-4 mt-4">
+                                      <a href="/admin/class/nine/fee/status/approved/<%= details._id %>" class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                                        <i class="fas fa-check mr-2"></i>Approve
+                                      </a>
+                                    </div>
+                                  </div>
+                              <% }) %>
+                          </div>
+                          
+                          <a href="/admin/class/nine/fees/delete/all/<%= classNinePaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600"><i class="bx bx-trash text-lg mr-2"></i >Delete all payment data for class nine.</a>
+          
+                        <% } else {%>
+                        <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                        <% } %>
+                      </div>
+                    </div>
 
           <div class="tab-bar-tab-content hidden p-4 rounded shadow" data-content="class-10">
-            <div class="tab-bar-sub-tab-border-b border-b flex">
-              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
-              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
-              <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
-            </div>
-            <div class="tab-bar-sub-tab-content mt-4">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 10 Status: </span><span class="text-yellow-600">Pending</span></h6>
-              <!-- Class 10 - Pending Status -->
-              <div id="class10" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student S</h2>
-                  <p class="text-gray-600">Class: 10</p>
-                  <p class="text-gray-600">Paid: ৳5000</p>
-                  <p class="text-gray-600">Due: ৳2000</p>
-                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student T</h2>
-                  <p class="text-gray-600">Class: 10</p>
-                  <p class="text-gray-600">Paid: ৳4500</p>
-                  <p class="text-gray-600">Due: ৳2500</p>
-                  <p class="status text-black">Status: <span class="text-yellow-500">Pending</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
+              <div class="tab-bar-sub-tab-border-b border-b flex">
+                  <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center text-blue-600">Pending</button>
+                  <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Approved</button>
+                  <button class="tab-bar-sub-tab-button w-1/3 py-2 px-4 text-center">Rejected</button>
               </div>
-            </div>
-            <div class="tab-bar-sub-tab-content mt-4 hidden">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 10 Status: </span><span class="text-green-600">Approved</span></h6>
-              <!-- Class 10 - Approved Status -->
-              <div id="class10" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student U</h2>
-                  <p class="text-gray-600">Class: 10</p>
-                  <p class="text-gray-600">Paid: ৳6000</p>
-                  <p class="text-gray-600">Due: ৳3000</p>
-                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
+          
+              <div class="tab-bar-sub-tab-content mt-4">
+                  <% if (classTenPendingPayments.length > 0){ %>
+                  <h6 class="mt-4 text-[12px]">
+                      <span class="text-zinc-500">Class 10 Status: </span><span class="text-yellow-600">Pending</span>
+                  </h6>
+                  <!-- Class 10 - Pending Status -->
+                  <div id="class10" class="content active grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <% classTenPendingPayments.forEach(details => { %>
+                      <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                          <a href="/admin/class/ten/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200">
+                              <i class="bx bx-trash text-lg"></i>
+                          </a>
+                          <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                          <p class="text-gray-600">Class: <%= details.student_class %></p>
+                          <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                          <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                          <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                          <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                          <p class="status text-black">Status: <span class="text-yellow-500"><%= details.status %></span></p>
+                          <div class="buttons flex space-x-4 mt-4">
+                              <a href="/admin/class/ten/fee/status/approved/<%= details._id %>" class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                                  <i class="fas fa-check mr-2"></i>Approve
+                              </a>
+                              <a href="/admin/class/ten/fee/status/rejected/<%= details._id %>" class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                                  <i class="fas fa-times mr-2"></i>Reject
+                              </a>
+                          </div>
+                      </div>
+                      <% }) %>
                   </div>
-                </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student V</h2>
-                  <p class="text-gray-600">Class: 10</p>
-                  <p class="text-gray-600">Paid: ৳7000</p>
-                  <p class="text-gray-600">Due: ৳500</p>
-                  <p class="status text-black">Status: <span class="text-green-500">Approved</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
-                      <i class="fas fa-times mr-2"></i>Reject
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
+                  <a href="/admin/class/ten/fees/delete/all/<%= classTenPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600">
+                      <i class="bx bx-trash text-lg mr-2"></i>Delete all payment data for class ten.
+                  </a>
+                  <% } else {%>
+                  <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                  <% } %>
               </div>
-            </div>
-            <div class="tab-bar-sub-tab-content mt-4 hidden">
-              <h6 class="text-[12px]"><span class="text-zinc-500">Class 10 Status: </span><span class="text-red-600">Rejected</span></h6>
-
-              <!-- Class 10 - Rejected Status -->
-              <div id="class10" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student W</h2>
-                  <p class="text-gray-600">Class: 10</p>
-                  <p class="text-gray-600">Paid: ৳3000</p>
-                  <p class="text-gray-600">Due: ৳1000</p>
-                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
+          
+              <div class="tab-bar-sub-tab-content mt-4 hidden">
+                  <% if (classTenApprovedPayments.length > 0){ %>
+                  <h6 class="mt-4 text-[12px]"><span class="text-zinc-500">Class 10 Status: </span><span class="text-green-600">Approved</span></h6>
+                  <!-- Class 10 - Approved Status -->
+                  <div id="class10" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <% classTenApprovedPayments.forEach(details => { %>
+                      <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                          <a href="/admin/class/ten/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200">
+                              <i class="bx bx-trash text-lg"></i>
+                          </a>
+                          <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                          <p class="text-gray-600">Class: <%= details.student_class %></p>
+                          <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                          <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                          <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                          <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                          <p class="status text-black">Status: <span class="text-green-500"><%= details.status %></span></p>
+                          <div class="buttons flex space-x-4 mt-4">
+                              <a href="/admin/class/ten/fee/status/rejected/<%= details._id %>" class="reject bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center hover:bg-red-200">
+                                  <i class="fas fa-times mr-2"></i>Reject
+                              </a>
+                          </div>
+                      </div>
+                      <% }) %>
                   </div>
-                </div>
-                <div class="shadow-lg rounded-lg p-6 mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Name: Student X</h2>
-                  <p class="text-gray-600">Class: 10</p>
-                  <p class="text-gray-600">Paid: ৳5500</p>
-                  <p class="text-gray-600">Due: ৳1500</p>
-                  <p class="status text-black">Status: <span class="text-red-500">Rejected</span></p>
-                  <div class="buttons flex space-x-4 mt-4">
-                    <button class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
-                      <i class="fas fa-check mr-2"></i>Approve
-                    </button>
-                    <button class="view bg-blue-100 text-blue-700 px-4 py-2 rounded-lg flex items-center hover:bg-blue-200">
-                      <i class="fas fa-eye mr-2"></i>View
-                    </button>
-                  </div>
-                </div>
+                  <a href="/admin/class/ten/fees/delete/all/<%= classTenPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600">
+                      <i class="bx bx-trash text-lg mr-2"></i>Delete all payment data for class ten.
+                  </a>
+                  <% } else {%>
+                  <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                  <% } %>
               </div>
-            </div>
+          
+              <div class="tab-bar-sub-tab-content mt-4 hidden">
+                  <% if (classTenRejectedPayments.length > 0){ %>
+                  <h6 class="mt-4 text-[12px]"><span class="text-zinc-500">Class 10 Status: </span><span class="text-red-600">Rejected</span></h6>
+          
+                  <!-- Class 10 - Rejected Status -->
+                  <div id="class10" class="content grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <% classTenRejectedPayments.forEach(details => { %>
+                      <div class="relative shadow-lg rounded-lg p-4 mt-4 mb-6">
+                          <a href="/admin/class/ten/fee/details/delete/<%= details._id %>" class="absolute right-2 top-2 bg-red-100 text-red-700 px-2 py-1 rounded-lg hover:bg-red-200">
+                              <i class="bx bx-trash text-lg"></i>
+                          </a>
+                          <h2 class="text-xl font-bold text-gray-800">Name: <%= details.student_name %></h2>
+                          <p class="text-gray-600">Class: <%= details.student_class %></p>
+                          <p class="text-gray-600">Payment Method: <%= details.payment_method %></p>
+                          <p class="text-gray-600">Transection ID: <%= details.transection_id %></p>
+                          <p class="text-gray-600">Sending Number: <%= details.sending_number %></p>
+                          <p class="text-gray-700">Sending Amount: <%= details.sending_amount %></p>
+                          <p class="status text-black">Status: <span class="text-red-500"><%= details.status %></span></p>
+                          <div class="buttons flex space-x-4 mt-4">
+                              <a href="/admin/class/ten/fee/status/approved/<%= details._id %>" class="approve bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg flex items-center hover:bg-yellow-200">
+                                  <i class="fas fa-check mr-2"></i>Approve
+                              </a>
+                          </div>
+                      </div>
+                      <% }) %>
+                  </div>
+                  <a href="/admin/class/ten/fees/delete/all/<%= classTenPaymentsCollectionName %>" class="flex items-center bg-red-500 text-white px-4 py-2 mt-12 rounded-md hover:bg-red-600">
+                      <i class="bx bx-trash text-lg mr-2"></i>Delete all payment data for class ten.
+                  </a>
+                  <% } else {%>
+                  <p class="text-sm mt-6 ml-4 text-zinc-300">Payment details is not available</p>
+                  <% } %>
+              </div>
           </div>
         </div>
       </section>
-
-
     </section>
   </main>
 

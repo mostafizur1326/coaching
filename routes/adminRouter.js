@@ -16,7 +16,6 @@ const class_eight_result_upload = require("../utils/class-eight-result-upload");
 const class_nine_result_upload = require("../utils/class-nine-result-upload");
 const class_ten_result_upload = require("../utils/class-ten-result-upload");
 
-
 const { adminIsLoggedIn } = require("../middlewares/isLoggedIn");
 
 const adminModel = require('../models/admin-model');
@@ -134,7 +133,12 @@ router.get('/all/students', adminIsLoggedIn, async (req, res) => {
   const classEightStudents = await eightTHStudentModel.getAllEightTHStudents();
   const classNineStudents = await nineTHStudentModel.getAllNineTHStudents();
   const classTenStudents = await tenTHStudentModel.getAllTenTHStudents();
-
+  
+  const classSixStudentsCollectionName = sixTHStudentModel.collection.name;
+  const classSevenStudentsCollectionName = sevenTHStudentModel.collection.name;
+  const classEightStudentsCollectionName = eightTHStudentModel.collection.name;
+  const classNineStudentsCollectionName = nineTHStudentModel.collection.name;
+  const classTenStudentsCollectionName = tenTHStudentModel.collection.name;
 
   res.render('allStudents', {
     isLoggedIn,
@@ -142,10 +146,204 @@ router.get('/all/students', adminIsLoggedIn, async (req, res) => {
     classSevenStudents,
     classEightStudents,
     classNineStudents,
-    classTenStudents
+    classTenStudents,
+    classSixStudentsCollectionName, 
+    classSevenStudentsCollectionName, 
+    classEightStudentsCollectionName, 
+    classNineStudentsCollectionName, 
+    classTenStudentsCollectionName
   });
 })
 
+router.get('/class/six/student/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    const students = await model.find({});
+    students.forEach((student) => {
+      if (student.student_photo) {
+        const filePath = path.join(__dirname, '../public', student.student_photo);
+        fs.exists(filePath, (exists) => {
+          if (exists) {
+            fs.unlink(filePath, (err) => {
+              if (err) {
+                dbgr('File deletion error:', err);
+              }
+            });
+          } else {
+            dbgr("File does not exist:", filePath);
+          }
+        });
+      }
+    });
+
+    await model.deleteMany({});
+    req.flash('success', 'All students for Class 6 have been successfully deleted!');
+    res.status(200).redirect('/admin/all/students');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/all/students');
+  }
+});
+
+router.get('/class/seven/student/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    const students = await model.find({});
+    students.forEach((student) => {
+      if (student.student_photo) {
+        const filePath = path.join(__dirname, '../public', student.student_photo);
+        fs.exists(filePath, (exists) => {
+          if (exists) {
+            fs.unlink(filePath, (err) => {
+              if (err) {
+                dbgr('File deletion error:', err);
+              }
+            });
+          } else {
+            dbgr("File does not exist:", filePath);
+          }
+        });
+      }
+    });
+
+    await model.deleteMany({});
+    req.flash('success', 'All students for Class 7 have been successfully deleted!');
+    res.status(200).redirect('/admin/all/students');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/all/students');
+  }
+});
+
+router.get('/class/eight/student/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    const students = await model.find({});
+    students.forEach((student) => {
+      if (student.student_photo) {
+        const filePath = path.join(__dirname, '../public', student.student_photo);
+        fs.exists(filePath, (exists) => {
+          if (exists) {
+            fs.unlink(filePath, (err) => {
+              if (err) {
+                dbgr('File deletion error:', err);
+              }
+            });
+          } else {
+            dbgr("File does not exist:", filePath);
+          }
+        });
+      }
+    });
+
+    await model.deleteMany({});
+    req.flash('success', 'All students for Class 8 have been successfully deleted!');
+    res.status(200).redirect('/admin/all/students');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/all/students');
+  }
+});
+
+router.get('/class/nine/student/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    const students = await model.find({});
+    students.forEach((student) => {
+      if (student.student_photo) {
+        const filePath = path.join(__dirname, '../public', student.student_photo);
+        fs.exists(filePath, (exists) => {
+          if (exists) {
+            fs.unlink(filePath, (err) => {
+              if (err) {
+                dbgr('File deletion error:', err);
+              }
+            });
+          } else {
+            dbgr("File does not exist:", filePath);
+          }
+        });
+      }
+    });
+
+    await model.deleteMany({});
+    req.flash('success', 'All students for Class 9 have been successfully deleted!');
+    res.status(200).redirect('/admin/all/students');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/all/students');
+  }
+});
+
+router.get('/class/ten/student/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    const students = await model.find({});
+    students.forEach((student) => {
+      if (student.student_photo) {
+        const filePath = path.join(__dirname, '../public', student.student_photo);
+        fs.exists(filePath, (exists) => {
+          if (exists) {
+            fs.unlink(filePath, (err) => {
+              if (err) {
+                dbgr('File deletion error:', err);
+              }
+            });
+          } else {
+            dbgr("File does not exist:", filePath);
+          }
+        });
+      }
+    });
+
+    await model.deleteMany({});
+    req.flash('success', 'All students for Class 10 have been successfully deleted!');
+    res.status(200).redirect('/admin/all/students');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/all/students');
+  }
+});
 router.post('/add/student', adminIsLoggedIn, (req, res) => {
   student_photo_upload.single('student_photo')(req, res, async (err) => {
     if (err) {
@@ -590,21 +788,365 @@ router.get('/class/six/fee/details/delete/:id', adminIsLoggedIn, async (req, res
   }
 });
 
+router.get('/class/six/fee/status/approved/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findPayment = await sixTHPaymentModel.findOne({ _id: id });
+    const updatedStatus = await sixTHPaymentModel.findByIdAndUpdate({ _id: id }, { status: 'approved' });
+
+    if (!updatedStatus) {
+      req.flash('error', 'Fee entry not found');
+      return res.status(404).redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `${findPayment.student_name}\'s payment has been approved`);
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    req.flash('error', 'Something went wrong!');
+    res.status(500).redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/six/fee/status/rejected/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findPayment = await sixTHPaymentModel.findOne({ _id: id });
+    const updatedStatus = await sixTHPaymentModel.findByIdAndUpdate({ _id: id }, { status: 'rejected' });
+
+    if (!updatedStatus) {
+      req.flash('error', 'Fee entry not found');
+      return res.status(404).redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `${findPayment.student_name}\'s payment has been rejected`);
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    req.flash('error', 'Something went!');
+    res.status(500).redirect('/admin/fees/management');
+  }
+});
+
 router.get('/class/six/fees/delete/all/:collectionName', async (req, res) => {
   const collectionName = req.params.collectionName;
   try {
-     let model;
-     if (mongoose.models[collectionName]) {
-       model = mongoose.models[collectionName];
-     } else {
-       model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
-     }
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
 
-     await model.deleteMany({});
-
-    console.log(collectionName)
+    await model.deleteMany({});
 
     req.flash('success', 'All payments for Class 6 have been successfully deleted!');
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/seven/fee/details/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classSevenPaymentDetails = await sevenTHPaymentModel.findOneAndDelete({ _id: req.params.id });
+
+    if (!classSevenPaymentDetails) {
+      req.flash('error', 'Payment details not found!');
+      return res.redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `The payment details for ${classSevenPaymentDetails.student_name} has been completely deleted.`);
+    res.redirect('/admin/fees/management');
+  } catch (error) {
+    dbgr('Error during payment details deletion:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/seven/fee/status/approved/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findPayment = await sevenTHPaymentModel.findOne({ _id: id });
+    const updatedStatus = await sevenTHPaymentModel.findByIdAndUpdate({ _id: id }, { status: 'approved' });
+
+    if (!updatedStatus) {
+      req.flash('error', 'Fee entry not found');
+      return res.status(404).redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `${findPayment.student_name}\'s payment has been approved`);
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    req.flash('error', 'Something went wrong!');
+    res.status(500).redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/seven/fee/status/rejected/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findPayment = await sevenTHPaymentModel.findOne({ _id: id });
+    const updatedStatus = await sevenTHPaymentModel.findByIdAndUpdate({ _id: id }, { status: 'rejected' });
+
+    if (!updatedStatus) {
+      req.flash('error', 'Fee entry not found');
+      return res.status(404).redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `${findPayment.student_name}\'s payment has been rejected`);
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    req.flash('error', 'Something went!');
+    res.status(500).redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/seven/fees/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    await model.deleteMany({});
+
+    req.flash('success', 'All payments for Class 7 have been successfully deleted!');
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/eight/fee/details/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classEightPaymentDetails = await eightTHPaymentModel.findOneAndDelete({ _id: req.params.id });
+
+    if (!classEightPaymentDetails) {
+      req.flash('error', 'Payment details not found!');
+      return res.redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `The payment details for ${classEightPaymentDetails.student_name} has been completely deleted.`);
+    res.redirect('/admin/fees/management');
+  } catch (error) {
+    dbgr('Error during payment details deletion:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/eight/fee/status/approved/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findPayment = await eightTHPaymentModel.findOne({ _id: id });
+    const updatedStatus = await eightTHPaymentModel.findByIdAndUpdate({ _id: id }, { status: 'approved' });
+
+    if (!updatedStatus) {
+      req.flash('error', 'Fee entry not found');
+      return res.status(404).redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `${findPayment.student_name}\'s payment has been approved`);
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    req.flash('error', 'Something went wrong!');
+    res.status(500).redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/eight/fee/status/rejected/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findPayment = await eightTHPaymentModel.findOne({ _id: id });
+    const updatedStatus = await eightTHPaymentModel.findByIdAndUpdate({ _id: id }, { status: 'rejected' });
+
+    if (!updatedStatus) {
+      req.flash('error', 'Fee entry not found');
+      return res.status(404).redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `${findPayment.student_name}\'s payment has been rejected`);
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    req.flash('error', 'Something went!');
+    res.status(500).redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/eight/fees/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    await model.deleteMany({});
+
+    req.flash('success', 'All payments for Class 8 have been successfully deleted!');
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/nine/fee/details/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classNinePaymentDetails = await nineTHPaymentModel.findOneAndDelete({ _id: req.params.id });
+
+    if (!classNinePaymentDetails) {
+      req.flash('error', 'Payment details not found!');
+      return res.redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `The payment details for ${classNinePaymentDetails.student_name} has been completely deleted.`);
+    res.redirect('/admin/fees/management');
+  } catch (error) {
+    dbgr('Error during payment details deletion:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/nine/fee/status/approved/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findPayment = await nineTHPaymentModel.findOne({ _id: id });
+    const updatedStatus = await nineTHPaymentModel.findByIdAndUpdate({ _id: id }, { status: 'approved' });
+
+    if (!updatedStatus) {
+      req.flash('error', 'Fee entry not found');
+      return res.status(404).redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `${findPayment.student_name}\'s payment has been approved`);
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    req.flash('error', 'Something went wrong!');
+    res.status(500).redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/nine/fee/status/rejected/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findPayment = await nineTHPaymentModel.findOne({ _id: id });
+    const updatedStatus = await nineTHPaymentModel.findByIdAndUpdate({ _id: id }, { status: 'rejected' });
+
+    if (!updatedStatus) {
+      req.flash('error', 'Fee entry not found');
+      return res.status(404).redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `${findPayment.student_name}\'s payment has been rejected`);
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    req.flash('error', 'Something went!');
+    res.status(500).redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/nine/fees/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    await model.deleteMany({});
+
+    req.flash('success', 'All payments for Class 9 have been successfully deleted!');
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    dbgr('Failed to delete the database collection:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/ten/fee/details/delete/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const classTenPaymentDetails = await tenTHPaymentModel.findOneAndDelete({ _id: req.params.id });
+
+    if (!classTenPaymentDetails) {
+      req.flash('error', 'Payment details not found!');
+      return res.redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `The payment details for ${classTenPaymentDetails.student_name} has been completely deleted.`);
+    res.redirect('/admin/fees/management');
+  } catch (error) {
+    dbgr('Error during payment details deletion:', error);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/ten/fee/status/approved/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findPayment = await tenTHPaymentModel.findOne({ _id: id });
+    const updatedStatus = await tenTHPaymentModel.findByIdAndUpdate({ _id: id }, { status: 'approved' });
+
+    if (!updatedStatus) {
+      req.flash('error', 'Fee entry not found');
+      return res.status(404).redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `${findPayment.student_name}\'s payment has been approved`);
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    req.flash('error', 'Something went wrong!');
+    res.status(500).redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/ten/fee/status/rejected/:id', adminIsLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findPayment = await tenTHPaymentModel.findOne({ _id: id });
+    const updatedStatus = await tenTHPaymentModel.findByIdAndUpdate({ _id: id }, { status: 'rejected' });
+
+    if (!updatedStatus) {
+      req.flash('error', 'Fee entry not found');
+      return res.status(404).redirect('/admin/fees/management');
+    }
+
+    req.flash('success', `${findPayment.student_name}\'s payment has been rejected`);
+    res.status(200).redirect('/admin/fees/management');
+  } catch (error) {
+    req.flash('error', 'Something went!');
+    res.status(500).redirect('/admin/fees/management');
+  }
+});
+
+router.get('/class/ten/fees/delete/all/:collectionName', async (req, res) => {
+  const collectionName = req.params.collectionName;
+  try {
+    let model;
+    if (mongoose.models[collectionName]) {
+      model = mongoose.models[collectionName];
+    } else {
+      model = mongoose.model(collectionName, new mongoose.Schema({}, { strict: false }));
+    }
+
+    await model.deleteMany({});
+
+    req.flash('success', 'All payments for Class 10 have been successfully deleted!');
     res.status(200).redirect('/admin/fees/management');
   } catch (error) {
     dbgr('Failed to delete the database collection:', error);
@@ -992,7 +1534,6 @@ router.get('/class/nine/result/delete/all/:collectionName', async (req, res) => 
     }
 
     const result = await model.findOne();
-    console.log(result.class_nine_result)
     const filePath = path.join(__dirname, '../public', result.class_nine_result);
     fs.exists(filePath, (exists) => {
       if (exists) {

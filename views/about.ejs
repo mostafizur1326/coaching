@@ -214,34 +214,20 @@
       <section id="teachers" class="font-cy py-10">
         <div class="max-w-7xl mx-auto p-6">
           <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Our Esteemed Teachers</h2>
-          <div class="grid md:grid-cols-3 gap-6">
-            <div class="rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-              <img src="https://via.placeholder.com/150" alt="Teacher" class="w-32 h-32 mx-auto rounded-full mb-4">
-              <h3 class="text-xl font-semibold text-gray-800 text-center">Mr. John Doe</h3>
-              <p class="text-gray-600 text-center">Mathematics Specialist</p>
-              <p class="text-sm text-gray-500 mt-2 text-center">
-                With over 15 years of teaching experience, Mr. John inspires students to excel in mathematics.
-              </p>
-            </div>
-            
-            <div class="rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-              <img src="https://via.placeholder.com/150" alt="Teacher" class="w-32 h-32 mx-auto rounded-full mb-4">
-              <h3 class="text-xl font-semibold text-gray-800 text-center">Ms. Sarah Lee</h3>
-              <p class="text-gray-600 text-center">Science Educator</p>
-              <p class="text-sm text-gray-500 mt-2 text-center">
-                A passionate science teacher dedicated to igniting curiosity in students.
-              </p>
-            </div>
-            
-            <div class="rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-              <img src="https://via.placeholder.com/150" alt="Teacher" class="w-32 h-32 mx-auto rounded-full mb-4">
-              <h3 class="text-xl font-semibold text-gray-800 text-center">Mrs. Emily Brown</h3>
-              <p class="text-gray-600 text-center">English Mentor</p>
-              <p class="text-sm text-gray-500 mt-2 text-center">
-                Emily has been fostering a love for literature and language for over a decade.
-              </p>
-            </div>
+          <% if (teachers.length > 0){ %>
+            <div class="grid md:grid-cols-3 gap-6">
+              <% teachers.reverse().forEach((teacher) => { %>
+                <div class="rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                  <img src="<%= teacher.teacher_photo %>" alt="Teacher" class="w-32 h-32 mx-auto rounded-full mb-4">
+                  <h3 class="text-xl font-semibold text-gray-800 text-center"><%= teacher.teacher_name %></h3>
+                  <p class="text-gray-600 text-center">Teacher: <%= teacher.teacher_subject %></p>
+                  <p class="text-gray-600 text-center">Contact: <%= teacher.teacher_contact %></p>
+                </div>
+             <% }) %>
           </div>
+          <% } else {%>
+          <p class="text-sm mt-6 ml-4 text-zinc-300">Teacher is not available</p>
+          <% } %>
         </div>
       </section>
       
